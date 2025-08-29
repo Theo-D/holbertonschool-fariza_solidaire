@@ -35,10 +35,7 @@
 
 | FEATURE                         | Description | Feasability | Risk      | Priority
 |---------------------------------|-------------|-------------|-----------|-------------|
-| Admin profile                   | Admin profile to create and manage events
-azdczamejkvcnzmlvn
-zevldknazev
-zmedvljknzesdvm         | 4/5         | 5/5       | 4/5         |
+| Admin profile                   | Admin profile to create and manage eventslzakendfvo zENDVOQZndmovnqzMLOJEDNVOMLJQZEDRNOMVIGQ?NZSEODMVNQZOIMESDRVN?OPIQzesnvoimnqzSEDOMVN<SOMEDVNZSDNVMOzsendomvnqzsmeodvnqsdvn<sdnvqzsndvmnezRM>>         | 4/5         | 5/5       | 4/5         |
 | User profile                    | 4/5         | 3/5         | 4/5       | 3/5         |
 | User reviews                    | 2/5         | 5/5         | 3/5       | 5/5         |
 | Hello asso integration          | 2/5         | 5/5         | 3/5       | 5/5         |
