@@ -4,7 +4,7 @@
 
 ### Roles and Responsibilities
 
-- Roles (to be rotated as needed):
+- Roles and Reponsibilities:
     We decided to both contribute to the front and the back-end of the project and assume the role of full-stack developers.
 
 ### Team Norms
@@ -19,9 +19,9 @@
 
 ### Research Phase
 
-    The main objective of our team was to learn more about technologies used in real-world companies. So we chose to look up for the most used languages and frameworks, keeping in mind that we still need them to conform to this projet's use cases. That's why we chose:
-        -Java Springboot for developing the backend as it features an ORM (Hibernate), routes management and a diverse array of dependencies to customize our project as needed.
-        -React.js for the front-end as the scope of the project suit well the use case this library was built for.
+The main objective of our team was to learn more about technologies used in real-world companies. So we chose to look up for the most used languages and frameworks, keeping in mind that we still need them to conform to this projet's use cases. That's why we chose:
+    -Java Springboot for developing the backend as it features an ORM (Hibernate), routes management and a diverse array of dependencies to customize our project as needed.
+    -React.js for the front-end as the scope of the project suit well the use case this library was built for.
 
 ---
 
@@ -81,3 +81,5 @@ To fulfill its duties it became clear that the association would need a website 
 - **Potential Impact**: So that the association gains in visibility and in practicality.
 
 ---
+
+#### Authors: Ancelin CHEVALLIER & Théo DESSAIGNE
