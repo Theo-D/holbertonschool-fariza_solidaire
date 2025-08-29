@@ -1,4 +1,4 @@
-package com.hbtn.test_db.model;
+package com.hbtn.farizasolidaire.model;
 
 import java.util.UUID;
 

@@ -1,13 +1,13 @@
-package com.hbtn.test_db;
+package com.hbtn.farizasolidaire;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestDbApplication {
+public class FarizasolidaireApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TestDbApplication.class, args);
+		SpringApplication.run(FarizasolidaireApplication.class, args);
 	}
 
 }

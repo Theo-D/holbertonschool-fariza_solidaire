@@ -1,10 +1,10 @@
-package com.hbtn.test_db;
+package com.hbtn.farizasolidaire;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TestDbApplicationTests {
+class FarizasolidaireApplicationTests {
 
 	@Test
 	void contextLoads() {

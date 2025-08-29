@@ -1,4 +1,4 @@
-package com.hbtn.test_db.config;
+package com.hbtn.farizasolidaire.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
