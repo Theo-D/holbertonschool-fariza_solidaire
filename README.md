@@ -35,15 +35,15 @@
 
 | FEATURE                         | Description | Feasability | Risk      | Priority
 |---------------------------------|-------------|-------------|-----------|-------------|
-| Admin profile                   | Admin profile to create and manage eventslzakendfvo zENDVOQZndmovnqzMLOJEDNVOMLJQZEDRNOMVIGQ?NZSEODMVNQZOIMESDRVN?OPIQzesnvoimnqzSEDOMVN<SOMEDVNZSDNVMOzsendomvnqzsmeodvnqsdvn<sdnvqzsndvmnezRM>>         | 4/5         | 5/5       | 4/5         |
-| User profile                    | 4/5         | 3/5         | 4/5       | 3/5         |
-| User reviews                    | 2/5         | 5/5         | 3/5       | 5/5         |
-| Hello asso integration          | 2/5         | 5/5         | 3/5       | 5/5         |
-| Event creation and management   | 2/5         | 5/5         | 3/5       | 5/5         |
-| Appointment for clothes deposit | 2/5         | 5/5         | 3/5       | 5/5         |
-| Galery                          | 2/5         | 5/5         | 3/5       | 5/5         |
-| Blog article                    | 2/5         | 5/5         | 3/5       | 5/5         |
-| Stats tracking                  | 2/5         | 5/5         | 3/5       | 5/5         |
+| Admin profile                   | Admin profile to create and manage events, users and apointments as well as writing blog articles. | 3/5 | :red_circle: | :green_circle:         |
+| User profile                    | User profile to create an account, leave reviews and subscribe to events. | 5/5 | :orange_circle: | :green_circle:         |
+| User reviews                    | The ability for users to leave reviews about their experience of the association. | 4/5 | :green_circle: | :orange_circle:        |
+| Hello asso integration          | Finding the best way to integrate Hello-Asso to the website to allow people to make donations. | depending on the type of integration chosen | :orange_circle: | :yellow_circle: |
+| Event creation and management   | The ability for the admin to create and manage events such as workshops, classes ... | 4/5 | :yellow_circle: | :green_circle: |
+| Appointment for clothes deposit | People wishing to donate clothes should be able to take apointments within working hours to deposit their gift to the association. | 3/5 | :green_circle: | :green_circle: |
+| Galery                          | A Galery of pictures to showcase the achievements of the association to investors and users. | 4/5         | :green_circle: | :red_circle: |
+| Blog article                    | The administrator should be able to write blog articles in order to create engagement towards the association actions. | 2/5 | :green_circle: | :orange_circle: |
+| Stats tracking                  | A stat tracker to highlight the association achievements in real time such as, the weight of clothes processed or people benefiting from its services. | 4/5 | :green_circle: | :red_circle: |
 
 ### Risks & Constraints
 
