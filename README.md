@@ -5,7 +5,7 @@
 ### Roles and Responsibilities
 
 - Temporary Project Manager: Théo
-- Other Roles (to be rotated as needed):
+- Other Roles:
     We decided to both contribute to the front and the back-end of the project and assume the role of full-stack developers.
 
 ### Team Norms
@@ -36,7 +36,6 @@
 ## 2. Idea Evaluation ✅
 
 ### Evaluation Criteria
-
 
 - Feasibility (technical and resource requirements)
 - Potential impact (value to users / community / industry)
@@ -106,15 +105,5 @@
 
 - Summary of team formation, role assignment, and collaboration process
 - Tools used and decision-making approach
-
----
-
-## ✅ Checklist (Progress Tracker)
-
-- [x] Team Formation
-- [x] Research and Brainstorming
-- [x] Idea Evaluation
-- [x] Decision and Refinement
-- [x] Idea Development Documentation
 
 ---
