@@ -4,14 +4,13 @@
 
 ### Roles and Responsibilities
 
-- Temporary Project Manager: Théo
-- Other Roles (to be rotated as needed):
+- Roles (to be rotated as needed):
     We decided to both contribute to the front and the back-end of the project and assume the role of full-stack developers.
 
 ### Team Norms
 
 - **Communication Tools**: Slack / Discord
-- **Decision-making**: Majority voting / Consensus
+- **Decision-making**: Consensus
 - **Collaboration Tools**: GitHub, Google Docs
 
 ---
@@ -20,15 +19,9 @@
 
 ### Research Phase
 
-    The main objective of our team was to learn more about the main technologies used in enterprises. So Théo came with sa belle idée de con and submitted the use of Springboot for the main part of the project.
-
-### Brainstorming Sessions
-
-- **Mind Mapping**: Visualized connections between ideas such as [Idea A, Idea B, Idea C].
-- **SCAMPER Framework**: Applied to [existing solutions].
-- **“How Might We” Questions**:
-  - How might we [solve X problem]?
-  - How might we [improve Y process]?
+    The main objective of our team was to learn more about technologies used in real-world companies. So we chose to look up for the most used languages and frameworks, keeping in mind that we still need them to conform to this projet's use cases. That's why we chose:
+        -Java Springboot for developing the backend as it features an ORM (Hibernate), routes management and a diverse array of dependencies to customize our project as needed.
+        -React.js for the front-end as the scope of the project suit well the use case this library was built for.
 
 ---
 
@@ -36,19 +29,21 @@
 
 ### Evaluation Criteria
 
-
 - Feasibility (technical and resource requirements)
-- Potential impact (value to users / community / industry)
-- Technical alignment (skills within team)
-- Scalability and sustainability
+- Security and/or data integrity risks
+- Feature development priority
 
-### Idea Scoring Rubric
-
-| Idea | Feasibility | Impact | Alignment | Scalability | Total Score |
-|------|-------------|--------|-----------|-------------|-------------|
-| Idea A | 3/5 | 4/5 | 5/5 | 4/5 | 16/20 |
-| Idea B | 4/5 | 3/5 | 4/5 | 3/5 | 14/20 |
-| Idea C | 2/5 | 5/5 | 3/5 | 5/5 | 15/20 |
+| FEATURE                         | Description | Feasability | Risk      | Priority
+|---------------------------------|-------------|-------------|-----------|-------------|
+| Admin profile                   | Admin profile to create and manage events         | 4/5         | 5/5       | 4/5         |
+| User profile                    | 4/5         | 3/5         | 4/5       | 3/5         |
+| User reviews                    | 2/5         | 5/5         | 3/5       | 5/5         |
+| Hello asso integration          | 2/5         | 5/5         | 3/5       | 5/5         |
+| Event creation and management   | 2/5         | 5/5         | 3/5       | 5/5         |
+| Appointment for clothes deposit | 2/5         | 5/5         | 3/5       | 5/5         |
+| Galery                          | 2/5         | 5/5         | 3/5       | 5/5         |
+| Blog article                    | 2/5         | 5/5         | 3/5       | 5/5         |
+| Stats tracking                  | 2/5         | 5/5         | 3/5       | 5/5         |
 
 ### Risks & Constraints
 
