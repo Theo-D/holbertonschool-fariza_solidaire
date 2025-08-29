@@ -1,4 +1,4 @@
-package com.hbtn.farizasolidaire.model;
+package com.hbtn.zafirasolidaire.model;
 
 import java.util.UUID;
 

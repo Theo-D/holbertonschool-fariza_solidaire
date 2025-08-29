@@ -1,8 +1,8 @@
-package com.hbtn.farizasolidaire.repo;
+package com.hbtn.zafirasolidaire.repo;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.hbtn.farizasolidaire.model.User;
+import com.hbtn.zafirasolidaire.model.User;
 
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
