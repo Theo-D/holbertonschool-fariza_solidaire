@@ -1,0 +1,1 @@
+# holbertonschool-fariza_solidaire
