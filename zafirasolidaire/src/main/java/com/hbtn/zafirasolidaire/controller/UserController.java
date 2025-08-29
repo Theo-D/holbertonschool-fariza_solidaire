@@ -1,4 +1,4 @@
-package com.hbtn.farizasolidaire.controller;
+package com.hbtn.zafirasolidaire.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hbtn.farizasolidaire.model.User;
-import com.hbtn.farizasolidaire.repo.UserRepo;
-import com.hbtn.farizasolidaire.service.UserService;
+import com.hbtn.zafirasolidaire.model.User;
+import com.hbtn.zafirasolidaire.repo.UserRepo;
+import com.hbtn.zafirasolidaire.service.UserService;
 
 @RestController // Use RestController for Swagger doc
 @RequestMapping(path="/api/v1") // This means URL's start with /demo (after Application path)

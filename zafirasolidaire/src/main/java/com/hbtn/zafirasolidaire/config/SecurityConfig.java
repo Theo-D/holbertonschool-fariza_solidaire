@@ -1,4 +1,4 @@
-package com.hbtn.farizasolidaire.config;
+package com.hbtn.zafirasolidaire.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

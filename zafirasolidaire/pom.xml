@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.hbtn</groupId>
-	<artifactId>farizasolidaire</artifactId>
+	<artifactId>zafirasolidaire</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>farizasolidaire</name>
-	<description>Demo project for Spring Boot</description>
+	<name>zafirasolidaire</name>
+	<description>Backend for Zafira Solidaire website</description>
 	<url/>
 	<licenses>
 		<license/>
