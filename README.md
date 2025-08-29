@@ -1,6 +1,6 @@
-# Project README
+# ZAFIRA SOLIDAIRE - Portfolio
 
-## 0. Team Formation ✅
+## 0. Team Formation
 
 ### Roles and Responsibilities
 
@@ -9,13 +9,13 @@
 
 ### Team Norms
 
-- **Communication Tools**: Slack / Discord
+- **Communication Tools**: Slack, Discord
 - **Decision-making**: Consensus
 - **Collaboration Tools**: GitHub, Google Docs
 
 ---
 
-## 1. Research and Brainstorming ✅
+## 1. Research and Brainstorming
 
 ### Research Phase
 
@@ -25,7 +25,7 @@
 
 ---
 
-## 2. Idea Evaluation ✅
+## 2. Idea Evaluation
 
 ### Evaluation Criteria
 
@@ -33,7 +33,7 @@
 - Security and/or data integrity risks
 - Feature development priority
 
-| FEATURE                         | Description | Feasability | Risk      | Priority
+| FEATURES                         | Description | Feasability | Risk      | Priority
 |---------------------------------|-------------|-------------|-----------|-------------|
 | Admin profile                   | Admin profile to create and manage events, users and apointments as well as writing blog articles. | 3/5 | :red_circle: | :green_circle:         |
 | User profile                    | User profile to create an account, leave reviews and subscribe to events. | 5/5 | :orange_circle: | :green_circle:         |
@@ -45,70 +45,39 @@
 | Blog article                    | The administrator should be able to write blog articles in order to create engagement towards the association actions. | 2/5 | :green_circle: | :orange_circle: |
 | Stats tracking                  | A stat tracker to highlight the association achievements in real time such as, the weight of clothes processed or people benefiting from its services. | 4/5 | :green_circle: | :red_circle: |
 
-### Risks & Constraints
-
-- Idea A: [Risk/Constraint]
-- Idea B: [Risk/Constraint]
-- Idea C: [Risk/Constraint]
-
 ---
 
-## 3. Decision and Refinement ✅
+## 3. Decision and Refinement
 
-### Selected MVP Idea
+### MVP Idea
 
-**Chosen Idea**: [Final Idea Name]
+Born from the realisation that people of different backgrounds are not equally equiped to face the hiring process, the association Fariza Solidaire was created to alleviate some of the hindrances these people might face.
 
-### Problem Statement
+To do so, the association provides professional clothing, image consulting, photo shoots and other kinds of services to ease the access to the employment market for those who require it, mostly young adults from 16 to 25.
 
-- What problem does it solve?
-- Why is this problem important?
-
-### Target Audience
-
-- Who will use this MVP?
-- What needs or pain points does it address?
+To fulfill its duties it became clear that the association would need a website to showcase its achievements to potential users and investors, to allow members to make appointments and subscribe to workshops as well as providing support in organizing its activities.
 
 ### Key Features
 
-- Feature 1: [Description]
-- Feature 2: [Description]
-- Feature 3: [Description]
+- Event creation and management.
+- Photo Gallery.
+- Stat tracking.
+- Online payment portal integration.
+- Blog articles.
+- Centralizing organization for clothing deposit.
 
 ### Expected Outcomes
 
-- Short-term: [Impact]
-- Long-term: [Impact]
+- A working website that satisfies the expectations of the client according to what she is looking for.
 
 ---
 
-## 4. Idea Development Documentation ✅
-
-### Considered Ideas
-
-- **Idea A** – Strengths, weaknesses, and reason for rejection
-- **Idea B** – Strengths, weaknesses, and reason for rejection
-- **Idea C** – Strengths, weaknesses, and reason for rejection
+## 4. Idea Development Documentation
 
 ### Final MVP Summary
 
-- **Chosen MVP**: [Final Idea Name]
-- **Rationale**: Why it was selected (based on evaluation criteria)
-- **Potential Impact**: Expected benefits to target users and broader community
-
-### Team Process Overview
-
-- Summary of team formation, role assignment, and collaboration process
-- Tools used and decision-making approach
-
----
-
-## ✅ Checklist (Progress Tracker)
-
-- [x] Team Formation
-- [x] Research and Brainstorming
-- [x] Idea Evaluation
-- [x] Decision and Refinement
-- [x] Idea Development Documentation
+- **Chosen MVP**: Zafira Solidaire
+- **Rationale**: The project matches the expectations of the RNCP level 5 as well as having a positive real-world impact on the community it seeks to support.
+- **Potential Impact**: So that the association gains in visibility and in practicality.
 
 ---
