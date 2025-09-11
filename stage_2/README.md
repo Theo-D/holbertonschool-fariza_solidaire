@@ -2,7 +2,7 @@
 ## In this stage of the project we will develop a project charter that will serve as a foundation for all subsequent work.
 
 ## 0 - Definition of the project objectives
-### Project importance and relevence
+### Project scope and relevence
 
 This project aims to support **Zafira Solidaire**'s team in fulfilling their mission by improving the management of the association's core operations. It will also serve as a platform for stakeholders—such as potential users, investors and public authorities—to know about and stay informed about the association’s actions and services.
 
