@@ -10,7 +10,7 @@ The **MVP** (Minimum Viable Product) we are working on here should provide the f
 
 | Feature Name           | Service provided |
 | ---------------------- | ---------------- |
-| Administrator Account  | An administrator account that will allow **Zafira Solidaire**'s team to access a control board that will allow them to manage the association's core operations (manage users, create blog posts, create and magae events...). |
+| Administrator Account  | An administrator account that will allow **Zafira Solidaire**'s team to access a control board that will allow them to manage the association's core operations (manage users, create blog posts, create and manage events...). |
 | User account           | The possibility for an user to create an account that will grant them access to the services of the association. |
 | Apointment management  | People wishing to donate professional clothing to the association should be able to do so by taking an apointment to deposit their donation. |
 
