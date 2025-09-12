@@ -37,6 +37,8 @@ Team members Ancelin Chevallier and Théo Dessaigne will work on both the front-
 
 ## 2 - Scope definition
 
+
+
 ---
 
 ## 3 - Risks identification
