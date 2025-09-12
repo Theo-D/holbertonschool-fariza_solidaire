@@ -1,10 +1,12 @@
 # ZAFIRA SOLIDAIRE - Portfolio - Stage 2: Project Charter Development
-## In this stage of the project we will develop a project charter that will serve as a foundation for all subsequent work.
+
+## In this stage of the project we will develop a project charter that will serve as a foundation for all subsequent work
 
 ## 0 - Definition of the project objectives
+
 ### Project scope and relevance
 
-This project aims to support **Zafira Solidaire**'s team in fulfilling their mission by improving the management of the association's core operations. It will also serve as a platform for stakeholders—such as potential users, investors and public authorities—to know about and stay informed about the association’s actions and services.
+This project aims to support **Zafira Solidaire**'s team in fulfilling their mission by improving the management of the association's core operations. It will also serve as a platform for stakeholders—such as potential users, investors and public authorities—to know and stay informed about the association’s actions and services.
 
 The **MVP** (Minimum Viable Product) we are working on here should provide the following services among others to come:
 
@@ -17,6 +19,19 @@ The **MVP** (Minimum Viable Product) we are working on here should provide the f
 ---
 
 ## 1 - Identification of Stakeholders and Team Roles
+
+### External stakeholders
+
+| Role                        | Description                                                                          |
+|-----------------------------|--------------------------------------------------------------------------------------|
+| Association's president     | Will have the responsibility to validate the website's functionnalities and design.  |
+| Association's beneficiaries | Young people mostly between 16 and 25 looking to integrate into professional life.   |
+| Holberton SWE               | Acts as an advisor on the use of technologies, work methodology and their relevency. |
+
+
+### Team members as internal stakeholders
+
+Team members Ancelin Chevallier and Théo Dessaigne will work on both the front-end and back-end of the project. Tasks will be divided based on features to facilitate collaboration, distribute the workload into manageable units, and ensure that both developers have an active participation across all parts of the project.
 
 ---
 
