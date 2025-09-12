@@ -37,37 +37,44 @@ Team members Ancelin Chevallier and Théo Dessaigne will work on both the front-
 
 ## 2 - Scope definition
 
-The main scope of the project consists in giving a platform to the association zafira-solidaire which aims to few simple features:
+### In-scope
 
-    - A counter of the given clothes mass
-    - Another counter of helped people
-    - A calendar, displaying the different workshops organized by the association
-    - The calendar should permit to arrange meetings to give the clothes
-    - A list of all financial and local partners
-    - A "News" hub, displaying interviews of the local elected officials
-    - A link to HelloAsso to donate money to the association
+    - A calendar, displaying the different events organized by the association.
+    - The ability to make apointments to donate clothes.
+    - A list of all financial and local partners.
+    - A blog page to inform about coming events and news pertaining to the association.
+    - Hello Asso integration to allow for financial participation.
+    - The website's users should be able to leave reviews to inform about their experience.
+    - A counter of the donated clothes by weight.
+    - A counter of supported people.
 
-The part out of scope, for now at least, would be to add a messaging service for all users, the possbibility to attend to workshops or meetings with Fariza.
+### Out of scope
+
+    - Direct paiement for donations through the website.
+    - Users being able to interact with each others.
+    - Users booking a place in events. Consulting only.
 
 ---
 
-## 3 - Risks identification
+## 3 - Risks identification and mitigation
 
-The main difficulty of this project is the use of a new technology, Springboot, which is very technical and demanding.
-The main risk would be to underestimate the time demanded to learn how to use it, wwhich would imply in  a lack of time to add all features to the project
-
-The other one would be to have the most intuitive front-end possible, given that the client is not used to web technology, and the website has to be the clearest and easiest possible, otherwise it will not be used nor will achieve the expected visibility.
+| Risks                                                           | Impact | Mitigation method |
+|-----------------------------------------------------------------|--------|-------------------|
+| The use of new technologies for back-end and front-end          | Limited time due to the learning curve and suboptimal use of technology features. | Leverage preparation time to gain an early understanding of the tools and reduce the impact of the learning curve. |
+| Security risks about users and admin credentials and identities | Potential privacy breaches and leakage of personal data, including names and passwords |  Make the best use of the technologies integrated security components to safeguard credentials and minimize the risk of data leaks. |
+| User interface not clear enough for stakeholders                | Low adoption by stakeholders due to unintuitive interface. | Make sure to operate a back and forth with test users to gather constructive criticism about the clarity and the ease of use of the interface. |
+| Legal Issues                                       | Legal repercussions regarding data privacy and conversation | To educate ourselves about laws pertaining to this matter. |
 
 ---
 
 ## 4 - High-Level plan development
 
-### Timeline / Phases  
+### Timeline / Phases
 
-| Phase | Duration | Deliverables |  
-|-------|----------|--------------|  
-| Phase 1: Team Formation & Research | Week 1 | Team norms, initial ideas |  
-| Phase 2: Idea Evaluation & Charter | Week 2 | Finalized Project Charter |  
-| Phase 3: MVP Development | Weeks 3–5 | Prototype with core features |  
-| Phase 4: Testing & Feedback | Week 6 | User testing report |  
-| Phase 5: Final Presentation | Week 7 | MVP + Documentation |  
+| Phase                                  | Duration   | Deliverables                            |
+|----------------------------------------|------------|-----------------------------------------|
+| Phase 1: Team Formation & Research     | Weeks 1-2  | Team norms, initial ideas.              |
+| Phase 2: Idea Evaluation & Charter     | Weeks 3-4  | Finalized Project Charter.              |
+| Pahse 3: Technical documentation       | Weeks 5-6  | Produce technical documentation.        |
+| Phase 4: MVP Development and execution | Weeks 7-10 | Prototype with core features.           |
+| Phase 5: Project closure               | Punctual   | Project closure on the 27th of October. |
