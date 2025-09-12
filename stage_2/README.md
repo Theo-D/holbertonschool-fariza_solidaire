@@ -37,12 +37,37 @@ Team members Ancelin Chevallier and Théo Dessaigne will work on both the front-
 
 ## 2 - Scope definition
 
+The main scope of the project consists in giving a platform to the association zafira-solidaire which aims to few simple features:
 
+    - A counter of the given clothes mass
+    - Another counter of helped people
+    - A calendar, displaying the different workshops organized by the association
+    - The calendar should permit to arrange meetings to give the clothes
+    - A list of all financial and local partners
+    - A "News" hub, displaying interviews of the local elected officials
+    - A link to HelloAsso to donate money to the association
+
+The part out of scope, for now at least, would be to add a messaging service for all users, the possbibility to attend to workshops or meetings with Fariza.
 
 ---
 
 ## 3 - Risks identification
 
+The main difficulty of this project is the use of a new technology, Springboot, which is very technical and demanding.
+The main risk would be to underestimate the time demanded to learn how to use it, wwhich would imply in  a lack of time to add all features to the project
+
+The other one would be to have the most intuitive front-end possible, given that the client is not used to web technology, and the website has to be the clearest and easiest possible, otherwise it will not be used nor will achieve the expected visibility.
+
 ---
 
 ## 4 - High-Level plan development
+
+### Timeline / Phases  
+
+| Phase | Duration | Deliverables |  
+|-------|----------|--------------|  
+| Phase 1: Team Formation & Research | Week 1 | Team norms, initial ideas |  
+| Phase 2: Idea Evaluation & Charter | Week 2 | Finalized Project Charter |  
+| Phase 3: MVP Development | Weeks 3–5 | Prototype with core features |  
+| Phase 4: Testing & Feedback | Week 6 | User testing report |  
+| Phase 5: Final Presentation | Week 7 | MVP + Documentation |  
