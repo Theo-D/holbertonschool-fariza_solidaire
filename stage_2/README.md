@@ -6,7 +6,7 @@
 
 ### Project scope and relevance
 
-This project aims to support **Zafira Solidaire**'s team in fulfilling their mission by improving the management of the association's core operations. It will also serve as a platform for stakeholders—such as potential users, investors and public authorities—to know about and stay informed about the association’s actions and services.
+This project aims to support **Zafira Solidaire**'s team in fulfilling their mission by improving the management of the association's core operations. It will also serve as a platform for stakeholders—such as potential users, investors and public authorities—to know and stay informed about the association’s actions and services.
 
 The **MVP** (Minimum Viable Product) we are working on here should provide the following services among others to come:
 
@@ -19,6 +19,8 @@ The **MVP** (Minimum Viable Product) we are working on here should provide the f
 ---
 
 ## 1 - Identification of Stakeholders and Team Roles
+
+###
 
 ---
 
