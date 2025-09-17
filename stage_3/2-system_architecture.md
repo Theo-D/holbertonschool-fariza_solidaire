@@ -12,7 +12,7 @@
 
  📊 Deliverable: High-level diagram showing:
 
-![System architecture diagram](/architect_diagram.png)
+![System architecture diagram](images/architect_diagram.png)
 
         Clients (browser/mobile) → Backend API → Database
         Backend → External notification service
