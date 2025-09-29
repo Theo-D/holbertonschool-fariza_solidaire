@@ -34,8 +34,6 @@
 
 ## 1 - Design System Architecture
 
-Hello
-
 ---
 
 ## 2 - Defining Components, Classes, and Database Design
