@@ -22,7 +22,6 @@
 The main objective of our team was to learn more about technologies used in real-world companies. So we chose to look up for the most used languages and frameworks, keeping in mind that we still need them to conform to this projet's use cases. That's why we chose:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Java Springboot for developing the backend as it features an ORM (Hibernate), routes management and a diverse array of dependencies to customize our project as needed.
-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-React.js for the front-end as the scope of the project suit well the use case this library was built for.
 
 ---
