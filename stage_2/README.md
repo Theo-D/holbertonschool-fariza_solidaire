@@ -5,10 +5,6 @@
 ## In this stage of the project we will develop a project charter that will serve as a foundation for all subsequent work
 
 ## 0 - Definition of the project objectives
-<<<<<<< HEAD
-=======
-### Project scope and relevence
->>>>>>> 25dbe41 (Update README.md)
 
 ### Project scope and relevance
 
