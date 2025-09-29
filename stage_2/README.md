@@ -42,22 +42,7 @@ Team members Ancelin Chevallier and Théo Dessaigne will work on both the front-
 
 ## 2 - Scope definition
 
-### In-scope
 
-    - A calendar, displaying the different events organized by the association.
-    - The ability to make apointments to donate clothes.
-    - A list of all financial and local partners.
-    - A blog page to inform about coming events and news pertaining to the association.
-    - Hello Asso integration to allow for financial participation.
-    - The website's users should be able to leave reviews to inform about their experience.
-    - A counter of the donated clothes by weight.
-    - A counter of supported people.
-
-### Out of scope
-
-    - Direct paiement for donations through the website.
-    - Users being able to interact with each others.
-    - Users booking a place in events. Consulting only.
 
 ---
 
