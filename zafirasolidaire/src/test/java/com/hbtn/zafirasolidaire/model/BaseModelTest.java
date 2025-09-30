@@ -19,7 +19,7 @@ public class BaseModelTest {
     public void BaseModelEntityCreationTest() {
 
         //Arrange
-        final BaseEntityTest baseEntity =  new BaseEntityTest();
+        BaseEntityTest baseEntity =  new BaseEntityTest();
 
         //Act
         UUID uuId = UUID.randomUUID();
@@ -31,19 +31,16 @@ public class BaseModelTest {
 
 
         try {
+            // simulate 10 ms delay to test diff between update date and create date
             Thread.sleep(10);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } // simulate delay
+        }
         baseEntity.onUpdate();
         Date updatedAt = baseEntity.getUpdateDate();
 
         //Assert
-        // assertNotNull(updatedAt, "Update date was initialized on baseEntity creation");
-        // assertNotNull(createdAt,"Create date was initialized on baseEntity creation");
-        // assertNotNull(baseEntityId, "Update date was set after baseEntity creation");
-        // assertEquals(updatedAt, createdAt, "updatedAt and createdAt should be equal on creation");
 
         Assertions.assertThat(createdAt).isNotNull();
         Assertions.assertThat(updatedAt).isNotNull();
