@@ -33,10 +33,7 @@ public class BaseModel {
         return id;
     }
 
-    //Commented setId because JPA handle automatic creation of ID attribute through @GeneratedValue(strategy = GenerationType.UUID)
-    // public void setId(UUID id) {
-    //     this.id = id;
-    // }
+    // JPA handle in db id set with @GeneratedValue(strategy = GenerationType.UUID)
 
     // ---------- createdAt - updatedAt getter and setter ---------- //
 
