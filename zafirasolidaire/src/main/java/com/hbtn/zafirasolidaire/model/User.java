@@ -2,6 +2,9 @@ package com.hbtn.zafirasolidaire.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name ="Users")
@@ -9,6 +12,9 @@ public class User extends BaseModel {
 
     private String firstName;
     private String lastName;
+    @Email
+    @NotBlank
+    @NotEmpty
     private String emailAddress;
     @SuppressWarnings("unused")
     private String password;
@@ -54,7 +60,7 @@ public class User extends BaseModel {
     // }
 
     //TODO: Implement password hash
-    protected User setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
         return this;
     }
