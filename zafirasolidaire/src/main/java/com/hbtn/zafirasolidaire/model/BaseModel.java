@@ -22,11 +22,11 @@ public class BaseModel {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATE_DATE")
-    private Date createDate;
+    protected Date createDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name ="UPDATE_DATE")
-    private Date updateDate;
+    protected Date updateDate;
 
     // ---------- id getter and setter ---------- //
     public UUID getId() {
