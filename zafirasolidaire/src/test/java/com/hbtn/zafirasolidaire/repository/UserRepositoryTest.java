@@ -44,14 +44,14 @@ public class UserRepositoryTest {
              .setLastName("Bob")
              .setEmail("billybob@gmail.com")
              .setProfilePic(photo1)
-             .setAdmin(false)
+             .setIsAdmin(false)
              .setPassword(passwordEncoder.encode("BillyPass"));
 
         user2.setFirstName("Marcel")
              .setLastName("Vincent")
              .setEmail("m.vincent@hotmail.fr")
              .setProfilePic(photo2)
-             .setAdmin(true)
+             .setIsAdmin(true)
              .setPassword(passwordEncoder.encode("MarcelPass"));
 
         //Act
@@ -92,14 +92,14 @@ public class UserRepositoryTest {
              .setLastName("Bob")
              .setEmail("billybob@gmail.com")
              .setProfilePic(photo1)
-             .setAdmin(false)
+             .setIsAdmin(false)
              .setPassword(passwordEncoder.encode("BillyPass"));
 
         user2.setFirstName("Marcel")
              .setLastName("Vincent")
              .setEmail("m.vincent@hotmail.fr")
              .setProfilePic(photo2)
-             .setAdmin(true)
+             .setIsAdmin(true)
              .setPassword(passwordEncoder.encode("MarcelPass"));
 
         //Act
@@ -132,7 +132,7 @@ public class UserRepositoryTest {
              .setLastName("Bob")
              .setEmail("billybob@gmail.com")
              .setProfilePic(photo1)
-             .setAdmin(false)
+             .setIsAdmin(false)
              .setPassword(passwordEncoder.encode("BillyPass"));
 
 
@@ -180,14 +180,14 @@ public class UserRepositoryTest {
              .setLastName("Bob")
              .setEmail("billybob@gmail.com")
              .setProfilePic(photo1)
-             .setAdmin(false)
+             .setIsAdmin(false)
              .setPassword(passwordEncoder.encode("BillyPass"));
 
         user2.setFirstName("Marcel")
              .setLastName("Vincent")
              .setEmail("m.vincent@hotmail.fr")
              .setProfilePic(photo2)
-             .setAdmin(true)
+             .setIsAdmin(true)
              .setPassword(passwordEncoder.encode("MarcelPass"));
 
         //Act
