@@ -20,25 +20,25 @@ public class UserDto {
     }
 
     //------- firstName getters and setters -------//
-    public String getfirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setfirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    //------- firstName getters and setters -------//
-    public String getlastName() {
+    //------- lastName getters and setters -------//
+    public String getLastName() {
         return lastName;
     }
 
-    public void setlastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    //------- firstName getters and setters -------//
-    public String getphotoUrl() {
+    //------- photoUrl getters and setters -------//
+    public String getPhotoUrl() {
         return photoUrl;
     }
 
@@ -46,12 +46,24 @@ public class UserDto {
         this.photoUrl = photoUrl;
     }
 
-    //------- firstName getters and setters -------//
-    public boolean getisAdmin() {
+    //------- isAdmin getters and setters -------//
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 
-    public void setisAdmin(boolean isAdmin) {
+    public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+
+    //------ Helper Methods -----//
+
+    public String toString() {
+        return "UserDto{" +
+            "userId=" + userId + '\'' +
+            ", first name= '" + firstName + '\'' +
+            ", last name= '" + lastName + '\'' +
+            ", photoUrl= '" + photoUrl + '\'' +
+            ", isAdmin= '" + isAdmin + '\'' +
+            '}';
     }
 }

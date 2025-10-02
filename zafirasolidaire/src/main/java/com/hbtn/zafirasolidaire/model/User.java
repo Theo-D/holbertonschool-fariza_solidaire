@@ -97,11 +97,11 @@ public class User extends BaseModel {
 
     // ---------- isAdmin getter and setter ---------- //
 
-    public Boolean isAdmin() {
+    public Boolean getIsAdmin() {
         return isAdmin;
     }
 
-    public User setAdmin(Boolean isAdmin) {
+    public User setIsAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
         return this;
     }

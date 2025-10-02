@@ -33,7 +33,7 @@ public class UserTest {
                     .setLastName("Bob")
                     .setEmail("billybob@gmail.com")
                     .setProfilePic(photo)
-                    .setAdmin(true)
+                    .setIsAdmin(true)
                     .setPassword("UserPass");
 
         baseUserTest.onUpdate();
@@ -47,7 +47,7 @@ public class UserTest {
         assertThat(baseUserTest.getLastName()).isNotNull().isInstanceOf(String.class);
         assertThat(baseUserTest.getEmail()).isNotNull().isInstanceOf(String.class);
         assertThat(baseUserTest.getProfilePic()).isNotNull().isInstanceOf(Photo.class);
-        assertThat(baseUserTest.isAdmin()).isNotNull().isInstanceOf(Boolean.class);
+        assertThat(baseUserTest.getIsAdmin()).isNotNull().isInstanceOf(Boolean.class);
         //assertThat(baseUserTest.getPasswordForTestingOnly()).isNotNull().isInstanceOf(String.class); Test passed
 
         System.out.println(baseUserTest.getId());
@@ -55,7 +55,7 @@ public class UserTest {
         System.out.println(baseUserTest.getLastName());
         System.out.println(baseUserTest.getEmail());
         System.out.println(baseUserTest.getProfilePic());
-        System.out.println(baseUserTest.isAdmin());
+        System.out.println(baseUserTest.getIsAdmin());
         //System.out.println(baseUserTest.getPasswordForTestingOnly()); Test passed
     }
 }
