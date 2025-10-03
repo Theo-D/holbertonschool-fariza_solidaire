@@ -11,6 +11,5 @@ public interface UserMapper {
 
         @Mapping(source = "profilePic.url", target = "photoUrl")
         @Mapping(source = "id", target = "userId")
-        @Mapping(source = "isAdmin", target = "isAdmin")
         UserDto toDto(User user);
 }
