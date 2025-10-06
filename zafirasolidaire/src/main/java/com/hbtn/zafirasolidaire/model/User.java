@@ -64,11 +64,11 @@ public class User extends BaseModel {
 
     // ---------- emailAddress getter and setter ---------- //
 
-    public String getEmail() {
+    public String getEmailAddress() {
         return emailAddress;
     }
 
-    public User setEmail(String emailAddress) {
+    public User setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
         return this;
     }

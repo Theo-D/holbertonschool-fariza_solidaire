@@ -42,14 +42,14 @@ public class UserRepositoryTest {
 
         user1.setFirstName("Billy")
              .setLastName("Bob")
-             .setEmail("billybob@gmail.com")
+             .setEmailAddress("billybob@gmail.com")
              .setProfilePic(photo1)
              .setIsAdmin(false)
              .setPassword(passwordEncoder.encode("BillyPass"));
 
         user2.setFirstName("Marcel")
              .setLastName("Vincent")
-             .setEmail("m.vincent@hotmail.fr")
+             .setEmailAddress("m.vincent@hotmail.fr")
              .setProfilePic(photo2)
              .setIsAdmin(true)
              .setPassword(passwordEncoder.encode("MarcelPass"));
@@ -90,14 +90,14 @@ public class UserRepositoryTest {
 
         user1.setFirstName("Billy")
              .setLastName("Bob")
-             .setEmail("billybob@gmail.com")
+             .setEmailAddress("billybob@gmail.com")
              .setProfilePic(photo1)
              .setIsAdmin(false)
              .setPassword(passwordEncoder.encode("BillyPass"));
 
         user2.setFirstName("Marcel")
              .setLastName("Vincent")
-             .setEmail("m.vincent@hotmail.fr")
+             .setEmailAddress("m.vincent@hotmail.fr")
              .setProfilePic(photo2)
              .setIsAdmin(true)
              .setPassword(passwordEncoder.encode("MarcelPass"));
@@ -130,7 +130,7 @@ public class UserRepositoryTest {
 
         user1.setFirstName("Billy")
              .setLastName("Bob")
-             .setEmail("billybob@gmail.com")
+             .setEmailAddress("billybob@gmail.com")
              .setProfilePic(photo1)
              .setIsAdmin(false)
              .setPassword(passwordEncoder.encode("BillyPass"));
@@ -144,7 +144,7 @@ public class UserRepositoryTest {
         savedUser1 = new User().setId(savedUser1.getId())
                                .setFirstName(savedUser1.getFirstName())
                                .setLastName(savedUser1.getLastName())
-                               .setEmail(savedUser1.getEmail())
+                               .setEmailAddress(savedUser1.getEmailAddress())
                                .setProfilePic(savedUser1.getProfilePic())
                                .setPassword(passwordEncoder.encode("MarcelPass"));
 
@@ -178,14 +178,14 @@ public class UserRepositoryTest {
 
         user1.setFirstName("Billy")
              .setLastName("Bob")
-             .setEmail("billybob@gmail.com")
+             .setEmailAddress("billybob@gmail.com")
              .setProfilePic(photo1)
              .setIsAdmin(false)
              .setPassword(passwordEncoder.encode("BillyPass"));
 
         user2.setFirstName("Marcel")
              .setLastName("Vincent")
-             .setEmail("m.vincent@hotmail.fr")
+             .setEmailAddress("m.vincent@hotmail.fr")
              .setProfilePic(photo2)
              .setIsAdmin(true)
              .setPassword(passwordEncoder.encode("MarcelPass"));
