@@ -13,13 +13,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.hbtn.zafirasolidaire.config.SecurityConfigTest;
+import com.hbtn.zafirasolidaire.config.ConfigTest;
 import com.hbtn.zafirasolidaire.model.Photo;
 import com.hbtn.zafirasolidaire.model.User;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-@Import(SecurityConfigTest.class)
+@Import(ConfigTest.class)
 public class UserRepositoryTest {
 
     @Autowired
