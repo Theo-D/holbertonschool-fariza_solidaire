@@ -1,10 +1,16 @@
 package com.hbtn.zafirasolidaire.model;
 
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
+
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 
 public class UserTest {
     static class BaseUserTest extends User{
@@ -14,6 +20,8 @@ public class UserTest {
             return this;
         }
     }
+
+    private Validator validator;
 
     @Test
     public void userModelCreationTest(){
@@ -57,5 +65,52 @@ public class UserTest {
         System.out.println(baseUserTest.getProfilePic());
         System.out.println(baseUserTest.getIsAdmin());
         //System.out.println(baseUserTest.getPasswordForTestingOnly()); Test passed
+    }
+
+    @Test
+    public void UserValidationTest() {
+        // Arrange
+
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
+
+        User user = new User();
+        user.setId(UUID.randomUUID());
+
+        // Deliberately setting invalid values
+        user.setFirstName("");         // violates @NotBlank, @Size
+        user.setLastName(null);        // violates @NotNull, @NotBlank
+        user.setEmailAddress("invalid-email"); // violates @Email
+        user.setPassword("");          // violates @NotBlank
+        user.setIsAdmin(null);         // violates @NotNull
+
+        // Act
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+
+        // Assert
+        assertThat(violations).hasSizeGreaterThan(0);
+
+        assertThat(violations)
+            .anySatisfy(v -> {
+                assertThat(v.getPropertyPath().toString()).isEqualTo("firstName");
+                assertThat(v.getMessage()).contains("must not be blank");
+            })
+            .anySatisfy(v -> {
+                assertThat(v.getPropertyPath().toString()).isEqualTo("lastName");
+                assertThat(v.getMessage()).contains("must not be null");
+            })
+            .anySatisfy(v -> {
+                assertThat(v.getPropertyPath().toString()).isEqualTo("emailAddress");
+                assertThat(v.getMessage()).contains("must be a well-formed email address");
+            })
+            .anySatisfy(v -> {
+                assertThat(v.getPropertyPath().toString()).isEqualTo("password");
+                assertThat(v.getMessage()).contains("must not be blank");
+            })
+            .anySatisfy(v -> {
+                assertThat(v.getPropertyPath().toString()).isEqualTo("isAdmin");
+                assertThat(v.getMessage()).contains("must not be null");
+            });
+
     }
 }

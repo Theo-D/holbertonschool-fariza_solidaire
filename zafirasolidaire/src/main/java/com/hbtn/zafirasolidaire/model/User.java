@@ -10,22 +10,39 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name ="Users")
 public class User extends BaseModel {
 
+    @NotBlank
+    @NotNull
+    @Size(min = 1, max = 50, message = "First name must be between 1 and 50 characters")
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @NotBlank
+    @NotNull
+    @Size(min = 1, max = 50, message = "Last name must be between 1 and 50 characters")
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Email
-    @Column(name = "email_address", nullable = false)
+    @NotBlank
+    @NotNull
+    @Size(max = 100)
+    @Column(name = "email_address", nullable = false, unique = true)
     private String emailAddress;
 
     @SuppressWarnings("unused")
+    @NotBlank
+    @NotNull
+    @Size(min = 8)
     @Column( nullable = false)
     private String password;
 
@@ -33,6 +50,7 @@ public class User extends BaseModel {
     @JoinColumn(name = "photo_id", unique = true)
     private Photo profilePic;
 
+    @NotNull
     @Column(name = "is_admin", nullable = false)
     private Boolean isAdmin;
 
