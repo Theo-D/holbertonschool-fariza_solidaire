@@ -8,6 +8,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String photoUrl;
+    private String emailAddress;
     private boolean isAdmin;
 
     //------- userId getters and setters -------//
@@ -44,6 +45,15 @@ public class UserDto {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    //------- photoUrl getters and setters -------//
+    public String getEmailaddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     //------- isAdmin getters and setters -------//

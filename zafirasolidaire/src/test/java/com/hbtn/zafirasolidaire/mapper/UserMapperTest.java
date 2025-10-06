@@ -37,13 +37,13 @@ public class UserMapperTest {
             User user = new User().setId(UUID.randomUUID())
                                   .setFirstName("Billy")
                                   .setLastName("Bob")
-                                  .setEmail("billybob@gmail.com")
+                                  .setEmailAddress("billybob@gmail.com")
                                   .setProfilePic(photo)
                                   .setPassword(passwordEncoder.encode("BillyPass"))
                                   .setIsAdmin(false);
 
             //Act
-            UserDto userDto = userMapper.toDto(user);
+            UserDto userDto = userMapper.usertoDto(user);
 
             //Assert
             assertThat(userDto).isNotNull();
