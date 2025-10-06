@@ -43,7 +43,7 @@ public class UserMapperTest {
                                   .setIsAdmin(false);
 
             //Act
-            UserDto userDto = userMapper.usertoDto(user);
+            UserDto userDto = userMapper.userToDto(user);
 
             //Assert
             assertThat(userDto).isNotNull();

@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,6 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.hbtn.zafirasolidaire.config.SecurityConfigTest;
+import com.hbtn.zafirasolidaire.dto.UserDto;
+import com.hbtn.zafirasolidaire.mapper.UserMapper;
 import com.hbtn.zafirasolidaire.model.User;
 import com.hbtn.zafirasolidaire.repository.UserRepository;
 
@@ -27,6 +30,9 @@ public class UserFacadeTest {
 
     @Autowired
     private UserFacade userFacade;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private UserRepository userRepository;
@@ -57,20 +63,23 @@ public class UserFacadeTest {
         // Arrange
         UUID userId = UUID.randomUUID();
         User user = new User();
+        UserDto userDto = new UserDto();
+        userDto.setUserId(userId);
         user.setId(userId);
 
+        when(userMapper.userToDto(user)).thenReturn(userDto);
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
         when(userRepository.existsById(userId)).thenReturn(true);
         when(userRepository.count()).thenReturn(1L);
 
         // Act
-        Optional<User> foundUser = userFacade.getUserById(userId);
+        UserDto foundUser = userFacade.getUserById(userId);
         boolean exists = userFacade.existsById(userId);
         long count = userFacade.countUsers();
 
         // Assert
-        assertThat(foundUser.isPresent()).isTrue();
-        assertThat(userId).isEqualTo(foundUser.get().getId());
+        assertThat(foundUser).isNotNull();
+        assertThat(userId).isEqualTo(foundUser.getUserId());
         assertThat(exists);
         assertThat(1L).isEqualTo(count);
 
@@ -100,5 +109,71 @@ public class UserFacadeTest {
         // saveAllUsers with empty list
         Exception ex5 = assertThrows(IllegalArgumentException.class, () -> userFacade.saveAllUsers(Collections.emptyList()));
         assertEquals("User list cannot be null or empty.", ex5.getMessage());
+    }
+
+    @Test
+    public void userFacade_getAllUsers_shouldReturnUserDtos() {
+        // Arrange
+        UUID userId = UUID.randomUUID();
+        User user = new User();
+        user.setId(userId);
+
+        UserDto userDto = new UserDto();
+        userDto.setUserId(userId);
+
+        List<User> userList = List.of(user);
+
+        when(userRepository.findAll()).thenReturn(userList);
+        when(userMapper.userToDto(user)).thenReturn(userDto);
+
+        // Act
+        Iterable<UserDto> result = userFacade.getAllUsers();
+
+        // Assert
+        assertThat(result).isNotNull();
+        assertThat(result).hasSize(1);
+        assertThat(result).containsExactly(userDto);
+
+        verify(userRepository, times(1)).findAll();
+        verify(userMapper, times(1)).userToDto(user);
+    }
+
+    @Test
+    public void userFacade_getAllUsersById_shouldReturnUserDtos() {
+        // Arrange
+        UUID userId = UUID.randomUUID();
+        User user = new User();
+        user.setId(userId);
+
+        UserDto userDto = new UserDto();
+        userDto.setUserId(userId);
+
+        List<UUID> userIds = List.of(userId);
+        List<User> users = List.of(user);
+
+        when(userRepository.findAllById(userIds)).thenReturn(users);
+        when(userMapper.userToDto(user)).thenReturn(userDto);
+
+        // Act
+        Iterable<UserDto> result = userFacade.getAllUsersById(userIds);
+
+        // Assert
+        assertThat(result).isNotNull();
+        assertThat(result).hasSize(1);
+        assertThat(result).containsExactly(userDto);
+
+        verify(userRepository, times(1)).findAllById(userIds);
+        verify(userMapper, times(1)).userToDto(user);
+    }
+
+    @Test
+    public void userFacade_getAllUsersById_shouldThrowWhenInputIsNullOrEmpty() {
+        // Null input
+        Exception ex1 = assertThrows(IllegalArgumentException.class, () -> userFacade.getAllUsersById(null));
+        assertEquals("ID list cannot be null or empty.", ex1.getMessage());
+
+        // Empty input
+        Exception ex2 = assertThrows(IllegalArgumentException.class, () -> userFacade.getAllUsersById(Collections.emptyList()));
+        assertEquals("ID list cannot be null or empty.", ex2.getMessage());
     }
 }
