@@ -1,26 +1,30 @@
 package com.hbtn.zafirasolidaire.service;
 
-import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.hbtn.zafirasolidaire.dto.UserDto;
+import com.hbtn.zafirasolidaire.mapper.UserMapper;
 import com.hbtn.zafirasolidaire.model.User;
 import com.hbtn.zafirasolidaire.repository.UserRepository;
 
-//TODO: CREATE USER DTO SERVICE
 @Service
 public class UserFacade {
 
     private final PasswordEncoder encoder;
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Autowired
-    public UserFacade(PasswordEncoder encoder, UserRepository userRepository) {
+    public UserFacade(PasswordEncoder encoder, UserRepository userRepository, UserMapper userMapper) {
         this.encoder = encoder;
         this.userRepository = userRepository;
+        this.userMapper  = userMapper;
     }
 
     //---------- Password Services ----------//
@@ -47,11 +51,14 @@ public class UserFacade {
         userRepository.saveAll(users);
     }
 
-    public Optional<User> getUserById(UUID id) {
+    public UserDto getUserById(UUID id) {
         if (id == null) {
             throw new IllegalArgumentException("User ID cannot be null.");
         }
-        return userRepository.findById(id);
+
+        User foundUser = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        return userMapper.userToDto(foundUser);
     }
 
     public boolean existsById(UUID id) {
@@ -61,15 +68,16 @@ public class UserFacade {
         return userRepository.existsById(id);
     }
 
-    public Iterable<User> getAllUsers() {
-        return userRepository.findAll();
+    public Iterable<UserDto> getAllUsers() {
+        return mapToDto(userRepository.findAll());
     }
 
-    public Iterable<User> getAllUsersById(Iterable<UUID> ids) {
+    public Iterable<UserDto> getAllUsersById(Iterable<UUID> ids) {
         if (ids == null || !ids.iterator().hasNext()) {
             throw new IllegalArgumentException("ID list cannot be null or empty.");
         }
-        return userRepository.findAllById(ids);
+
+        return mapToDto(userRepository.findAllById(ids));
     }
 
     public void deleteUserById(UUID id) {
@@ -99,6 +107,14 @@ public class UserFacade {
 
     public long countUsers() {
         return userRepository.count();
+    }
+
+    //--------- Helper methods ---------//
+
+    private Iterable<UserDto> mapToDto(Iterable<User> users) {
+        return StreamSupport.stream(users.spliterator(), false)
+            .map(userMapper::userToDto)
+            .collect(Collectors.toList());
     }
 
 }
