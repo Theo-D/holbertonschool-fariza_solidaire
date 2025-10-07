@@ -36,7 +36,7 @@ public class EventFacade {
         eventRepository.save(event);
     }
 
-    public void createAllUsers(Iterable<EventDto> eventDtos) {
+    public void createAllEvents(Iterable<EventDto> eventDtos) {
         if (eventDtos == null || !eventDtos.iterator().hasNext()) {
             throw new IllegalArgumentException("Event list cannot be null or empty.");
         }
