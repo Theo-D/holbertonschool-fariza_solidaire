@@ -1,6 +1,7 @@
 package com.hbtn.zafirasolidaire.dto;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
@@ -8,6 +9,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class EventDto {
+
+    @NotNull
+    private UUID eventId;
 
     @NotNull
     @NotBlank
@@ -25,9 +29,18 @@ public class EventDto {
     @NotBlank
     private String photoUrl;
 
+    //---------- id getters and setters  ----------//
+    public UUID getEventId() {
+        return this.eventId;
+    }
+
+    public void setEventId(UUID eventId) {
+        this.eventId = eventId;
+    }
+
     //---------- category getters and setters  ----------//
     public String getCategory() {
-    return category;
+        return category;
     }
 
     public void setCategory(String category) {
