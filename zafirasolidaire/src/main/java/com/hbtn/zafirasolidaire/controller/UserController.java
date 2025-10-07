@@ -111,7 +111,7 @@ public class UserController {
 
     // Delete specific users
     @DeleteMapping("/batch")
-    public ResponseEntity<Void> deleteAllUsers(@RequestBody List<User> users) {
+    public ResponseEntity<Void> deleteAllUsersFromList(@RequestBody List<User> users) {
         userFacade.deleteAllUsers(users);
         return ResponseEntity.noContent().build();
     }

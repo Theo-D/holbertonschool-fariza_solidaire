@@ -63,14 +63,14 @@ public class EventFacadeTest {
     void createAllUsers_shouldSaveAllEvents() {
         List<EventDto> dtos = List.of(eventDto);
         when(eventMapper.dtoToEvent(eventDto)).thenReturn(event);
-        eventFacade.createAllUsers(dtos);
+        eventFacade.createAllEvents(dtos);
         verify(eventRepository).saveAll(List.of(event));
     }
 
     @Test
     void createAllUsers_shouldThrowException_whenNullOrEmpty() {
-        assertThrows(IllegalArgumentException.class, () -> eventFacade.createAllUsers(null));
-        assertThrows(IllegalArgumentException.class, () -> eventFacade.createAllUsers(List.of()));
+        assertThrows(IllegalArgumentException.class, () -> eventFacade.createAllEvents(null));
+        assertThrows(IllegalArgumentException.class, () -> eventFacade.createAllEvents(List.of()));
     }
 
     // getEventById
