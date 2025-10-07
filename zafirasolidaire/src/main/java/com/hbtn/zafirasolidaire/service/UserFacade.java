@@ -1,5 +1,7 @@
 package com.hbtn.zafirasolidaire.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -9,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hbtn.zafirasolidaire.dto.UserDto;
+import com.hbtn.zafirasolidaire.dto.UserRequest;
 import com.hbtn.zafirasolidaire.mapper.UserMapper;
 import com.hbtn.zafirasolidaire.model.User;
 import com.hbtn.zafirasolidaire.repository.UserRepository;
@@ -37,17 +40,32 @@ public class UserFacade {
     }
 
     //---------- Repository Services ----------//
-    public void saveUser(User user) {
-        if (user == null) {
-            throw new IllegalArgumentException("User cannot be null.");
+    public void createUser(UserRequest userRequest) {
+        if (userRequest == null) {
+            throw new IllegalArgumentException("User request cannot be null.");
         }
+
+        User user = userMapper.userRequestToUser(userRequest);
+
+        user.setPassword(encodePassword(userRequest.getPassword()));
+        user.setIsAdmin(false);
         userRepository.save(user);
     }
 
-    public void saveAllUsers(Iterable<User> users) {
-        if (users == null || !users.iterator().hasNext()) {
+    public void createAllUsers(Iterable<UserRequest> userRequests) {
+        if (userRequests == null || !userRequests.iterator().hasNext()) {
             throw new IllegalArgumentException("User list cannot be null or empty.");
         }
+
+        List<User> users = new ArrayList<>();
+
+        for (UserRequest userRequest : userRequests) {
+            User user = userMapper.userRequestToUser(userRequest);
+            user.setPassword(encodePassword(userRequest.getPassword()));
+            user.setIsAdmin(false);
+            users.add(user);
+        }
+
         userRepository.saveAll(users);
     }
 

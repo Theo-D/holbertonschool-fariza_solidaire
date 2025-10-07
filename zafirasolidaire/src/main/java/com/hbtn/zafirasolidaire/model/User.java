@@ -89,11 +89,11 @@ public class User extends BaseModel {
         return this;
     }
 
-    // ---------- password setter ---------- //
-    // Test passed - Commenting method
-    // protected String getPasswordForTestingOnly() {
-    //     return password;
-    // }
+    //---------- password setter ---------- //
+    //Test passed - Commenting method
+    public String getPasswordForTestingOnly() {
+        return password;
+    }
 
     public User setPassword(String password) {
         this.password = password;

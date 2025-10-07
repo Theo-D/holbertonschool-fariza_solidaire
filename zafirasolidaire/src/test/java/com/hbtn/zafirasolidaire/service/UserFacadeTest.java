@@ -14,49 +14,51 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import com.hbtn.zafirasolidaire.config.ConfigTest;
+import com.hbtn.zafirasolidaire.config.SecurityConfigTest;
 import com.hbtn.zafirasolidaire.dto.UserDto;
+import com.hbtn.zafirasolidaire.dto.UserRequest;
 import com.hbtn.zafirasolidaire.mapper.UserMapper;
 import com.hbtn.zafirasolidaire.model.User;
 import com.hbtn.zafirasolidaire.repository.UserRepository;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {UserFacade.class, ConfigTest.class})
+@ContextConfiguration(classes = {UserFacade.class, SecurityConfigTest.class})
 public class UserFacadeTest {
 
-    @Autowired
-    private UserFacade userFacade;
-
-    @Autowired
+    @Mock
     private UserMapper userMapper;
 
-    @Autowired
+    @Mock
     private UserRepository userRepository;
 
-    @SuppressWarnings("unused")
-    @Autowired
+    @Mock
     private PasswordEncoder passwordEncoder;
 
-    @Test
-    public void userFacade_PasswordServiceTest(){
-        //Arrange
-        String unhashedPass = "UserPass";
+    @InjectMocks
+    private UserFacade userFacade;
 
-        //Act
+    @Test
+    public void userFacade_PasswordServiceTest() {
+        // Arrange
+        String unhashedPass = "UserPass";
+        String hashedPassExpected = "encoded_UserPass";
+
+        when(passwordEncoder.encode(unhashedPass)).thenReturn(hashedPassExpected);
+        when(passwordEncoder.matches(unhashedPass, hashedPassExpected)).thenReturn(true);
+
+        // Act
         String hashedPass = userFacade.encodePassword(unhashedPass);
 
-        //Assert
+        // Assert
         assertThat(hashedPass).isNotEqualTo(unhashedPass).isNotNull();
-        assertThat(unhashedPass).isNotNull();
         assertThat(userFacade.checkPassword(unhashedPass, hashedPass)).isTrue();
-
-        System.out.println(hashedPass);
-        System.out.println(unhashedPass);
     }
+
 
     @Test
     public void userFacade_RepositoryServiceTest() {
@@ -99,15 +101,15 @@ public class UserFacadeTest {
         assertEquals("User ID cannot be null.", ex2.getMessage());
 
         // saveUser with null
-        Exception ex3 = assertThrows(IllegalArgumentException.class, () -> userFacade.saveUser(null));
-        assertEquals("User cannot be null.", ex3.getMessage());
+        Exception ex3 = assertThrows(IllegalArgumentException.class, () -> userFacade.createUser(null));
+        assertEquals("User request cannot be null.", ex3.getMessage());
 
         // saveAllUsers with null
-        Exception ex4 = assertThrows(IllegalArgumentException.class, () -> userFacade.saveAllUsers(null));
+        Exception ex4 = assertThrows(IllegalArgumentException.class, () -> userFacade.createAllUsers(null));
         assertEquals("User list cannot be null or empty.", ex4.getMessage());
 
         // saveAllUsers with empty list
-        Exception ex5 = assertThrows(IllegalArgumentException.class, () -> userFacade.saveAllUsers(Collections.emptyList()));
+        Exception ex5 = assertThrows(IllegalArgumentException.class, () -> userFacade.createAllUsers(Collections.emptyList()));
         assertEquals("User list cannot be null or empty.", ex5.getMessage());
     }
 
@@ -176,4 +178,79 @@ public class UserFacadeTest {
         Exception ex2 = assertThrows(IllegalArgumentException.class, () -> userFacade.getAllUsersById(Collections.emptyList()));
         assertEquals("ID list cannot be null or empty.", ex2.getMessage());
     }
+
+    @Test
+    public void userFacade_createUser_shouldMapEncodeAndSave() {
+        // Arrange
+        UserRequest request = new UserRequest();
+        request.setFirstName("Test");
+        request.setLastName("User");
+        request.setEmailAddress("test@example.com");
+        request.setPassword("plainPassword");
+
+        User mappedUser = new User();
+        when(userMapper.userRequestToUser(request)).thenReturn(mappedUser);
+        when(passwordEncoder.encode("plainPassword")).thenReturn("hashedPassword");
+
+        // Act
+        userFacade.createUser(request);
+
+        // Assert
+        assertThat(mappedUser.getPasswordForTestingOnly()).isEqualTo("hashedPassword");
+        assertThat(mappedUser.getIsAdmin()).isFalse();
+
+        verify(userMapper).userRequestToUser(request);
+        verify(passwordEncoder).encode("plainPassword");
+        verify(userRepository).save(mappedUser);
+    }
+
+    @Test
+    public void userFacade_createAllUsers_shouldMapEncodeAndSaveAll() {
+        // Arrange
+        UserRequest request1 = new UserRequest();
+        request1.setPassword("pass1");
+        UserRequest request2 = new UserRequest();
+        request2.setPassword("pass2");
+
+        User user1 = new User();
+        User user2 = new User();
+
+        List<UserRequest> requests = List.of(request1, request2);
+
+        when(userMapper.userRequestToUser(request1)).thenReturn(user1);
+        when(userMapper.userRequestToUser(request2)).thenReturn(user2);
+        when(passwordEncoder.encode("pass1")).thenReturn("hashed1");
+        when(passwordEncoder.encode("pass2")).thenReturn("hashed2");
+
+        // Act
+        userFacade.createAllUsers(requests);
+
+        // Assert
+        assertThat(user1.getPasswordForTestingOnly()).isEqualTo("hashed1");
+        assertThat(user2.getPasswordForTestingOnly()).isEqualTo("hashed2");
+        assertThat(user1.getIsAdmin()).isFalse();
+        assertThat(user2.getIsAdmin()).isFalse();
+
+        verify(userMapper).userRequestToUser(request1);
+        verify(userMapper).userRequestToUser(request2);
+        verify(passwordEncoder).encode("pass1");
+        verify(passwordEncoder).encode("pass2");
+        verify(userRepository).saveAll(List.of(user1, user2));
+    }
+
+    @Test
+    public void userFacade_createUser_shouldThrowOnNullInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> userFacade.createUser(null));
+        assertEquals("User request cannot be null.", exception.getMessage());
+    }
+
+    @Test
+    public void userFacade_createAllUsers_shouldThrowOnNullOrEmpty() {
+        Exception ex1 = assertThrows(IllegalArgumentException.class, () -> userFacade.createAllUsers(null));
+        assertEquals("User list cannot be null or empty.", ex1.getMessage());
+
+        Exception ex2 = assertThrows(IllegalArgumentException.class, () -> userFacade.createAllUsers(Collections.emptyList()));
+        assertEquals("User list cannot be null or empty.", ex2.getMessage());
+    }
+
 }
