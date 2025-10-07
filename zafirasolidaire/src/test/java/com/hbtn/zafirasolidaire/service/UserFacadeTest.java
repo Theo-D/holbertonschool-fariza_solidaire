@@ -19,7 +19,7 @@ import org.mockito.Mock;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import com.hbtn.zafirasolidaire.config.SecurityConfigTest;
+import com.hbtn.zafirasolidaire.config.ConfigTest;
 import com.hbtn.zafirasolidaire.dto.UserDto;
 import com.hbtn.zafirasolidaire.dto.UserRequest;
 import com.hbtn.zafirasolidaire.mapper.UserMapper;
@@ -27,7 +27,7 @@ import com.hbtn.zafirasolidaire.model.User;
 import com.hbtn.zafirasolidaire.repository.UserRepository;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {UserFacade.class, SecurityConfigTest.class})
+@ContextConfiguration(classes = {UserFacade.class, ConfigTest.class})
 public class UserFacadeTest {
 
     @Mock

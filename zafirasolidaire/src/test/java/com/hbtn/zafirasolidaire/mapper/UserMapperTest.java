@@ -12,13 +12,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.hbtn.zafirasolidaire.config.SecurityConfigTest;
+import com.hbtn.zafirasolidaire.config.ConfigTest;
 import com.hbtn.zafirasolidaire.dto.UserDto;
 import com.hbtn.zafirasolidaire.model.Photo;
 import com.hbtn.zafirasolidaire.model.User;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = SecurityConfigTest.class)
+@ContextConfiguration(classes = ConfigTest.class)
 public class UserMapperTest {
 
         private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
