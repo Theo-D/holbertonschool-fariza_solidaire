@@ -10,7 +10,7 @@ import com.hbtn.zafirasolidaire.mapper.UserMapper;
 import com.hbtn.zafirasolidaire.repository.UserRepository;
 
 @TestConfiguration
-public class ConfigTest {
+public class SecurityConfigTest {
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
