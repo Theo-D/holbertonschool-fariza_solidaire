@@ -60,7 +60,7 @@ public class EventMapperTest {
     }
 
     @Test
-    public void testDtoToEvent() {
+    public void testdtoToEvent() {
         // Arrange
         UUID id = UUID.randomUUID();
         EventDto dto = new EventDto();
@@ -71,7 +71,7 @@ public class EventMapperTest {
         dto.setPhotoUrl("https://example.com/seminar.jpg");
 
         // Act
-        Event event = mapper.DtoToEvent(dto);
+        Event event = mapper.dtoToEvent(dto);
 
         // Assert
         assertThat(event).isNotNull();

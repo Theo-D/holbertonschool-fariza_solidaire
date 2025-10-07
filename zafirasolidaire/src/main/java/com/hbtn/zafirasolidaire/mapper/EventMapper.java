@@ -17,5 +17,5 @@ public interface EventMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(source = "photoUrl", target = "photo.url")
     @Mapping(source = "category", target = "category.name")
-    Event DtoToEvent(EventDto eventDto);
+    Event dtoToEvent(EventDto eventDto);
 }
