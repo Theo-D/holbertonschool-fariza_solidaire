@@ -41,8 +41,8 @@ public class EventFacadeTest {
     @BeforeEach
     void setUp() {
         eventId = UUID.randomUUID();
-        eventDto = new EventDto(); // Assuming it has a no-arg constructor
-        event = new Event();       // Assuming it has a no-arg constructor
+        eventDto = new EventDto();
+        event = new Event();
     }
 
     // createEvent
