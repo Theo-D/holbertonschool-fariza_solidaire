@@ -76,4 +76,15 @@ public class BlogPost extends BaseModel {
         this.photo = photo;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "BlogPost{" +
+            "id='" + id + '\'' +
+            "title='" + title + '\'' +
+            ", textBody='" + textBody + '\'' +
+            ", author='" + author + '\'' +
+            ", photo=" + (photo != null ? photo.toString() : "null") +
+            '}';
+    }
 }
