@@ -1,9 +1,14 @@
 package com.hbtn.zafirasolidaire.dto;
 
+import java.util.UUID;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class BlogPostDto {
+
+    @NotNull
+    private UUID blogPostId;
 
     @NotNull
     @NotBlank
@@ -18,6 +23,14 @@ public class BlogPostDto {
     private String author;
 
     private String photoUrl;
+
+    public UUID getBlogPostId() {
+        return blogPostId;
+    }
+
+    public void setBlogPostId(UUID blogPostId) {
+        this.blogPostId = blogPostId;
+    }
 
     public String getTitle() {
         return title;
@@ -49,5 +62,16 @@ public class BlogPostDto {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "BlogPostDto{" +
+            "blogPostId=" + blogPostId +
+            ", title='" + title + '\'' +
+            ", textBody='" + textBody + '\'' +
+            ", author='" + author + '\'' +
+            ", photoUrl='" + photoUrl + '\'' +
+            '}';
     }
 }
