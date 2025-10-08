@@ -1,11 +1,19 @@
 package com.hbtn.zafirasolidaire.config;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 
 @Configuration
 public class SecurityConfig {
@@ -14,21 +22,27 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-        .csrf(csrf -> csrf.disable())  // disable CSRF protection, find a way to cinfigure it more precisely
-        .authorizeHttpRequests(authorize -> authorize
-        .requestMatchers(
-            "/v3/api-docs/**",
-            "/swagger-ui/**",
-            "/swagger-ui.html/**",
-            "/doc.html/**",
-            "/api/v1/**"
-        ).permitAll()
-        .anyRequest().authenticated()
-    );
+    private static final String[] SWAGGER_PATHS = {"/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**", "/webjars/swagger-ui/**"};
 
-    return http.build();
+    @Bean
+    SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
+        return http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(SWAGGER_PATHS).permitAll()
+                        .anyRequest().authenticated())
+                        .httpBasic(withDefaults())
+                .build();
+    }
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .addSecurityItem(new SecurityRequirement().addList("basicAuth"))
+                .components(new Components()
+                        .addSecuritySchemes("basicAuth",
+                                new SecurityScheme()
+                                        .type(SecurityScheme.Type.HTTP)
+                                        .scheme("basic")));
     }
 }
