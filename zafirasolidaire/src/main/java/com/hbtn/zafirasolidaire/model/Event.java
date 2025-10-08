@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Future;
@@ -18,7 +19,8 @@ import jakarta.validation.constraints.NotNull;
 public class Event extends BaseModel {
 
     @NotNull
-    @Column(name = "event_category", nullable = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_category_id", nullable = false)
     private EventCategory category;
 
     @NotNull
