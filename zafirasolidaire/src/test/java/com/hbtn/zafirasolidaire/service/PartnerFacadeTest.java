@@ -130,37 +130,37 @@ public class PartnerFacadeTest {
         assertThrows(IllegalArgumentException.class, () -> partnerFacade.getAllPartnersById(Collections.emptyList()));
     }
 
-    //---------- deleteUserById ----------//
+    //---------- deletePartnerById ----------//
 
     @Test
-    void deleteUserById_shouldDeletePartner() {
-        partnerFacade.deleteUserById(partnerId);
+    void deletePartnerById_shouldDeletePartner() {
+        partnerFacade.deletePartnerById(partnerId);
         verify(partnerRepository).deleteById(partnerId);
     }
 
     @Test
-    void deleteUserById_shouldThrowException_whenNull() {
-        assertThrows(IllegalArgumentException.class, () -> partnerFacade.deleteUserById(null));
+    void deletePartnerById_shouldThrowException_whenNull() {
+        assertThrows(IllegalArgumentException.class, () -> partnerFacade.deletePartnerById(null));
     }
 
-    //---------- deleteUser ----------//
+    //---------- deletePartner ----------//
 
     @Test
-    void deleteUser_shouldDeletePartner() {
-        partnerFacade.deleteUser(partner);
+    void deletePartner_shouldDeletePartner() {
+        partnerFacade.deletePartner(partner);
         verify(partnerRepository).delete(partner);
     }
 
     @Test
-    void deleteUser_shouldThrowException_whenNull() {
-        assertThrows(IllegalArgumentException.class, () -> partnerFacade.deleteUser(null));
+    void deletePartner_shouldThrowException_whenNull() {
+        assertThrows(IllegalArgumentException.class, () -> partnerFacade.deletePartner(null));
     }
 
-    //---------- deleteAllUsers ----------//
+    //---------- deleteAllPartners ----------//
 
     @Test
-    void deleteAllUsers_shouldCallDeleteAll() {
-        partnerFacade.deleteAllUsers();
+    void deleteAllPartners_shouldCallDeleteAll() {
+        partnerFacade.deleteAllPartners();
         verify(partnerRepository).deleteAll();
     }
 
@@ -169,26 +169,26 @@ public class PartnerFacadeTest {
     @Test
     void deleteAllPartners_shouldDeleteAll() {
         List<Partner> partners = List.of(partner);
-        partnerFacade.deleteAllPArtners(partners);
+        partnerFacade.deleteAllPArtnersFromList(partners);
         verify(partnerRepository).deleteAll(partners);
     }
 
     @Test
     void deleteAllPartners_shouldThrowException_whenNull() {
-        assertThrows(IllegalArgumentException.class, () -> partnerFacade.deleteAllPArtners(null));
+        assertThrows(IllegalArgumentException.class, () -> partnerFacade.deleteAllPArtnersFromList(null));
     }
 
     @Test
     void deleteAllPartners_shouldThrowException_whenEmpty() {
-        assertThrows(IllegalArgumentException.class, () -> partnerFacade.deleteAllPArtners(Collections.emptyList()));
+        assertThrows(IllegalArgumentException.class, () -> partnerFacade.deleteAllPArtnersFromList(Collections.emptyList()));
     }
 
-    //---------- countUsers ----------//
+    //---------- countPartners ----------//
 
     @Test
-    void countUsers_shouldReturnCount() {
+    void countPartners_shouldReturnCount() {
         when(partnerRepository.count()).thenReturn(5L);
-        long count = partnerFacade.countUsers();
+        long count = partnerFacade.countPartners();
         assertEquals(5L, count);
     }
 }

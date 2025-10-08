@@ -3,10 +3,12 @@ package com.hbtn.zafirasolidaire.service;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.hbtn.zafirasolidaire.model.Partner;
 import com.hbtn.zafirasolidaire.repository.PartnerRepository;
 
+@Service
 public class PartnerFacade {
     private final PartnerRepository partnerRepository;
 
@@ -58,32 +60,32 @@ public class PartnerFacade {
         return partnerRepository.findAllById(ids);
     }
 
-    public void deleteUserById(UUID id) {
+    public void deletePartnerById(UUID id) {
         if (id == null) {
             throw new IllegalArgumentException("Partner ID cannot be null.");
         }
         partnerRepository.deleteById(id);
     }
 
-    public void deleteUser(Partner partner) {
+    public void deletePartner(Partner partner) {
         if (partner == null) {
             throw new IllegalArgumentException("Partner cannot be null.");
         }
         partnerRepository.delete(partner);
     }
 
-    public void deleteAllUsers() {
+    public void deleteAllPartners() {
         partnerRepository.deleteAll();
     }
 
-    public void deleteAllPArtners(Iterable<Partner> partners) {
+    public void deleteAllPArtnersFromList(Iterable<Partner> partners) {
         if (partners == null || !partners.iterator().hasNext()) {
-            throw new IllegalArgumentException("User list cannot be null or empty.");
+            throw new IllegalArgumentException("Partner list cannot be null or empty.");
         }
         partnerRepository.deleteAll(partners);
     }
 
-    public long countUsers() {
+    public long countPartners() {
         return partnerRepository.count();
     }
 }
