@@ -38,7 +38,7 @@ public class BlogPostMapperTest {
                 .setPhoto(photo);
 
         // Act
-        BlogPostDto dto = mapper.BlogPostToDto(blogPost);
+        BlogPostDto dto = mapper.blogPostToDto(blogPost);
 
         // Assert
         assertThat(dto).isNotNull();
