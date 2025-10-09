@@ -10,6 +10,7 @@ public class UserDto {
     private String photoUrl;
     private String emailAddress;
     private boolean isAdmin;
+    private boolean isServiced;
 
     //------- userId getters and setters -------//
     public UUID getUserId() {
@@ -63,6 +64,15 @@ public class UserDto {
 
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+
+    //------- isServiced getters and setters -------//
+    public boolean getIsServiced() {
+        return isServiced;
+    }
+
+    public void setIsServiced(boolean isServiced) {
+        this.isServiced = isServiced;
     }
 
     //------ Helper Methods -----//

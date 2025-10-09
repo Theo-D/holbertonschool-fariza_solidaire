@@ -52,6 +52,10 @@ public class User extends BaseModel {
     @Column(name = "is_admin", nullable = false)
     private Boolean isAdmin;
 
+    @NotNull
+    @Column(name = "is_serviced", nullable = false)
+    private Boolean isServiced = false;
+
     // ---------- Id setter ---------- //
     public User setId(UUID id) {
         this.id = id;
@@ -119,6 +123,17 @@ public class User extends BaseModel {
 
     public User setIsAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
+        return this;
+    }
+
+    // ---------- isServiced getter and setter ---------- //
+
+    public Boolean getIsServiced() {
+        return isServiced;
+    }
+
+    public User setIsServiced(Boolean isServiced) {
+        this.isServiced = isServiced;
         return this;
     }
 
