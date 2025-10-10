@@ -29,4 +29,12 @@ public class ServicedUser extends BaseModel{
         this.user = user;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "ServicedUser{" +
+            "id=" + id +
+            ", userId='" + user.getId() + '\'' +
+            '}';
+    }
 }

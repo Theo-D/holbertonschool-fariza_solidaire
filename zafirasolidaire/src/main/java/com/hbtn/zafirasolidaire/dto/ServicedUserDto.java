@@ -27,4 +27,12 @@ public class ServicedUserDto {
     public void setUserId(UUID userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "ServicedUser{" +
+            "id=" + id +
+            ", userId='" + userId + '\'' +
+            '}';
+    }
 }
