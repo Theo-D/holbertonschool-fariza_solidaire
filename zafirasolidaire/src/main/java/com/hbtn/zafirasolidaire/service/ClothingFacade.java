@@ -2,7 +2,7 @@ package com.hbtn.zafirasolidaire.service;
 
 import org.springframework.stereotype.Service;
 
-import static com.hbtn.zafirasolidaire.model.Clothing.CLOTHING_UUID;
+import static com.hbtn.zafirasolidaire.config.ClothingInitializer.CLOTHING_UUID;
 
 import com.hbtn.zafirasolidaire.model.Clothing;
 import com.hbtn.zafirasolidaire.repository.ClothingRepository;

@@ -6,6 +6,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hbtn.zafirasolidaire.dto.ServicedUserDto;
@@ -18,6 +19,7 @@ public class ServicedUserFacade {
     private final ServicedUserMapper servicedUserMapper;
     private final ServicedUserRepository servicedUserRepository;
 
+    @Autowired
     public ServicedUserFacade(ServicedUserMapper servicedUserMapper, ServicedUserRepository servicedUserRepository) {
         this.servicedUserMapper = servicedUserMapper;
         this.servicedUserRepository = servicedUserRepository;
