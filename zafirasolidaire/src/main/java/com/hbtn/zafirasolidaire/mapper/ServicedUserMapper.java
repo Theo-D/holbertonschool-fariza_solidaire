@@ -1,7 +1,9 @@
 package com.hbtn.zafirasolidaire.mapper;
 
+
 import com.hbtn.zafirasolidaire.dto.ServicedUserDto;
 import com.hbtn.zafirasolidaire.model.ServicedUser;
+import com.hbtn.zafirasolidaire.model.User;
 
 public class ServicedUserMapper {
 
@@ -16,10 +18,11 @@ public class ServicedUserMapper {
 
     ServicedUser dtoToServicedUser(ServicedUserDto servicedUserDto) {
         ServicedUser servicedUser = new ServicedUser();
+        User user = new User().setId(servicedUserDto.getUserId());
 
-        servicedUser.getUser().setId(servicedUserDto.getId());
+        servicedUser.setUser(user);
+        servicedUser.setId(servicedUserDto.getId());
 
         return servicedUser;
-
     }
 }
