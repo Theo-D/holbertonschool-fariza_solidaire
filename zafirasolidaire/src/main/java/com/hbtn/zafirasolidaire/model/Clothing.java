@@ -4,14 +4,16 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Clothing")
 public class Clothing {
 
-    @Column
-    public static final UUID CLOTHING_UUID = UUID.fromString("7fdc74b2-c8c1-41ba-89d2-efa772d4b627");
+    @Id
+    @Column(nullable = false, updatable = false)
+    private UUID id;
 
     @Column(name = "weight", nullable = false)
     private int weight;
