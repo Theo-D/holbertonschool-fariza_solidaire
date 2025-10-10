@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "Blog_post")
+@Table(name = "BlogPosts")
 public class BlogPost extends BaseModel {
 
     @NotNull
