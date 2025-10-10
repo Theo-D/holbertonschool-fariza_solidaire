@@ -18,6 +18,10 @@ public class Clothing {
     @Column(name = "weight", nullable = false)
     private int weight;
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     public int getWeight() {
         return weight;
     }

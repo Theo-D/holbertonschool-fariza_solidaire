@@ -1,10 +1,13 @@
 package com.hbtn.zafirasolidaire.mapper;
 
 
+import org.springframework.stereotype.Component;
+
 import com.hbtn.zafirasolidaire.dto.ServicedUserDto;
 import com.hbtn.zafirasolidaire.model.ServicedUser;
 import com.hbtn.zafirasolidaire.model.User;
 
+@Component
 public class ServicedUserMapper {
 
     public ServicedUserDto servicedUserToDto(ServicedUser servicedUser){

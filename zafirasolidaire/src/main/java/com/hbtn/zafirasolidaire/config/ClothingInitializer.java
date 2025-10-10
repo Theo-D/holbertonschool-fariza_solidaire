@@ -24,6 +24,7 @@ public class ClothingInitializer implements CommandLineRunner {
 
         if (Iterables.size(foundClothing) != 1) {
             Clothing clothing = new Clothing();
+            clothing.setId(CLOTHING_UUID);
             clothing.setWeight(0);
             clothingRepository.save(clothing);
         }
