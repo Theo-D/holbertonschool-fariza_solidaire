@@ -36,9 +36,10 @@ public class UserController {
 
     // Save a single user
     @PostMapping
-    public ResponseEntity<Void> saveUser(@RequestBody @Valid UserRequest userRequest) {
+    public ResponseEntity<String> saveUser(@RequestBody @Valid UserRequest userRequest) {
         userFacade.createUser(userRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("Utilisateur créé avec succès!");
     }
 
     // Save multiple users

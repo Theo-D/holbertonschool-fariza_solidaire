@@ -13,6 +13,12 @@ public class Photo extends BaseModel {
     @OneToOne(mappedBy = "profilePic", optional = false)
     private User user;
 
+    @OneToOne(mappedBy = "photo", optional = false)
+    private Event event;
+
+    @OneToOne(mappedBy = "photo", optional = false)
+    private BlogPost blogpost;
+
     public String getUrl() {
         return url;
     }
