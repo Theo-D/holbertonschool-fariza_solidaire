@@ -20,7 +20,7 @@ import com.hbtn.zafirasolidaire.service.PartnerFacade;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("Partners")
+@RequestMapping("partners")
 public class PartnerController {
     private final PartnerFacade partnerFacade;
 
