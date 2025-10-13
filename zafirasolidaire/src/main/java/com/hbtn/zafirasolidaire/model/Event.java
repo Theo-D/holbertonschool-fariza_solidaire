@@ -1,6 +1,7 @@
 package com.hbtn.zafirasolidaire.model;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -38,6 +39,11 @@ public class Event extends BaseModel {
     private Photo photo;
 
     //---------- category getters and setters  ----------//
+    public Event setId(UUID id) {
+        this.id = id;
+        return this;
+    }
+
     public EventCategory getCategory() {
         return category;
     }

@@ -1,5 +1,7 @@
 package com.hbtn.zafirasolidaire.model;
 
+import java.util.UUID;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,6 +40,11 @@ public class BlogPost extends BaseModel {
     private Photo photo;
 
     //---------- Title getters and setters ----------//
+    public BlogPost setId(UUID id) {
+        this.id = id;
+        return this;
+    }
+
     public String getTitle() {
     return title;
     }
