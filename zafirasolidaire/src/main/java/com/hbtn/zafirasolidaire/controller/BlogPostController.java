@@ -35,14 +35,14 @@ public class BlogPostController {
 
     // Save a single blogPost
     @PostMapping
-    public ResponseEntity<Void> saveBlogPost(@RequestBody @Valid BlogPostDto blogPostDto) {
+    public ResponseEntity<String> saveBlogPost(@RequestBody @Valid BlogPostDto blogPostDto) {
         blogPostFacade.createBlogPost(blogPostDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     // Save multiple blogPosts
     @PostMapping("/batch")
-    public ResponseEntity<Void> saveAllBlogPosts(@RequestBody @Valid List<BlogPostDto> blogPostDtos) {
+    public ResponseEntity<String> saveAllBlogPosts(@RequestBody @Valid List<BlogPostDto> blogPostDtos) {
         blogPostFacade.createAllBlogPosts(blogPostDtos);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
