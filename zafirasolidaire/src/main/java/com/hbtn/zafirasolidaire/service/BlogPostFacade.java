@@ -9,18 +9,22 @@ import java.util.stream.StreamSupport;
 import org.springframework.stereotype.Service;
 
 import com.hbtn.zafirasolidaire.dto.BlogPostDto;
+import com.hbtn.zafirasolidaire.dto.PhotoDto;
 import com.hbtn.zafirasolidaire.mapper.BlogPostMapper;
 import com.hbtn.zafirasolidaire.model.BlogPost;
+import com.hbtn.zafirasolidaire.model.Photo;
 import com.hbtn.zafirasolidaire.repository.BlogPostRepository;
 
 @Service
 public class BlogPostFacade {
     private final BlogPostMapper blogPostMapper;
     private final BlogPostRepository blogPostRepository;
+    private final PhotoFacade photoFacade;
 
-    public BlogPostFacade(BlogPostMapper blogPostMapper, BlogPostRepository blogPostRepository) {
+    public BlogPostFacade(BlogPostMapper blogPostMapper, BlogPostRepository blogPostRepository, PhotoFacade photoFacade) {
         this.blogPostMapper = blogPostMapper;
         this.blogPostRepository= blogPostRepository;
+        this.photoFacade = photoFacade;
     }
 
     //---------- Repository Services ----------//
@@ -46,6 +50,26 @@ public class BlogPostFacade {
             blogPosts.add(blogPost);
         }
         blogPostRepository.saveAll(blogPosts);
+    }
+
+    public void addPhoto(PhotoDto photoDto, UUID blogPostId) {
+        if (photoDto == null) {
+            throw new IllegalArgumentException("Photo DTO cannot be null.");
+        } else if (blogPostId == null) {
+            throw new IllegalArgumentException("BlogPost ID cannot be null.");
+        }
+
+        BlogPost blogPost = blogPostRepository.findById(blogPostId)
+                                              .orElseThrow(() -> new IllegalArgumentException("BlogPost not found"));
+
+        // Create and persist Photo
+        Photo photo = photoFacade.mapDtoToPhoto(photoDto);
+        photo.setBlogPost(blogPost);
+        photoFacade.savePhoto(photo);
+
+        // Link Photo to BlogPost
+        blogPost.setPhoto(photo);
+        blogPostRepository.save(blogPost);
     }
 
     public BlogPostDto getBlogPostById(UUID id) {

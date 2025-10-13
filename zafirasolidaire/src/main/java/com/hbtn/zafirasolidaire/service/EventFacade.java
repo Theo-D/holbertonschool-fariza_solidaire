@@ -8,21 +8,24 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.hbtn.zafirasolidaire.dto.EventDto;
+import com.hbtn.zafirasolidaire.dto.PhotoDto;
 import com.hbtn.zafirasolidaire.mapper.EventMapper;
 import com.hbtn.zafirasolidaire.model.Event;
+import com.hbtn.zafirasolidaire.model.Photo;
 import com.hbtn.zafirasolidaire.repository.EventRepository;
 
 @Service
 public class EventFacade {
     private final EventMapper eventMapper;
     private final EventRepository eventRepository;
+    private final PhotoFacade photoFacade;
 
     @Autowired
-    public EventFacade(EventMapper eventMapper, EventRepository eventRepository) {
+    public EventFacade(EventMapper eventMapper, EventRepository eventRepository, PhotoFacade photoFacade) {
         this.eventMapper = eventMapper;
         this.eventRepository = eventRepository;
+        this.photoFacade = photoFacade;
     }
 
     //---------- Repository Services ----------//
@@ -48,6 +51,26 @@ public class EventFacade {
             events.add(event);
         }
         eventRepository.saveAll(events);
+    }
+
+    public void addPhoto(PhotoDto photoDto, UUID eventId) {
+        if (photoDto == null) {
+            throw new IllegalArgumentException("Photo DTO cannot be null.");
+        } else if (eventId == null) {
+            throw new IllegalArgumentException("Event ID cannot be null.");
+        }
+
+        Event event = eventRepository.findById(eventId)
+                                     .orElseThrow(() -> new IllegalArgumentException("Event not found"));
+
+        // Create and persist Photo
+        Photo photo = photoFacade.mapDtoToPhoto(photoDto);
+        photo.setEvent(event);
+        photoFacade.savePhoto(photo);
+
+        // Link Photo to Event
+        event.setPhoto(photo);
+        eventRepository.save(event);
     }
 
     public EventDto getEventById(UUID id) {
@@ -115,6 +138,5 @@ public class EventFacade {
             .map(eventMapper::eventToDto)
             .collect(Collectors.toList());
     }
-
 
 }
