@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hbtn.zafirasolidaire.dto.EventDto;
+import com.hbtn.zafirasolidaire.dto.PhotoDto;
 import com.hbtn.zafirasolidaire.model.Event;
 import com.hbtn.zafirasolidaire.service.EventFacade;
 
@@ -36,6 +37,12 @@ public class EventController {
     @PostMapping
     public ResponseEntity<Void> saveEvent(@RequestBody @Valid EventDto eventDto) {
         eventFacade.createEvent(eventDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/{eventId}/photo")
+    public ResponseEntity<Void> saveEvent(@RequestBody @Valid PhotoDto photoDto, @PathVariable UUID eventId) {
+        eventFacade.addPhoto(photoDto, eventId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

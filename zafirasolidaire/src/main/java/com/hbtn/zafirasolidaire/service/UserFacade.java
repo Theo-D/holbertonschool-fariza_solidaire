@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.hbtn.zafirasolidaire.dto.PhotoDto;
 import com.hbtn.zafirasolidaire.dto.UserDto;
 import com.hbtn.zafirasolidaire.dto.UserRequest;
 import com.hbtn.zafirasolidaire.mapper.UserMapper;
 import com.hbtn.zafirasolidaire.model.User;
+import com.hbtn.zafirasolidaire.model.Photo;
 import com.hbtn.zafirasolidaire.repository.UserRepository;
 
 @Service
@@ -22,12 +24,14 @@ public class UserFacade {
     private final PasswordEncoder encoder;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PhotoFacade photoFacade;
 
     @Autowired
-    public UserFacade(PasswordEncoder encoder, UserRepository userRepository, UserMapper userMapper) {
+    public UserFacade(PasswordEncoder encoder, UserRepository userRepository, UserMapper userMapper, PhotoFacade photoFacade) {
         this.encoder = encoder;
         this.userRepository = userRepository;
         this.userMapper  = userMapper;
+        this.photoFacade = photoFacade;
     }
 
     //---------- Password Services ----------//
@@ -67,6 +71,26 @@ public class UserFacade {
         }
 
         userRepository.saveAll(users);
+    }
+
+    public void addPhoto(PhotoDto photoDto, UUID userId) {
+        if (photoDto == null) {
+            throw new IllegalArgumentException("Photo DTO cannot be null.");
+        } else if (userId == null) {
+            throw new IllegalArgumentException("User ID cannot be null.");
+        }
+
+        User user = userRepository.findById(userId)
+                                  .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        // Create and persist Photo
+        Photo photo = photoFacade.mapDtoToPhoto(photoDto);
+        photo.setUser(user);
+        photoFacade.savePhoto(photo);
+
+        // Link Photo to User
+        user.setProfilePic(photo);
+        userRepository.save(user);
     }
 
     public UserDto getUserById(UUID id) {

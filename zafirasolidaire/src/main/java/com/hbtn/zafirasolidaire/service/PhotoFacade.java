@@ -115,4 +115,12 @@ public class PhotoFacade {
             .map(photoMapper::photoToDto)
             .collect(Collectors.toList());
     }
+
+    public Photo mapDtoToPhoto(PhotoDto dto) {
+    return photoMapper.dtoToPhoto(dto);
+    }
+
+    public void savePhoto(Photo photo) {
+        photoRepository.save(photo);
+    }
 }
