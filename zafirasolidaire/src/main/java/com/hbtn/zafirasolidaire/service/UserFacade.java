@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hbtn.zafirasolidaire.dto.PhotoDto;
@@ -21,26 +20,17 @@ import com.hbtn.zafirasolidaire.repository.UserRepository;
 @Service
 public class UserFacade {
 
-    private final PasswordEncoder encoder;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PhotoFacade photoFacade;
+    private final AuthenticationService authenticationService;
 
     @Autowired
-    public UserFacade(PasswordEncoder encoder, UserRepository userRepository, UserMapper userMapper, PhotoFacade photoFacade) {
-        this.encoder = encoder;
+    public UserFacade(UserRepository userRepository, UserMapper userMapper, PhotoFacade photoFacade, AuthenticationService authenticationService) {
         this.userRepository = userRepository;
         this.userMapper  = userMapper;
         this.photoFacade = photoFacade;
-    }
-
-    //---------- Password Services ----------//
-    public String encodePassword(String rawPassword) {
-        return encoder.encode(rawPassword);
-    }
-
-    public boolean checkPassword(String rawPassord, String hashedPassword) {
-        return encoder.matches(rawPassord, hashedPassword);
+        this.authenticationService = authenticationService;
     }
 
     //---------- Repository Services ----------//
@@ -51,7 +41,7 @@ public class UserFacade {
 
         User user = userMapper.userRequestToUser(userRequest);
 
-        user.setPassword(encodePassword(userRequest.getPassword()));
+        user.setPassword(authenticationService.encodePassword(userRequest.getPassword()));
         user.setIsAdmin(false);
         userRepository.save(user);
     }
@@ -65,7 +55,7 @@ public class UserFacade {
 
         for (UserRequest userRequest : userRequests) {
             User user = userMapper.userRequestToUser(userRequest);
-            user.setPassword(encodePassword(userRequest.getPassword()));
+            user.setPassword(authenticationService.encodePassword(userRequest.getPassword()));
             user.setIsAdmin(false);
             users.add(user);
         }
@@ -101,6 +91,17 @@ public class UserFacade {
         User foundUser = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         return userMapper.userToDto(foundUser);
+    }
+
+    //TODO: Maybe implement Dto mapping and return
+    public User getUserByEmailAddress(String emailAddress) {
+        if (emailAddress == null) {
+            throw new IllegalArgumentException("Email address cannot be null.");
+        }
+
+        User foundUser = userRepository.findByEmailAddress(emailAddress).orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        return foundUser;
     }
 
     public boolean existsById(UUID id) {

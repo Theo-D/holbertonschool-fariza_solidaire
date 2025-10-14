@@ -28,9 +28,6 @@ public class UserRequest {
     @Size(min = 8, message = "")
     private String password;
 
-    @NotNull
-    private boolean isServiced;
-
     //----------- First Name Getters and Setters -----------//
     public String getFirstName() {
         return firstName;
@@ -65,14 +62,5 @@ public class UserRequest {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    //------- isServiced getters and setters -------//
-    public boolean getIsServiced() {
-        return isServiced;
-    }
-
-    public void setIsServiced(boolean isServiced) {
-        this.isServiced = isServiced;
     }
 }

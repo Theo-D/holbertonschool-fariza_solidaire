@@ -23,7 +23,7 @@ import com.hbtn.zafirasolidaire.service.UserFacade;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserFacade userFacade;
@@ -37,10 +37,10 @@ public class UserController {
 
     // Save a single user
     @PostMapping
-    public ResponseEntity<String> saveUser(@RequestBody @Valid UserRequest userRequest) {
+    public ResponseEntity<Void> saveUser(@RequestBody @Valid UserRequest userRequest) {
         userFacade.createUser(userRequest);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Utilisateur créé avec succès!");
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     // Save multiple users

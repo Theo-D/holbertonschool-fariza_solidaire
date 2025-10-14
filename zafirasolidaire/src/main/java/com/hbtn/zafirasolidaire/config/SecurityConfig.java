@@ -1,48 +1,61 @@
 package com.hbtn.zafirasolidaire.config;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import io.swagger.v3.oas.models.Components;
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.security.SecurityRequirement;
-import io.swagger.v3.oas.models.security.SecurityScheme;
-
 @Configuration
 public class SecurityConfig {
+
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 
-    private static final String[] SWAGGER_PATHS = {"/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**", "/webjars/swagger-ui/**"};
+    private static final String[] AUTHORIZED_PATHS = {"/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**", "/webjars/swagger-ui/**"};
 
     @Bean
     SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
         return http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(SWAGGER_PATHS).permitAll()
+                .csrf(customizer -> customizer.disable())
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers(AUTHORIZED_PATHS).permitAll()
                         .anyRequest().authenticated())
-                        .httpBasic(withDefaults())
+                        .httpBasic(Customizer.withDefaults())
+                        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
     }
 
+//     @Bean
+//     public OpenAPI customOpenAPI() {
+//         return new OpenAPI()
+//                 .addSecurityItem(new SecurityRequirement().addList("basicAuth"))
+//                 .components(new Components()
+//                         .addSecuritySchemes("basicAuth",
+//                                 new SecurityScheme()
+//                                         .type(SecurityScheme.Type.HTTP)
+//                                         .scheme("basic")));
+//     }
+
     @Bean
-    public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .addSecurityItem(new SecurityRequirement().addList("basicAuth"))
-                .components(new Components()
-                        .addSecuritySchemes("basicAuth",
-                                new SecurityScheme()
-                                        .type(SecurityScheme.Type.HTTP)
-                                        .scheme("basic")));
+    public AuthenticationProvider authenticationProvider(UserDetailsService emailAddress) {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(emailAddress);
+        authProvider.setPasswordEncoder(encoder());
+        return authProvider;
+    }
+
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
     }
 }
