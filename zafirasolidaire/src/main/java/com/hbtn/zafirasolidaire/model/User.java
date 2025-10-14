@@ -94,8 +94,7 @@ public class User extends BaseModel {
     }
 
     //---------- password setter ---------- //
-    //Test passed - Commenting method
-    public String getPasswordForTestingOnly() {
+    public String getPassword() {
         return password;
     }
 

@@ -19,6 +19,7 @@ public interface UserMapper {
         @Mapping(target = "id", ignore = true)
         @Mapping(target = "isAdmin", ignore = true)
         @Mapping(target = "profilePic", ignore = true)
+        @Mapping(target = "isServiced", ignore = true)
         User userRequestToUser(UserRequest userRequest);
         @AfterMapping
         default void setSystemFields(@MappingTarget User user) {

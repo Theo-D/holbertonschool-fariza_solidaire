@@ -39,6 +39,9 @@ public class UserFacadeTest {
     @Mock
     private PasswordEncoder passwordEncoder;
 
+    @Mock
+    private AuthenticationService authenticationService;
+
     @InjectMocks
     private UserFacade userFacade;
 
@@ -52,11 +55,11 @@ public class UserFacadeTest {
         when(passwordEncoder.matches(unhashedPass, hashedPassExpected)).thenReturn(true);
 
         // Act
-        String hashedPass = userFacade.encodePassword(unhashedPass);
+        String hashedPass = authenticationService.encodePassword(unhashedPass);
 
         // Assert
         assertThat(hashedPass).isNotEqualTo(unhashedPass).isNotNull();
-        assertThat(userFacade.checkPassword(unhashedPass, hashedPass)).isTrue();
+        assertThat(authenticationService.checkPassword(unhashedPass, hashedPass)).isTrue();
     }
 
 
@@ -196,7 +199,7 @@ public class UserFacadeTest {
         userFacade.createUser(request);
 
         // Assert
-        assertThat(mappedUser.getPasswordForTestingOnly()).isEqualTo("hashedPassword");
+        assertThat(mappedUser.getPassword()).isEqualTo("hashedPassword");
         assertThat(mappedUser.getIsAdmin()).isFalse();
 
         verify(userMapper).userRequestToUser(request);
@@ -226,8 +229,8 @@ public class UserFacadeTest {
         userFacade.createAllUsers(requests);
 
         // Assert
-        assertThat(user1.getPasswordForTestingOnly()).isEqualTo("hashed1");
-        assertThat(user2.getPasswordForTestingOnly()).isEqualTo("hashed2");
+        assertThat(user1.getPassword()).isEqualTo("hashed1");
+        assertThat(user2.getPassword()).isEqualTo("hashed2");
         assertThat(user1.getIsAdmin()).isFalse();
         assertThat(user2.getIsAdmin()).isFalse();
 
