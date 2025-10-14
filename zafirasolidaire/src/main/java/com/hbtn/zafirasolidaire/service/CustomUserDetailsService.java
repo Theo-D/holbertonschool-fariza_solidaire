@@ -1,5 +1,7 @@
 package com.hbtn.zafirasolidaire.service;
 
+import java.util.UUID;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,6 +24,11 @@ public class CustomUserDetailsService implements UserDetailsService{
     public UserDetails loadUserByUsername(String emailAddress) throws UsernameNotFoundException {
         User user = userRepository.findByEmailAddress(emailAddress).orElseThrow(() -> new IllegalArgumentException("User not found"));
 
+        return new CustomUserDetails(user);
+    }
+
+    public UserDetails loadUserById(String id) {
+        User user = userRepository.findById(UUID.fromString(id)).orElseThrow(() -> new IllegalArgumentException("User not found"));
         return new CustomUserDetails(user);
     }
 
