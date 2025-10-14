@@ -13,49 +13,67 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
-    }
+        private final JwtFilter jwtFilter;
 
-    private static final String[] AUTHORIZED_PATHS = {"/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**", "/webjars/swagger-ui/**"};
+        public SecurityConfig(JwtFilter jwtFilter) {
+                this.jwtFilter = jwtFilter;
+        }
 
-    @Bean
-    SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
-        return http
-                .csrf(customizer -> customizer.disable())
-                .authorizeHttpRequests(request -> request
-                        .requestMatchers(AUTHORIZED_PATHS).permitAll()
-                        .anyRequest().authenticated())
-                        .httpBasic(Customizer.withDefaults())
-                        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .build();
-    }
+        @Bean
+        public PasswordEncoder encoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-//     @Bean
-//     public OpenAPI customOpenAPI() {
-//         return new OpenAPI()
-//                 .addSecurityItem(new SecurityRequirement().addList("basicAuth"))
-//                 .components(new Components()
-//                         .addSecuritySchemes("basicAuth",
-//                                 new SecurityScheme()
-//                                         .type(SecurityScheme.Type.HTTP)
-//                                         .scheme("basic")));
-//     }
+        private static final String[] AUTHORIZED_PATHS = {"/auth/**"};
 
-    @Bean
-    public AuthenticationProvider authenticationProvider(UserDetailsService emailAddress) {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(emailAddress);
-        authProvider.setPasswordEncoder(encoder());
-        return authProvider;
-    }
+        @Bean
+        SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
+                return http
+                        .csrf(customizer -> customizer.disable())
+                        .authorizeHttpRequests(request -> request
+                                .requestMatchers(AUTHORIZED_PATHS).permitAll()
+                                .anyRequest().authenticated())
+                                .httpBasic(Customizer.withDefaults())
+                                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                        .build();
+        }
 
-    @Bean
-    AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();
-    }
+        @Bean
+        public OpenAPI customOpenAPI() {
+                return new OpenAPI()
+                        .info(new Info()
+                                .title("API"))
+                        .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
+                        .components(new Components()
+                                .addSecuritySchemes("bearerAuth",
+                                        new SecurityScheme()
+                                                .name("Bearer Authentication")
+                                                .type(SecurityScheme.Type.HTTP)
+                                                .bearerFormat("JWT")
+                                                .scheme("bearer")));
+        }
+
+        @Bean
+        public AuthenticationProvider authenticationProvider(UserDetailsService emailAddress) {
+                DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(emailAddress);
+                authProvider.setPasswordEncoder(encoder());
+                return authProvider;
+        }
+
+        @Bean
+        AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+                return authConfig.getAuthenticationManager();
+        }
 }
