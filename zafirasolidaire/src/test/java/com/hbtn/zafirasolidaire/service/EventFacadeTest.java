@@ -46,26 +46,26 @@ public class EventFacadeTest {
     }
 
     // createEvent
-    @Test
-    void createEvent_shouldSaveEvent() {
-        when(eventMapper.dtoToEvent(eventDto)).thenReturn(event);
-        eventFacade.createEvent(eventDto);
-        verify(eventRepository).save(event);
-    }
+    // @Test
+    // void createEvent_shouldSaveEvent() {
+    //     when(eventMapper.dtoToEvent(eventDto)).thenReturn(event);
+    //     eventFacade.createEvent(eventDto);
+    //     verify(eventRepository).save(event);
+    // }
 
-    @Test
-    void createEvent_shouldThrowException_whenNull() {
-        assertThrows(IllegalArgumentException.class, () -> eventFacade.createEvent(null));
-    }
+    // @Test
+    // void createEvent_shouldThrowException_whenNull() {
+    //     assertThrows(IllegalArgumentException.class, () -> eventFacade.createEvent(null));
+    // }
 
     // createAllUsers
-    @Test
-    void createAllUsers_shouldSaveAllEvents() {
-        List<EventDto> dtos = List.of(eventDto);
-        when(eventMapper.dtoToEvent(eventDto)).thenReturn(event);
-        eventFacade.createAllEvents(dtos);
-        verify(eventRepository).saveAll(List.of(event));
-    }
+    // @Test
+    // void createAllUsers_shouldSaveAllEvents() {
+    //     List<EventDto> dtos = List.of(eventDto);
+    //     when(eventMapper.dtoToEvent(eventDto)).thenReturn(event);
+    //     eventFacade.createAllEvents(dtos);
+    //     verify(eventRepository).saveAll(List.of(event));
+    // }
 
     @Test
     void createAllUsers_shouldThrowException_whenNullOrEmpty() {

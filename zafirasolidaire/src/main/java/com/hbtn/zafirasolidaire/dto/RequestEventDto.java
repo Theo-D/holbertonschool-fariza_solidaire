@@ -3,39 +3,39 @@ package com.hbtn.zafirasolidaire.dto;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class EventDto {
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-    private UUID id;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+public class RequestEventDto {
+
+    @NotNull
+    private UUID eventId;
+
+    @NotNull
+    @NotBlank
     private String category;
+
+    @NotNull
+    @Future
     private LocalDateTime date;
+
+    @NotNull
+    @Min(value = 1, message = "Events must host at least one person")
     private int capacity;
+
+    @NotNull
+    @NotBlank
     private String photoUrl;
 
     //---------- id getters and setters  ----------//
-    public UUID getId() {
-        return this.id;
+    public UUID getEventId() {
+        return this.eventId;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(LocalDateTime updateDate) {
-        this.updateDate = updateDate;
+    public void setEventId(UUID eventId) {
+        this.eventId = eventId;
     }
 
     //---------- category getters and setters  ----------//
