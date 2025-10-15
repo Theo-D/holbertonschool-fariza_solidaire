@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hbtn.zafirasolidaire.model.Partner;
+import com.hbtn.zafirasolidaire.dto.PartnerDto;
+import com.hbtn.zafirasolidaire.dto.RequestPartnerDto;
 import com.hbtn.zafirasolidaire.service.PartnerFacade;
 
 import jakarta.validation.Valid;
@@ -32,8 +33,8 @@ public class PartnerController {
 
     // Save a single partner
     @PostMapping
-    public ResponseEntity<Void> savePartner(@RequestBody @Valid Partner partner) {
-        partnerFacade.createPartner(partner);
+    public ResponseEntity<Void> savePartner(@RequestBody @Valid RequestPartnerDto requestPartnerDto) {
+        partnerFacade.createPartner(requestPartnerDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -48,9 +49,9 @@ public class PartnerController {
 
     // Get partner by ID
     @GetMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<Partner> getpartnerById(@PathVariable UUID id) {
-        Partner Partner = partnerFacade.getPartnerById(id);
-        return ResponseEntity.ok(Partner);
+    public ResponseEntity<PartnerDto> getpartnerById(@PathVariable UUID id) {
+        PartnerDto partnerDto = partnerFacade.getPartnerById(id);
+        return ResponseEntity.ok(partnerDto);
     }
 
     // Check if partner exists by ID
@@ -62,9 +63,9 @@ public class PartnerController {
 
     // Get all partners
     @GetMapping
-    public ResponseEntity<Iterable<Partner>> getAllpartners() {
-        Iterable<Partner> partners = partnerFacade.getAllPartners();
-        return ResponseEntity.ok(partners);
+    public ResponseEntity<Iterable<PartnerDto>> getAllpartners() {
+        Iterable<PartnerDto> partnerDtos = partnerFacade.getAllPartners();
+        return ResponseEntity.ok(partnerDtos);
     }
 
     // Count partners
