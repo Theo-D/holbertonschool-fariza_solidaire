@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.hbtn.zafirasolidaire.dto.EventDto;
 import com.hbtn.zafirasolidaire.dto.PhotoDto;
+import com.hbtn.zafirasolidaire.dto.RequestEventDto;
 import com.hbtn.zafirasolidaire.mapper.EventMapper;
 import com.hbtn.zafirasolidaire.model.Event;
 import com.hbtn.zafirasolidaire.model.Photo;
@@ -29,25 +30,25 @@ public class EventFacade {
     }
 
     //---------- Repository Services ----------//
-    public void createEvent(EventDto eventDto) {
-        if (eventDto == null) {
+    public void createEvent(RequestEventDto requestEventDto) {
+        if (requestEventDto == null) {
             throw new IllegalArgumentException("Event cannot be null.");
         }
 
-        Event event = eventMapper.dtoToEvent(eventDto);
+        Event event = eventMapper.requestDtoToEvent(requestEventDto);
 
         eventRepository.save(event);
     }
 
-    public void createAllEvents(Iterable<EventDto> eventDtos) {
-        if (eventDtos == null || !eventDtos.iterator().hasNext()) {
+    public void createAllEvents(Iterable<RequestEventDto> requestEventDtos) {
+        if (requestEventDtos == null || !requestEventDtos.iterator().hasNext()) {
             throw new IllegalArgumentException("Event list cannot be null or empty.");
         }
 
         List<Event> events = new ArrayList<>();
 
-        for (EventDto eventDto : eventDtos) {
-            Event event = eventMapper.dtoToEvent(eventDto);
+        for (RequestEventDto requestEventDto : requestEventDtos) {
+            Event event = eventMapper.requestDtoToEvent(requestEventDto);
             events.add(event);
         }
         eventRepository.saveAll(events);
