@@ -1,7 +1,12 @@
 package com.hbtn.zafirasolidaire.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,6 +19,9 @@ public class EventCategory extends BaseModel{
     @NotBlank
     @Column(unique = true, nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    private Set<Event> events = new HashSet<>();
 
     //---------- name getters and setters ----------//
 
