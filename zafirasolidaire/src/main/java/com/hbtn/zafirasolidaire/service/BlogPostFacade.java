@@ -9,8 +9,8 @@ import java.util.stream.StreamSupport;
 import org.springframework.stereotype.Service;
 
 import com.hbtn.zafirasolidaire.dto.BlogPostDto;
-import com.hbtn.zafirasolidaire.dto.PhotoDto;
 import com.hbtn.zafirasolidaire.dto.RequestBlogPostDto;
+import com.hbtn.zafirasolidaire.dto.RequestPhotoDto;
 import com.hbtn.zafirasolidaire.mapper.BlogPostMapper;
 import com.hbtn.zafirasolidaire.model.BlogPost;
 import com.hbtn.zafirasolidaire.model.Photo;
@@ -53,7 +53,7 @@ public class BlogPostFacade {
         blogPostRepository.saveAll(blogPosts);
     }
 
-    public void addPhoto(PhotoDto photoDto, UUID blogPostId) {
+    public void addPhoto(RequestPhotoDto photoDto, UUID blogPostId) {
         if (photoDto == null) {
             throw new IllegalArgumentException("Photo DTO cannot be null.");
         } else if (blogPostId == null) {

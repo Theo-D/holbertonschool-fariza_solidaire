@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hbtn.zafirasolidaire.dto.PhotoDto;
+import com.hbtn.zafirasolidaire.dto.RequestPhotoDto;
 import com.hbtn.zafirasolidaire.mapper.PhotoMapper;
 import com.hbtn.zafirasolidaire.model.Photo;
 import com.hbtn.zafirasolidaire.repository.PhotoRepository;
@@ -26,25 +27,25 @@ public class PhotoFacade {
     }
 
     //---------- Repository Services ----------//
-    public void createPhoto(PhotoDto photoDto) {
-        if (photoDto == null) {
+    public void createPhoto(RequestPhotoDto requestPhotoDto) {
+        if (requestPhotoDto == null) {
             throw new IllegalArgumentException("Photo cannot be null.");
         }
 
-        Photo photo = photoMapper.dtoToPhoto(photoDto);
+        Photo photo = photoMapper.requestDtoToPhoto(requestPhotoDto);
 
         photoRepository.save(photo);
     }
 
-    public void createAllPhotos(Iterable<PhotoDto> photoDtos) {
-        if (photoDtos == null || !photoDtos.iterator().hasNext()) {
+    public void createAllPhotos(Iterable<RequestPhotoDto> requestPhotoDtos) {
+        if (requestPhotoDtos == null || !requestPhotoDtos.iterator().hasNext()) {
             throw new IllegalArgumentException("Photo list cannot be null or empty.");
         }
 
         List<Photo> photos = new ArrayList<>();
 
-        for (PhotoDto photoDto : photoDtos) {
-            Photo photo = photoMapper.dtoToPhoto(photoDto);
+        for (RequestPhotoDto requestPhotoDto : requestPhotoDtos) {
+            Photo photo = photoMapper.requestDtoToPhoto(requestPhotoDto);
             photos.add(photo);
         }
         photoRepository.saveAll(photos);
@@ -116,8 +117,8 @@ public class PhotoFacade {
             .collect(Collectors.toList());
     }
 
-    public Photo mapDtoToPhoto(PhotoDto dto) {
-    return photoMapper.dtoToPhoto(dto);
+    public Photo mapDtoToPhoto(RequestPhotoDto dto) {
+    return photoMapper.requestDtoToPhoto(dto);
     }
 
     public void savePhoto(Photo photo) {

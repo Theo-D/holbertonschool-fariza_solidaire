@@ -9,8 +9,8 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.hbtn.zafirasolidaire.dto.EventDto;
-import com.hbtn.zafirasolidaire.dto.PhotoDto;
 import com.hbtn.zafirasolidaire.dto.RequestEventDto;
+import com.hbtn.zafirasolidaire.dto.RequestPhotoDto;
 import com.hbtn.zafirasolidaire.mapper.EventMapper;
 import com.hbtn.zafirasolidaire.model.Event;
 import com.hbtn.zafirasolidaire.model.Photo;
@@ -54,7 +54,7 @@ public class EventFacade {
         eventRepository.saveAll(events);
     }
 
-    public void addPhoto(PhotoDto photoDto, UUID eventId) {
+    public void addPhoto(RequestPhotoDto photoDto, UUID eventId) {
         if (photoDto == null) {
             throw new IllegalArgumentException("Photo DTO cannot be null.");
         } else if (eventId == null) {

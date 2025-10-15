@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hbtn.zafirasolidaire.dto.PhotoDto;
+import com.hbtn.zafirasolidaire.dto.RequestPhotoDto;
 import com.hbtn.zafirasolidaire.service.PhotoFacade;
 
 import jakarta.validation.Valid;
@@ -32,7 +33,7 @@ public class PhotoController {
 
     // Save a single photo
     @PostMapping
-    public ResponseEntity<String> savePhoto(@RequestBody @Valid PhotoDto photoRequest) {
+    public ResponseEntity<String> savePhoto(@RequestBody @Valid RequestPhotoDto photoRequest) {
         photoFacade.createPhoto(photoRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Utilisateur créé avec succès!");

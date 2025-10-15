@@ -9,7 +9,7 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hbtn.zafirasolidaire.dto.PhotoDto;
+import com.hbtn.zafirasolidaire.dto.RequestPhotoDto;
 import com.hbtn.zafirasolidaire.dto.UserDto;
 import com.hbtn.zafirasolidaire.dto.UserRequest;
 import com.hbtn.zafirasolidaire.mapper.UserMapper;
@@ -63,8 +63,8 @@ public class UserFacade {
         userRepository.saveAll(users);
     }
 
-    public void addPhoto(PhotoDto photoDto, UUID userId) {
-        if (photoDto == null) {
+    public void addPhoto(RequestPhotoDto requestPhotoDto, UUID userId) {
+        if (requestPhotoDto == null) {
             throw new IllegalArgumentException("Photo DTO cannot be null.");
         } else if (userId == null) {
             throw new IllegalArgumentException("User ID cannot be null.");
@@ -74,7 +74,7 @@ public class UserFacade {
                                   .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         // Create and persist Photo
-        Photo photo = photoFacade.mapDtoToPhoto(photoDto);
+        Photo photo = photoFacade.mapDtoToPhoto(requestPhotoDto);
         photo.setUser(user);
         photoFacade.savePhoto(photo);
 

@@ -1,14 +1,16 @@
 package com.hbtn.zafirasolidaire.dto;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 public class PhotoDto {
 
-    @NotNull
     private UUID id;
+
+    private LocalDateTime createDate;
+
+    private LocalDateTime updateDate;
 
     private UUID userId;
 
@@ -16,8 +18,6 @@ public class PhotoDto {
 
     private UUID blogPostId;
 
-    @NotBlank
-    @NotNull
     private String url;
 
     public UUID getId() {
@@ -26,6 +26,22 @@ public class PhotoDto {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
+
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
     }
 
     public UUID getUserId() {
