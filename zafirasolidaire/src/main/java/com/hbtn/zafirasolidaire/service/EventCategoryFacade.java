@@ -28,7 +28,7 @@ public class EventCategoryFacade {
     }
 
     //---------- Repository Services ----------//
-    public void createEvent(RequestEventCategoryDto requestEventCategoryDto) {
+    public void createEventCategory(RequestEventCategoryDto requestEventCategoryDto) {
         if (requestEventCategoryDto == null) {
             throw new IllegalArgumentException("EventCategory cannot be null.");
         }
@@ -38,7 +38,7 @@ public class EventCategoryFacade {
         eventCategoryRepository.save(eventcategory);
     }
 
-    public void createAllEvents(Iterable<RequestEventCategoryDto> requestEventCategoryDtos) {
+    public void createAllEventCategories(Iterable<RequestEventCategoryDto> requestEventCategoryDtos) {
         if (requestEventCategoryDtos == null || !requestEventCategoryDtos.iterator().hasNext()) {
             throw new IllegalArgumentException("EventCategory list cannot be null or empty.");
         }
@@ -53,7 +53,7 @@ public class EventCategoryFacade {
     }
 
 
-    public EventCategoryDto getEventById(UUID id) {
+    public EventCategoryDto getEventCategoryById(UUID id) {
         if (id == null) {
             throw new IllegalArgumentException("EventCategory ID cannot be null.");
         }
@@ -70,11 +70,11 @@ public class EventCategoryFacade {
         return eventCategoryRepository.existsById(id);
     }
 
-    public Iterable<EventCategoryDto> getAllEvents() {
+    public Iterable<EventCategoryDto> getAllEventCategories() {
         return mapToDto(eventCategoryRepository.findAll());
     }
 
-    public Iterable<EventCategoryDto> getAllEventsById(Iterable<UUID> ids) {
+    public Iterable<EventCategoryDto> getAllEventCategoriesById(Iterable<UUID> ids) {
         if (ids == null || !ids.iterator().hasNext()) {
             throw new IllegalArgumentException("ID list cannot be null or empty.");
         }
@@ -82,32 +82,32 @@ public class EventCategoryFacade {
         return mapToDto(eventCategoryRepository.findAllById(ids));
     }
 
-    public void deleteEventById(UUID id) {
+    public void deleteEventCategoryById(UUID id) {
         if (id == null) {
             throw new IllegalArgumentException("EventCategory ID cannot be null.");
         }
         eventCategoryRepository.deleteById(id);
     }
 
-    public void deleteEvent(EventCategory eventcategory) {
+    public void deleteEventCategory(EventCategory eventcategory) {
         if (eventcategory == null) {
             throw new IllegalArgumentException("EventCategory cannot be null.");
         }
         eventCategoryRepository.delete(eventcategory);
     }
 
-    public void deleteAllEvents() {
+    public void deleteAllEventCategories() {
         eventCategoryRepository.deleteAll();
     }
 
-    public void deleteAllEvents(Iterable<EventCategory> eventCategories) {
+    public void deleteAllEventCategories(Iterable<EventCategory> eventCategories) {
         if (eventCategories == null || !eventCategories.iterator().hasNext()) {
             throw new IllegalArgumentException("EventCategory list cannot be null or empty.");
         }
         eventCategoryRepository.deleteAll(eventCategories);
     }
 
-    public long countEvents() {
+    public long countEventCategories() {
         return eventCategoryRepository.count();
     }
 
