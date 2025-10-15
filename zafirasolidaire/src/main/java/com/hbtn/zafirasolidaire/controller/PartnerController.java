@@ -1,6 +1,5 @@
 package com.hbtn.zafirasolidaire.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +37,12 @@ public class PartnerController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    // Save multiple partners
-    @PostMapping("/batch")
-    public ResponseEntity<Void> saveAllPartners(@RequestBody @Valid List<Partner> partners) {
-        partnerFacade.createAllPartners(partners);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
+    // // Save multiple partners
+    // @PostMapping("/batch")
+    // public ResponseEntity<Void> saveAllPartners(@RequestBody @Valid List<Partner> partners) {
+    //     partnerFacade.createAllPartners(partners);
+    //     return ResponseEntity.status(HttpStatus.CREATED).build();
+    // }
 
     // ---------- GET ----------//
 
@@ -84,23 +83,23 @@ public class PartnerController {
         return ResponseEntity.noContent().build();
     }
 
-    // Delete a single partner (full object)
-    @DeleteMapping
-    public ResponseEntity<Void> deletePartner(@RequestBody Partner partner) {
-        partnerFacade.deletePartner(partner);
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete a single partner (full object)
+    // @DeleteMapping
+    // public ResponseEntity<Void> deletePartner(@RequestBody Partner partner) {
+    //     partnerFacade.deletePartner(partner);
+    //     return ResponseEntity.noContent().build();
+    // }
 
-    // Delete all partners
-    @DeleteMapping("/all")
-    public ResponseEntity<Void> deleteAllPartners() {
-        partnerFacade.deleteAllPartners();
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete all partners
+    // @DeleteMapping("/all")
+    // public ResponseEntity<Void> deleteAllPartners() {
+    //     partnerFacade.deleteAllPartners();
+    //     return ResponseEntity.noContent().build();
+    // }
 
-    // Delete specific partners
-    @DeleteMapping("/batch")
-    public void deleteAllPartnersFromList(@RequestBody List<Partner> partners) {
-        partnerFacade.deleteAllPArtnersFromList(partners);
-    }
+    // // Delete specific partners
+    // @DeleteMapping("/batch")
+    // public void deleteAllPartnersFromList(@RequestBody List<Partner> partners) {
+    //     partnerFacade.deleteAllPArtnersFromList(partners);
+    // }
 }

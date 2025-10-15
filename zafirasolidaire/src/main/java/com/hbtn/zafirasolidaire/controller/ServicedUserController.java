@@ -1,6 +1,5 @@
 package com.hbtn.zafirasolidaire.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hbtn.zafirasolidaire.dto.ServicedUserDto;
-import com.hbtn.zafirasolidaire.model.ServicedUser;
 import com.hbtn.zafirasolidaire.service.ServicedUserFacade;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -39,12 +37,12 @@ public class ServicedUserController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    // Save multiple servicedUsers
-    @PostMapping("/batch")
-    public ResponseEntity<Void> saveAllServicedUsers(@RequestBody @Valid List<ServicedUserDto> servicedUserDtos) {
-        servicedUserFacade.createAllServicedUsers(servicedUserDtos);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
+    // // Save multiple servicedUsers
+    // @PostMapping("/batch")
+    // public ResponseEntity<Void> saveAllServicedUsers(@RequestBody @Valid List<ServicedUserDto> servicedUserDtos) {
+    //     servicedUserFacade.createAllServicedUsers(servicedUserDtos);
+    //     return ResponseEntity.status(HttpStatus.CREATED).build();
+    // }
 
     // Get servicedUser by ID
     @GetMapping(value = "/{id}", produces = "application/json")
@@ -83,24 +81,24 @@ public class ServicedUserController {
         return ResponseEntity.noContent().build();
     }
 
-    // Delete a single servicedUser (full object)
-    @DeleteMapping
-    public ResponseEntity<Void> deleteServicedUser(@RequestBody ServicedUser servicedUser) {
-        servicedUserFacade.deleteServicedUser(servicedUser);
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete a single servicedUser (full object)
+    // @DeleteMapping
+    // public ResponseEntity<Void> deleteServicedUser(@RequestBody ServicedUser servicedUser) {
+    //     servicedUserFacade.deleteServicedUser(servicedUser);
+    //     return ResponseEntity.noContent().build();
+    // }
 
-    // Delete all servicedUsers
-    @DeleteMapping("/all")
-    public ResponseEntity<Void> deleteAllServicedUsers() {
-        servicedUserFacade.deleteAllServicedUsers();
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete all servicedUsers
+    // @DeleteMapping("/all")
+    // public ResponseEntity<Void> deleteAllServicedUsers() {
+    //     servicedUserFacade.deleteAllServicedUsers();
+    //     return ResponseEntity.noContent().build();
+    // }
 
-    // Delete specific servicedUsers
-    @DeleteMapping("/batch")
-    public ResponseEntity<Void> deleteAllServicedUsersFromlist(@RequestBody List<ServicedUser> servicedUsers) {
-        servicedUserFacade.deleteAllServicedUsers(servicedUsers);
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete specific servicedUsers
+    // @DeleteMapping("/batch")
+    // public ResponseEntity<Void> deleteAllServicedUsersFromlist(@RequestBody List<ServicedUser> servicedUsers) {
+    //     servicedUserFacade.deleteAllServicedUsers(servicedUsers);
+    //     return ResponseEntity.noContent().build();
+    // }
 }

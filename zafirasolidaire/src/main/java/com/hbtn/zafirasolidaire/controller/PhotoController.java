@@ -1,6 +1,5 @@
 package com.hbtn.zafirasolidaire.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hbtn.zafirasolidaire.dto.PhotoDto;
-import com.hbtn.zafirasolidaire.model.Photo;
 import com.hbtn.zafirasolidaire.service.PhotoFacade;
 
 import jakarta.validation.Valid;
@@ -40,12 +38,12 @@ public class PhotoController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Utilisateur créé avec succès!");
     }
 
-    // Save multiple photos
-    @PostMapping("/batch")
-    public ResponseEntity<Void> saveAllPhotos(@RequestBody @Valid List<PhotoDto> photoRequests) {
-        photoFacade.createAllPhotos(photoRequests);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
+    // // Save multiple photos
+    // @PostMapping("/batch")
+    // public ResponseEntity<Void> saveAllPhotos(@RequestBody @Valid List<PhotoDto> photoRequests) {
+    //     photoFacade.createAllPhotos(photoRequests);
+    //     return ResponseEntity.status(HttpStatus.CREATED).build();
+    // }
 
     // ---------- GET ----------//
     // Get photo by ID
@@ -85,26 +83,26 @@ public class PhotoController {
         return ResponseEntity.noContent().build();
     }
 
-    // Delete a single photo (full object)
-    @DeleteMapping
-    public ResponseEntity<Void> deletePhoto(@RequestBody Photo photo) {
-        photoFacade.deletePhoto(photo);
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete a single photo (full object)
+    // @DeleteMapping
+    // public ResponseEntity<Void> deletePhoto(@RequestBody Photo photo) {
+    //     photoFacade.deletePhoto(photo);
+    //     return ResponseEntity.noContent().build();
+    // }
 
-    // Delete all photos
-    @DeleteMapping("/all")
-    public ResponseEntity<Void> deleteAllPhotos() {
-        photoFacade.deleteAllPhotos();
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete all photos
+    // @DeleteMapping("/all")
+    // public ResponseEntity<Void> deleteAllPhotos() {
+    //     photoFacade.deleteAllPhotos();
+    //     return ResponseEntity.noContent().build();
+    // }
 
-    // Delete specific photos
-    @DeleteMapping("/batch")
-    public ResponseEntity<Void> deleteAllPhotosFromList(@RequestBody List<Photo> photos) {
-        photoFacade.deleteAllPhotos(photos);
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete specific photos
+    // @DeleteMapping("/batch")
+    // public ResponseEntity<Void> deleteAllPhotosFromList(@RequestBody List<Photo> photos) {
+    //     photoFacade.deleteAllPhotos(photos);
+    //     return ResponseEntity.noContent().build();
+    // }
 
 
 }
