@@ -1,6 +1,6 @@
 package com.hbtn.zafirasolidaire.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.assertj.core.api.Assertions;
@@ -26,7 +26,7 @@ public class BaseModelTest {
         baseEntity.setId(uuId);
         baseEntity.onCreate();
 
-        Date createdAt = baseEntity.getCreateDate();
+        LocalDateTime createdAt = baseEntity.getCreateDate();
         UUID baseEntityId = baseEntity.getId();
 
 
@@ -38,7 +38,7 @@ public class BaseModelTest {
             e.printStackTrace();
         }
         baseEntity.onUpdate();
-        Date updatedAt = baseEntity.getUpdateDate();
+        LocalDateTime updatedAt = baseEntity.getUpdateDate();
 
         //Assert
 

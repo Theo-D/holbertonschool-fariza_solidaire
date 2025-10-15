@@ -1,6 +1,6 @@
 package com.hbtn.zafirasolidaire.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -22,11 +22,11 @@ public class BaseModel {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATE_DATE")
-    protected Date createDate;
+    protected LocalDateTime createDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name ="UPDATE_DATE")
-    protected Date updateDate;
+    protected LocalDateTime updateDate;
 
     // ---------- id getter and setter ---------- //
     public UUID getId() {
@@ -40,20 +40,20 @@ public class BaseModel {
     //Protected methods to be access by inheriting classes but not outside of class logic.
     @PrePersist
     protected void onCreate(){
-        createDate = new Date();
-        updateDate = new Date();
+        createDate = LocalDateTime.now();
+        updateDate = LocalDateTime.now();
     }
 
     @PreUpdate
     protected void onUpdate() {
-        updateDate = new Date();
+        updateDate = LocalDateTime.now();
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 }

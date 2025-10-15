@@ -16,6 +16,8 @@ public class ServicedUserMapper {
 
         servicedUserDto.setId(servicedUser.getId());
         servicedUserDto.setUserId(servicedUser.getUser().getId());
+        servicedUserDto.setCreateDate(servicedUser.getCreateDate());
+        servicedUserDto.setUpdateDate(servicedUser.getUpdateDate());
 
         return servicedUserDto;
     };
