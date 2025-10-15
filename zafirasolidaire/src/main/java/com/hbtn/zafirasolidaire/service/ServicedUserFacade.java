@@ -9,6 +9,7 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hbtn.zafirasolidaire.dto.RequestServicedUserDto;
 import com.hbtn.zafirasolidaire.dto.ServicedUserDto;
 import com.hbtn.zafirasolidaire.mapper.ServicedUserMapper;
 import com.hbtn.zafirasolidaire.model.ServicedUser;
@@ -26,7 +27,7 @@ public class ServicedUserFacade {
     }
 
     //---------- Repository Services ----------//
-    public void createServicedUser(ServicedUserDto ServicedUserDto) {
+    public void createServicedUser(RequestServicedUserDto ServicedUserDto) {
         if (ServicedUserDto == null) {
             throw new IllegalArgumentException("ServicedUser cannot be null.");
         }
@@ -36,14 +37,14 @@ public class ServicedUserFacade {
         servicedUserRepository.save(ServicedUser);
     }
 
-    public void createAllServicedUsers(Iterable<ServicedUserDto> ServicedUserDtos) {
+    public void createAllServicedUsers(Iterable<RequestServicedUserDto> ServicedUserDtos) {
         if (ServicedUserDtos == null || !ServicedUserDtos.iterator().hasNext()) {
             throw new IllegalArgumentException("ServicedUser list cannot be null or empty.");
         }
 
         List<ServicedUser> ServicedUsers = new ArrayList<>();
 
-        for (ServicedUserDto ServicedUserDto : ServicedUserDtos) {
+        for (RequestServicedUserDto ServicedUserDto : ServicedUserDtos) {
             ServicedUser ServicedUser = servicedUserMapper.dtoToServicedUser(ServicedUserDto);
             ServicedUsers.add(ServicedUser);
         }

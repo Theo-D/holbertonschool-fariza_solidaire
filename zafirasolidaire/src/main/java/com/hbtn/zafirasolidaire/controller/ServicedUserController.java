@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hbtn.zafirasolidaire.dto.RequestServicedUserDto;
 import com.hbtn.zafirasolidaire.dto.ServicedUserDto;
 import com.hbtn.zafirasolidaire.service.ServicedUserFacade;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 
 @RestController
@@ -32,7 +33,7 @@ public class ServicedUserController {
 
     // Save a single servicedUser
     @PostMapping
-    public ResponseEntity<Void> saveServicedUser(@RequestBody @Valid ServicedUserDto servicedUserDto) {
+    public ResponseEntity<Void> saveServicedUser(@RequestBody @Valid RequestServicedUserDto servicedUserDto) {
         servicedUserFacade.createServicedUser(servicedUserDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
