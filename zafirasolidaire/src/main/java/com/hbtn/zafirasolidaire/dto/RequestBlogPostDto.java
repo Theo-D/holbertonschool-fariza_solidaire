@@ -2,6 +2,7 @@ package com.hbtn.zafirasolidaire.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class RequestBlogPostDto {
 
@@ -11,6 +12,7 @@ public class RequestBlogPostDto {
 
     @NotNull
     @NotBlank
+    @Size(min = 50)
     private String textBody;
 
     @NotNull
