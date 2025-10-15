@@ -10,17 +10,37 @@ import jakarta.validation.constraints.NotNull;
 
 public class RequestServicedUserDto extends BaseModel{
 
-    @Schema(hidden = true)
+
+    @SuppressWarnings("unused")
     private UUID id;
 
-    @Schema(hidden = true)
+    @SuppressWarnings("unused")
     private LocalDateTime createDate;
 
-    @Schema(hidden = true)
+
+    @SuppressWarnings("unused")
     private LocalDateTime updateDate;
 
     @NotNull
     private UUID userId;
+
+    @Override
+    @Schema(hidden = true)
+    public UUID getId() {
+        return super.getId();
+    }
+
+    @Override
+    @Schema(hidden = true)
+    public LocalDateTime getCreateDate() {
+        return super.getCreateDate();
+    }
+
+    @Override
+    @Schema(hidden = true)
+    public LocalDateTime getUpdateDate() {
+        return super.getUpdateDate();
+    }
 
     public UUID getUserId() {
         return userId;
