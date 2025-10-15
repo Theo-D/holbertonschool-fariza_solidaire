@@ -1,47 +1,23 @@
 package com.hbtn.zafirasolidaire.dto;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-public class BlogPostDto {
+public class RequestBlogPostDto {
 
-    private UUID id;
-
-    private LocalDateTime createDate;
-
-    private LocalDateTime updateDate;
-
+    @NotNull
+    @NotBlank
     private String title;
 
+    @NotNull
+    @NotBlank
     private String textBody;
 
+    @NotNull
+    @NotBlank
     private String author;
 
     private String photoUrl;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(LocalDateTime updateDate) {
-        this.updateDate = updateDate;
-    }
 
     public String getTitle() {
         return title;
@@ -78,7 +54,6 @@ public class BlogPostDto {
     @Override
     public String toString() {
         return "BlogPostDto{" +
-            "Id=" + id +
             ", title='" + title + '\'' +
             ", textBody='" + textBody + '\'' +
             ", author='" + author + '\'' +

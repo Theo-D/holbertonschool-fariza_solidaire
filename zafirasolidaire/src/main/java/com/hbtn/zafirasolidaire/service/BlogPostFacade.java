@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.hbtn.zafirasolidaire.dto.BlogPostDto;
 import com.hbtn.zafirasolidaire.dto.PhotoDto;
+import com.hbtn.zafirasolidaire.dto.RequestBlogPostDto;
 import com.hbtn.zafirasolidaire.mapper.BlogPostMapper;
 import com.hbtn.zafirasolidaire.model.BlogPost;
 import com.hbtn.zafirasolidaire.model.Photo;
@@ -28,25 +29,25 @@ public class BlogPostFacade {
     }
 
     //---------- Repository Services ----------//
-    public void createBlogPost(BlogPostDto blogPostDto) {
-        if (blogPostDto == null) {
+    public void createBlogPost(RequestBlogPostDto requestBlogPostDto) {
+        if (requestBlogPostDto == null) {
             throw new IllegalArgumentException("BlogPost cannot be null.");
         }
 
-        BlogPost blogPost = blogPostMapper.dtoToBlogPost(blogPostDto);
+        BlogPost blogPost = blogPostMapper.requestDtoToBlogPost(requestBlogPostDto);
 
         blogPostRepository.save(blogPost);
     }
 
-    public void createAllBlogPosts(Iterable<BlogPostDto> blogPostDtos) {
-        if (blogPostDtos == null || !blogPostDtos.iterator().hasNext()) {
+    public void createAllBlogPosts(Iterable<RequestBlogPostDto> requestBlogPostDtos) {
+        if (requestBlogPostDtos == null || !requestBlogPostDtos.iterator().hasNext()) {
             throw new IllegalArgumentException("BlogPost list cannot be null or empty.");
         }
 
         List<BlogPost> blogPosts = new ArrayList<>();
 
-        for (BlogPostDto blogPostDto : blogPostDtos) {
-            BlogPost blogPost = blogPostMapper.dtoToBlogPost(blogPostDto);
+        for (RequestBlogPostDto requestBlogPostDto : requestBlogPostDtos) {
+            BlogPost blogPost = blogPostMapper.requestDtoToBlogPost(requestBlogPostDto);
             blogPosts.add(blogPost);
         }
         blogPostRepository.saveAll(blogPosts);

@@ -7,11 +7,11 @@ import java.util.UUID;
 public class PartnerDto {
 
     private UUID id;
+    private LocalDateTime createDate;
+    private LocalDateTime updateDate;
     private String name;
     private String homepageUrl;
     private String logoUrl;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
 
     // Getters and setters
 
