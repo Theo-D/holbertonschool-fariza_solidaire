@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hbtn.zafirasolidaire.dto.EventDto;
 import com.hbtn.zafirasolidaire.dto.PhotoDto;
+import com.hbtn.zafirasolidaire.dto.RequestEventDto;
 import com.hbtn.zafirasolidaire.service.EventFacade;
 
 import jakarta.validation.Valid;
@@ -33,8 +34,8 @@ public class EventController {
 
     // Save a single event
     @PostMapping
-    public ResponseEntity<Void> saveEvent(@RequestBody @Valid EventDto eventDto) {
-        eventFacade.createEvent(eventDto);
+    public ResponseEntity<Void> saveEvent(@RequestBody @Valid RequestEventDto requestEventDto) {
+        eventFacade.createEvent(requestEventDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
