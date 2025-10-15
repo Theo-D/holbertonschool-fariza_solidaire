@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hbtn.zafirasolidaire.dto.BlogPostDto;
-import com.hbtn.zafirasolidaire.dto.PhotoDto;
 import com.hbtn.zafirasolidaire.dto.RequestBlogPostDto;
+import com.hbtn.zafirasolidaire.dto.RequestPhotoDto;
 import com.hbtn.zafirasolidaire.model.BlogPost;
 import com.hbtn.zafirasolidaire.service.BlogPostFacade;
 
@@ -49,7 +49,7 @@ public class BlogPostController {
     // }
 
     @PostMapping("/{blogPostId}/photo")
-    public ResponseEntity<Void> saveBlogPost(@RequestBody @Valid PhotoDto photoDto, @PathVariable UUID blogPostId) {
+    public ResponseEntity<Void> saveBlogPost(@RequestBody @Valid RequestPhotoDto photoDto, @PathVariable UUID blogPostId) {
         blogPostFacade.addPhoto(photoDto, blogPostId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

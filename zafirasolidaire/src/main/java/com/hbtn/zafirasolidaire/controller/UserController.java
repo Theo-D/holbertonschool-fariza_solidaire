@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hbtn.zafirasolidaire.dto.PhotoDto;
+import com.hbtn.zafirasolidaire.dto.RequestPhotoDto;
 import com.hbtn.zafirasolidaire.dto.UserDto;
 import com.hbtn.zafirasolidaire.dto.UserRequest;
 import com.hbtn.zafirasolidaire.service.UserFacade;
@@ -80,7 +80,7 @@ public class UserController {
     }
 
     @PostMapping("/{userId}/photo")
-    public ResponseEntity<Void> saveEvent(@RequestBody @Valid PhotoDto photoDto, @PathVariable UUID userId) {
+    public ResponseEntity<Void> saveEvent(@RequestBody @Valid RequestPhotoDto photoDto, @PathVariable UUID userId) {
         userFacade.addPhoto(photoDto, userId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
