@@ -35,7 +35,7 @@ public class SecurityConfig {
                 return new BCryptPasswordEncoder();
         }
 
-        private static final String[] AUTHORIZED_PATHS = {"/auth/**"};
+        private static final String[] AUTHORIZED_PATHS = {"/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**", "/webjars/swagger-ui/**", "/auth/**"};
 
         @Bean
         SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {

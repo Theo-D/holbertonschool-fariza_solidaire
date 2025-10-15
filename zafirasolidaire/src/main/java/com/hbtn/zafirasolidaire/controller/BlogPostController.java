@@ -1,6 +1,5 @@
 package com.hbtn.zafirasolidaire.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +40,12 @@ public class BlogPostController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    // Save multiple blogPosts
-    @PostMapping("/batch")
-    public ResponseEntity<String> saveAllBlogPosts(@RequestBody @Valid List<BlogPostDto> blogPostDtos) {
-        blogPostFacade.createAllBlogPosts(blogPostDtos);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
+    // // Save multiple blogPosts
+    // @PostMapping("/batch")
+    // public ResponseEntity<String> saveAllBlogPosts(@RequestBody @Valid List<BlogPostDto> blogPostDtos) {
+    //     blogPostFacade.createAllBlogPosts(blogPostDtos);
+    //     return ResponseEntity.status(HttpStatus.CREATED).build();
+    // }
 
     @PostMapping("/{blogPostId}/photo")
     public ResponseEntity<Void> saveBlogPost(@RequestBody @Valid PhotoDto photoDto, @PathVariable UUID blogPostId) {
@@ -98,17 +97,17 @@ public class BlogPostController {
         return ResponseEntity.noContent().build();
     }
 
-    // Delete all blogPosts
-    @DeleteMapping("/all")
-    public ResponseEntity<Void> deleteAllBlogPosts() {
-        blogPostFacade.deleteAllBlogPosts();
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete all blogPosts
+    // @DeleteMapping("/all")
+    // public ResponseEntity<Void> deleteAllBlogPosts() {
+    //     blogPostFacade.deleteAllBlogPosts();
+    //     return ResponseEntity.noContent().build();
+    // }
 
-    // Delete specific blogPosts
-    @DeleteMapping("/batch")
-    public ResponseEntity<Void> deleteAllBlogPostsFromlist(@RequestBody List<BlogPost> blogPosts) {
-        blogPostFacade.deleteAllBlogPosts(blogPosts);
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete specific blogPosts
+    // @DeleteMapping("/batch")
+    // public ResponseEntity<Void> deleteAllBlogPostsFromlist(@RequestBody List<BlogPost> blogPosts) {
+    //     blogPostFacade.deleteAllBlogPosts(blogPosts);
+    //     return ResponseEntity.noContent().build();
+    // }
 }

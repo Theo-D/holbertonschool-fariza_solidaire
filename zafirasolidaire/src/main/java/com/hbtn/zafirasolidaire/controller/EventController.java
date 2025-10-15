@@ -1,6 +1,5 @@
 package com.hbtn.zafirasolidaire.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hbtn.zafirasolidaire.dto.EventDto;
 import com.hbtn.zafirasolidaire.dto.PhotoDto;
-import com.hbtn.zafirasolidaire.model.Event;
 import com.hbtn.zafirasolidaire.service.EventFacade;
 
 import jakarta.validation.Valid;
@@ -46,12 +44,12 @@ public class EventController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    // Save multiple events
-    @PostMapping("/batch")
-    public ResponseEntity<Void> saveAllEvents(@RequestBody @Valid List<EventDto> eventDtos) {
-        eventFacade.createAllEvents(eventDtos);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
+    // // Save multiple events
+    // @PostMapping("/batch")
+    // public ResponseEntity<Void> saveAllEvents(@RequestBody @Valid List<EventDto> eventDtos) {
+    //     eventFacade.createAllEvents(eventDtos);
+    //     return ResponseEntity.status(HttpStatus.CREATED).build();
+    // }
 
     // ---------- GET ----------//
 
@@ -100,24 +98,24 @@ public class EventController {
         return ResponseEntity.noContent().build();
     }
 
-    // Delete a single event (full object)
-    @DeleteMapping
-    public ResponseEntity<Void> deleteEvent(@RequestBody Event event) {
-        eventFacade.deleteEvent(event);
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete a single event (full object)
+    // @DeleteMapping
+    // public ResponseEntity<Void> deleteEvent(@RequestBody Event event) {
+    //     eventFacade.deleteEvent(event);
+    //     return ResponseEntity.noContent().build();
+    // }
 
-    // Delete all events
-    @DeleteMapping("/all")
-    public ResponseEntity<Void> deleteAllEvents() {
-        eventFacade.deleteAllEvents();
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete all events
+    // @DeleteMapping("/all")
+    // public ResponseEntity<Void> deleteAllEvents() {
+    //     eventFacade.deleteAllEvents();
+    //     return ResponseEntity.noContent().build();
+    // }
 
-    // Delete specific events
-    @DeleteMapping("/batch")
-    public ResponseEntity<Void> deleteAllEventsFromlist(@RequestBody List<Event> events) {
-        eventFacade.deleteAllEvents(events);
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete specific events
+    // @DeleteMapping("/batch")
+    // public ResponseEntity<Void> deleteAllEventsFromlist(@RequestBody List<Event> events) {
+    //     eventFacade.deleteAllEvents(events);
+    //     return ResponseEntity.noContent().build();
+    // }
 }

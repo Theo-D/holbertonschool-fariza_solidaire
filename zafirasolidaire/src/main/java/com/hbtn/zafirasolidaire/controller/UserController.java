@@ -1,6 +1,5 @@
 package com.hbtn.zafirasolidaire.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hbtn.zafirasolidaire.dto.PhotoDto;
 import com.hbtn.zafirasolidaire.dto.UserDto;
 import com.hbtn.zafirasolidaire.dto.UserRequest;
-import com.hbtn.zafirasolidaire.model.User;
 import com.hbtn.zafirasolidaire.service.UserFacade;
 
 import jakarta.validation.Valid;
@@ -43,12 +41,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    // Save multiple users
-    @PostMapping("/batch")
-    public ResponseEntity<Void> saveAllUsers(@RequestBody @Valid List<UserRequest> userRequests) {
-        userFacade.createAllUsers(userRequests);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
+    // // Save multiple users
+    // @PostMapping("/batch")
+    // public ResponseEntity<Void> saveAllUsers(@RequestBody @Valid List<UserRequest> userRequests) {
+    //     userFacade.createAllUsers(userRequests);
+    //     return ResponseEntity.status(HttpStatus.CREATED).build();
+    // }
 
     // ---------- GET ----------//
 
@@ -103,24 +101,24 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    // Delete a single user (full object)
-    @DeleteMapping
-    public ResponseEntity<Void> deleteUser(@RequestBody User user) {
-        userFacade.deleteUser(user);
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete a single user (full object)
+    // @DeleteMapping
+    // public ResponseEntity<Void> deleteUser(@RequestBody User user) {
+    //     userFacade.deleteUser(user);
+    //     return ResponseEntity.noContent().build();
+    // }
 
-    // Delete all users
-    @DeleteMapping("/all")
-    public ResponseEntity<Void> deleteAllUsers() {
-        userFacade.deleteAllUsers();
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete all users
+    // @DeleteMapping("/all")
+    // public ResponseEntity<Void> deleteAllUsers() {
+    //     userFacade.deleteAllUsers();
+    //     return ResponseEntity.noContent().build();
+    // }
 
-    // Delete specific users
-    @DeleteMapping("/batch")
-    public ResponseEntity<Void> deleteAllUsersFromList(@RequestBody List<User> users) {
-        userFacade.deleteAllUsers(users);
-        return ResponseEntity.noContent().build();
-    }
+    // // Delete specific users
+    // @DeleteMapping("/batch")
+    // public ResponseEntity<Void> deleteAllUsersFromList(@RequestBody List<User> users) {
+    //     userFacade.deleteAllUsers(users);
+    //     return ResponseEntity.noContent().build();
+    // }
 }
