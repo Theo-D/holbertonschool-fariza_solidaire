@@ -33,10 +33,10 @@ public class PhotoController {
 
     // Save a single photo
     @PostMapping
-    public ResponseEntity<String> savePhoto(@RequestBody @Valid RequestPhotoDto photoRequest) {
+    public ResponseEntity<Void> savePhoto(@RequestBody @Valid RequestPhotoDto photoRequest) {
         photoFacade.createPhoto(photoRequest);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Utilisateur créé avec succès!");
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     // // Save multiple photos

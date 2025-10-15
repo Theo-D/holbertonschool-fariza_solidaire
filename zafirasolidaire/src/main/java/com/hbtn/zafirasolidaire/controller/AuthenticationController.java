@@ -40,6 +40,8 @@ public class AuthenticationController {
     public ResponseEntity<String> login(@RequestBody UserLoginDto userLoginDto) {
         User user = userFacade.getUserByEmailAddress(userLoginDto.getEmailAddress());
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(authenticationService.verifyUser(user, userLoginDto.getPassword()));
+        String jwtToken = authenticationService.verifyUser(user, userLoginDto.getPassword());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(jwtToken);
     }
 }
