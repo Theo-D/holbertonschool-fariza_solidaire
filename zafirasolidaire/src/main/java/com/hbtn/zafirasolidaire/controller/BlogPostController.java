@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hbtn.zafirasolidaire.dto.BlogPostDto;
 import com.hbtn.zafirasolidaire.dto.PhotoDto;
+import com.hbtn.zafirasolidaire.dto.RequestBlogPostDto;
 import com.hbtn.zafirasolidaire.model.BlogPost;
 import com.hbtn.zafirasolidaire.service.BlogPostFacade;
 
@@ -35,8 +36,8 @@ public class BlogPostController {
 
     // Save a single blogPost
     @PostMapping
-    public ResponseEntity<String> saveBlogPost(@RequestBody @Valid BlogPostDto blogPostDto) {
-        blogPostFacade.createBlogPost(blogPostDto);
+    public ResponseEntity<String> saveBlogPost(@RequestBody @Valid RequestBlogPostDto requestBlogPostDto) {
+        blogPostFacade.createBlogPost(requestBlogPostDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

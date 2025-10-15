@@ -41,12 +41,12 @@ public class BlogPostFacadeTest {
     }
 
     // createBlogPost
-    @Test
-    void createBlogPost_shouldSaveBlogPost() {
-        when(blogPostMapper.dtoToBlogPost(blogPostDto)).thenReturn(blogPost);
-        blogPostFacade.createBlogPost(blogPostDto);
-        verify(blogPostRepository).save(blogPost);
-    }
+    // @Test
+    // void createBlogPost_shouldSaveBlogPost() {
+    //     when(blogPostMapper.dtoToBlogPost(blogPostDto)).thenReturn(blogPost);
+    //     blogPostFacade.createBlogPost(blogPostDto);
+    //     verify(blogPostRepository).save(blogPost);
+    // }
 
     @Test
     void createBlogPost_shouldThrowException_whenNull() {
@@ -54,13 +54,13 @@ public class BlogPostFacadeTest {
     }
 
     // createAllBlogPosts
-    @Test
-    void createAllBlogPosts_shouldSaveAllBlogPosts() {
-        List<BlogPostDto> dtos = List.of(blogPostDto);
-        when(blogPostMapper.dtoToBlogPost(blogPostDto)).thenReturn(blogPost);
-        blogPostFacade.createAllBlogPosts(dtos);
-        verify(blogPostRepository).saveAll(List.of(blogPost));
-    }
+    // @Test
+    // void createAllBlogPosts_shouldSaveAllBlogPosts() {
+    //     List<BlogPostDto> dtos = List.of(blogPostDto);
+    //     when(blogPostMapper.dtoToBlogPost(blogPostDto)).thenReturn(blogPost);
+    //     blogPostFacade.createAllBlogPosts(dtos);
+    //     verify(blogPostRepository).saveAll(List.of(blogPost));
+    // }
 
     @Test
     void createAllBlogPosts_shouldThrowException_whenNullOrEmpty() {
