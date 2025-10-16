@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class PhotoController {
 
     // Save a single photo
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> savePhoto(@RequestBody @Valid RequestPhotoDto photoRequest) {
         photoFacade.createPhoto(photoRequest);
 
@@ -54,7 +56,7 @@ public class PhotoController {
         return ResponseEntity.ok(photoDto);
     }
 
-    // Check if photo exists by ID
+    // Check if photo exists by
     @GetMapping("/{id}/exists")
     public ResponseEntity<Boolean> existsById(@PathVariable UUID id) {
         boolean exists = photoFacade.existsById(id);
@@ -62,6 +64,7 @@ public class PhotoController {
     }
 
     // Get all photos
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ResponseEntity<Iterable<PhotoDto>> getAllPhotos() {
         Iterable<PhotoDto> photos = photoFacade.getAllPhotos();
@@ -69,6 +72,7 @@ public class PhotoController {
     }
 
     // Count photos
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/count")
     public ResponseEntity<Long> countPhotos() {
         long count = photoFacade.countPhotos();
@@ -78,6 +82,7 @@ public class PhotoController {
     // ---------- DELETE ----------//
 
     // Delete photo by ID
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePhotoById(@PathVariable UUID id) {
         photoFacade.deletePhotoById(id);

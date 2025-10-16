@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ public class UserController {
     // ---------- POST ----------//
 
     // Save a single user
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Void> saveUser(@RequestBody @Valid UserRequest userRequest) {
         userFacade.createUser(userRequest);
@@ -59,6 +61,7 @@ public class UserController {
     // }
 
     // Get user by ID
+    @PreAuthorize("isAuthenticated()")
     @GetMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<UserDto> getUserById(@PathVariable UUID id) {
         UserDto userDto = userFacade.getUserById(id);
@@ -66,6 +69,7 @@ public class UserController {
     }
 
     // Check if user exists by ID
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/{id}/exists")
     public ResponseEntity<Boolean> existsById(@PathVariable UUID id) {
         boolean exists = userFacade.existsById(id);
@@ -73,12 +77,14 @@ public class UserController {
     }
 
     // Get all users
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ResponseEntity<Iterable<UserDto>> getAllUsers() {
         Iterable<UserDto> users = userFacade.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/{userId}/photo")
     public ResponseEntity<Void> saveEvent(@RequestBody @Valid RequestPhotoDto photoDto, @PathVariable UUID userId) {
         userFacade.addPhoto(photoDto, userId);
@@ -86,6 +92,7 @@ public class UserController {
     }
 
     // Count users
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/count")
     public ResponseEntity<Long> countUsers() {
         long count = userFacade.countUsers();
@@ -95,6 +102,7 @@ public class UserController {
     // ---------- DELETE ----------//
 
     // Delete user by ID
+    @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUserById(@PathVariable UUID id) {
         userFacade.deleteUserById(id);
