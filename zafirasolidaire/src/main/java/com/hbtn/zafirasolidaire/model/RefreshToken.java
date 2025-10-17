@@ -35,7 +35,7 @@ public class RefreshToken extends BaseModel{
         return token;
     }
 
-    public RefreshToken setUSer(String token) {
+    public RefreshToken setToken(String token) {
         this.token = token;
         return this;
     }

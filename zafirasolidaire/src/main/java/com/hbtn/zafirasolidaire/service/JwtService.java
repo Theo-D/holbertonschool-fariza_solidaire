@@ -12,6 +12,7 @@ import java.util.function.Function;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.hbtn.zafirasolidaire.model.CustomUserDetails;
@@ -24,6 +25,8 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
+    @Value("${jwt.expiration}")
+    private Long accessTokenDuration;
     private String secretKey = "";
 
     public JwtService() {
@@ -49,7 +52,7 @@ public class JwtService {
                              .add(claims)
                              .subject(userId.toString())
                              .issuedAt(new Date(System.currentTimeMillis()))
-                             .expiration(new Date(System.currentTimeMillis() +  600 * 60 * 30))
+                             .expiration(new Date(System.currentTimeMillis() +  accessTokenDuration))
                              .and()
                              .signWith(getKey())
                              .compact();
