@@ -27,6 +27,7 @@ public class JwtService {
 
     @Value("${jwt.expiration}")
     private Long accessTokenDuration;
+
     private String secretKey = "";
 
     public JwtService() {
@@ -58,6 +59,20 @@ public class JwtService {
                              .compact();
     }
 
+    // public RefreshToken createRefreshToken(UUID userId) {
+    //     User user = userRepository.findById(userId)
+    //                               .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+    //     String refreshTokenValue = UUID.randomUUID().toString();
+
+    //     RefreshToken refreshToken = new RefreshToken().setUSer(user)
+    //                                                   .setExpirationDate(Instant.now().plusMillis(refreshTokenDuration))
+    //                                                   .setToken(refreshTokenValue);
+
+
+    //     return refreshTokenRepository.save(refreshToken);
+    // }
+
     private <T> T extractClaim(String token, Function<Claims, T> claimResolver) {
         final Claims claims = extractAllClaims(token);
         return claimResolver.apply(claims);
@@ -80,12 +95,16 @@ public class JwtService {
         return (id.equals(userDetails.getId()) && !isTokenExpired(token));
     }
 
-    private boolean isTokenExpired(String token) {
+    public boolean isTokenExpired(String token) {
         return extractExpirationToken(token).before(new Date());
     }
 
     private Date extractExpirationToken(String token) {
         return extractClaim(token, Claims::getExpiration);
+    }
+
+    public String generateRefreshTokenValue() {
+        return UUID.randomUUID().toString();
     }
 
 }

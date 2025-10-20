@@ -16,7 +16,7 @@ public class RefreshToken extends BaseModel{
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "token", nullable = false, unique = true)
     private String token;
 
     @Column(nullable = false)
@@ -26,7 +26,7 @@ public class RefreshToken extends BaseModel{
         return user;
     }
 
-    public RefreshToken setUSer(User user) {
+    public RefreshToken setUser(User user) {
         this.user = user;
         return this;
     }
