@@ -1,14 +1,21 @@
 import { useState } from "react";
+import {login} from "../services/login";
 
 function Login() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // 👉 Handle login logic here
     console.log("Email:", email);
     console.log("Password:", password);
+    try {
+      const result = await login(email, password);
+      console.log("Login successful:", result);
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
