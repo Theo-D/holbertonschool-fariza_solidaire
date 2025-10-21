@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, useEffect, useCallback, Children } from 'react'
-import { loginRequest, refreshRequest, logoutRequest, getCurrentUser } from '../services/auth'
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { loginRequest, getCurrentUser } from '../services/auth'
+import {refreshRequest, logoutRequest} from '../services/tokenService'
 
 const AuthContext = createContext();
 
@@ -27,11 +28,12 @@ export const AuthProvider = ({children}) => {
     };
 
     const login = async function (email, password) {
-        const {accessToken: token} = await loginRequest(email, password);
+        const token = await loginRequest(email, password);
 
         saveToken(token);
         const userData = await getCurrentUser();
         setUser(userData);
+        return token
     };
 
     const logout = async function () {
@@ -71,7 +73,7 @@ export const AuthProvider = ({children}) => {
         })();
     }, []);
 
-    const value = {
+    const value = React.useMemo(() => ({
         user,
         accessToken,
         login,
@@ -79,11 +81,12 @@ export const AuthProvider = ({children}) => {
         refresh,
         loading,
         isAuthenticated: !!user,
-    };
+    }), [user, accessToken, loading]);
+
 
     return (
         <AuthContext.Provider value={value}>
-        {!loading && children}
+            {children}
         </AuthContext.Provider>
     );
 };

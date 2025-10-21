@@ -27,7 +27,6 @@ import com.hbtn.zafirasolidaire.repository.RefreshTokenRepository;
 import com.hbtn.zafirasolidaire.service.AuthenticationService;
 import com.hbtn.zafirasolidaire.service.UserFacade;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
@@ -66,15 +65,16 @@ public class AuthenticationController {
         //refresh token
         RefreshToken refreshToken = authenticationService.createRefreshToken(user);
 
-        Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken.getToken());
+        ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", refreshToken.getToken())
+                                        .httpOnly(true)
+                                        .secure(true)
+                                        .path("/")
+                                        .maxAge(Duration.between(Instant.now(), refreshToken.getExpirationDate()))
+                                        .sameSite("None")
+                                        .build();
 
-        refreshTokenCookie.setHttpOnly(true);
-        refreshTokenCookie.setSecure(true);
-        refreshTokenCookie.setPath("/");
-        refreshTokenCookie.setMaxAge((int) Duration.between(Instant.now(), refreshToken.getExpirationDate())
-                                                                                       .getSeconds());
-
-        response.addCookie(refreshTokenCookie);
+        String cookie = refreshCookie.toString() + "; Partitioned";
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("accessToken", jwtToken));
     }
@@ -90,14 +90,16 @@ public class AuthenticationController {
 
         // Overwrite cookie with empty value to delete it
         ResponseCookie deleteCookie = ResponseCookie.from("refreshToken", "")
-                .httpOnly(true)
-                .secure(true)
-                .path("/")
-                .maxAge(0)
-                .sameSite("Strict")
-                .build();
+                                        .httpOnly(true)
+                                        .secure(true)
+                                        .path("/")
+                                        .maxAge(0)
+                                        .sameSite("None")
+                                        .build();
 
-        response.addHeader(HttpHeaders.SET_COOKIE, deleteCookie.toString());
+        String cookie = deleteCookie.toString() + "; Partitioned";
+
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie);
         return ResponseEntity.ok(Map.of("message", "Successfully logged out"));
     }
 

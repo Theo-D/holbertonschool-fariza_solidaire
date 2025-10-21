@@ -1,6 +1,6 @@
 function Home() {
     return(
-        <h1>Ton père</h1>
+        <h1>This is the Home Page</h1>
     );
 }
 
