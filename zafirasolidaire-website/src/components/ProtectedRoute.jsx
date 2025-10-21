@@ -3,7 +3,6 @@ import { useAuth } from "../context/AuthContext";
 
 export default function ProtectedRoute({ children, requiredRole }) {
   const { user, loading, isAuthenticated } = useAuth();
-
   // While auth is being checked, avoid flicker
   if (loading) {
     return <div>Loading...</div>;

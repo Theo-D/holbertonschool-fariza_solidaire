@@ -52,7 +52,7 @@ public class SecurityConfig {
                         .authorizeHttpRequests(request -> request
                                 .requestMatchers(AUTHORIZED_PATHS).permitAll()
                                 .anyRequest().authenticated())
-                                .httpBasic(Customizer.withDefaults())
+                                //.httpBasic(Customizer.withDefaults())
                                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                         .build();
