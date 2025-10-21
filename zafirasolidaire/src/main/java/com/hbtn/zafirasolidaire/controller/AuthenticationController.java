@@ -2,6 +2,7 @@ package com.hbtn.zafirasolidaire.controller;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hbtn.zafirasolidaire.dto.UserLoginDto;
 import com.hbtn.zafirasolidaire.dto.UserRequest;
+import com.hbtn.zafirasolidaire.model.CustomUserDetails;
 import com.hbtn.zafirasolidaire.model.RefreshToken;
 import com.hbtn.zafirasolidaire.model.User;
 import com.hbtn.zafirasolidaire.repository.RefreshTokenRepository;
@@ -102,8 +106,6 @@ public class AuthenticationController {
         @CookieValue(value = "refreshToken", required = false) String oldRefreshToken,
         HttpServletResponse response) {
 
-        System.out.println("REFRESH TOKEN FROM COOKIE: " + oldRefreshToken);
-
         if (oldRefreshToken == null || oldRefreshToken.isBlank()) {
             return ResponseEntity
                     .status(HttpStatus.UNAUTHORIZED)
@@ -126,6 +128,22 @@ public class AuthenticationController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", e.getMessage()));
         }
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<Map<String, String>> getUser(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        if (userDetails == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        String role = userDetails.getAuthorities().iterator().next().getAuthority();
+
+        Map<String, String> response = new HashMap<>();
+        response.put("id", String.valueOf(userDetails.getId()));
+        response.put("email", userDetails.getUsername());
+        response.put("role", role);
+
+        return ResponseEntity.ok(response);
     }
 
 }
