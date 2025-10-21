@@ -13,8 +13,8 @@ function Login() {
     console.log("Email:", email);
     console.log("Password:", password);
     try {
-      const result = await login(email, password);
-      console.log("Login successful:", result);
+      await login(email, password);
+      console.log("Login successful:");
     } catch (error) {
       setError(error.message);
     }
