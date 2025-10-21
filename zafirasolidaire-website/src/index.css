@@ -1,4 +1,5 @@
 @import "tailwindcss";
-@plugin "daisyui";
-
+@plugin "daisyui" {
+  themes: cmyk --default;
+}
 /* daisyUI is enabled via tailwind.config.cjs as a Tailwind plugin */
