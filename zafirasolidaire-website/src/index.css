@@ -1,4 +1,4 @@
-@import 'tailwindcss/preflight';
-@import 'tailwindcss/utilities';
+@import "tailwindcss";
+@plugin "daisyui";
 
 /* daisyUI is enabled via tailwind.config.cjs as a Tailwind plugin */
