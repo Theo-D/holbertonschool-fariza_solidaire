@@ -67,15 +67,14 @@ export default function Home() {
             
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               <span className="bg-gradient-to-r from-[#42AAE1] via-[#E82B89] to-[#FCD916] bg-clip-text text-transparent">
-                Créez l'extraordinaire
+                Mettez toutes les chances
               </span>
               <br />
-              <span className="text-gray-900">avec simplicité</span>
+              <span className="text-gray-900">de votre côté</span>
             </h1>
             
-            <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto">
-              Une solution moderne et puissante pour transformer vos idées en réalité. 
-              Rejoignez des milliers d'utilisateurs qui nous font confiance.
+            <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto"> 
+              Rejoignez des centaines de demandeurs d'emploi qui nous font confiance.
             </p>
           </div>
 
