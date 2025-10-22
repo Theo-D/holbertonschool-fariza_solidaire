@@ -21,7 +21,7 @@ import com.hbtn.zafirasolidaire.service.PhotoFacade;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("photos")
+@RequestMapping("/photos")
 public class PhotoController {
     private final PhotoFacade photoFacade;
 
@@ -41,6 +41,17 @@ public class PhotoController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @GetMapping("/test/{id}")
+    public ResponseEntity<String> test(@PathVariable String id) {
+        try {
+            UUID uuid = UUID.fromString(id);
+            return ResponseEntity.ok("UUID is valid: " + uuid);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid UUID");
+        }
+    }
+
+
     // // Save multiple photos
     // @PostMapping("/batch")
     // public ResponseEntity<Void> saveAllPhotos(@RequestBody @Valid List<PhotoDto> photoRequests) {
@@ -50,8 +61,9 @@ public class PhotoController {
 
     // ---------- GET ----------//
     // Get photo by ID
-    @GetMapping(value = "/{id}", produces = "application/json")
+    @GetMapping("/{id}")
     public ResponseEntity<PhotoDto> getPhotoById(@PathVariable UUID id) {
+        System.out.println("RECEIVED PHOTO ID : " + id);
         PhotoDto photoDto = photoFacade.getPhotoById(id);
         return ResponseEntity.ok(photoDto);
     }

@@ -3,20 +3,22 @@ package com.hbtn.zafirasolidaire.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 //Placeholder class waiting to be implemented
 @Entity
-@Table(name = "Photos")
+@Table(name = "photos")
 public class Photo extends BaseModel {
+    @NotBlank
     private String url;
 
-    @OneToOne(mappedBy = "profilePic", optional = false)
+    @OneToOne(mappedBy = "profilePic", optional = true)
     private User user;
 
-    @OneToOne(mappedBy = "photo", optional = false)
+    @OneToOne(mappedBy = "photo", optional = true)
     private Event event;
 
-    @OneToOne(mappedBy = "photo", optional = false)
+    @OneToOne(mappedBy = "photo", optional = true)
     private BlogPost blogPost;
 
     public String getUrl() {

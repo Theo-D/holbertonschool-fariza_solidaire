@@ -1,5 +1,5 @@
 import api from "./api";
-import { refreshToken, logout } from "./tokenService";
+import { refreshRequest, logoutRequest } from "./tokenService";
 
 let isRefreshing = false;
 let refreshUsers = [];
@@ -11,6 +11,7 @@ function onRefreshed(newToken) {
 
 api.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem("accessToken");
+  console.log("ACCESS TOKEN FROM INTERCEPTORS: ", accessToken)
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
@@ -27,14 +28,14 @@ api.interceptors.response.use(
       if (!isRefreshing) {
         isRefreshing = true;
         try {
-          const { accessToken: newToken } = await refreshToken();
+          const { accessToken: newToken } = await refreshRequest();
           localStorage.setItem("accessToken", newToken);
           isRefreshing = false;
           onRefreshed(newToken);
         } catch (err) {
           isRefreshing = false;
           try {
-            await logout();
+            await logoutRequest();
           } finally {
             window.location.replace(window.location.origin + "/");
           }
