@@ -84,6 +84,12 @@ public class ServicedUserController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/by-user-id/{userId}")
+    public ResponseEntity<Void> deleteServicedUserByUserId(@PathVariable UUID userId) {
+        servicedUserFacade.deleteServicedUserByUserId(userId);
+        return ResponseEntity.noContent().build();
+    }
+
     // // Delete a single servicedUser (full object)
     // @DeleteMapping
     // public ResponseEntity<Void> deleteServicedUser(@RequestBody ServicedUser servicedUser) {

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hbtn.zafirasolidaire.dto.RequestPhotoDto;
 import com.hbtn.zafirasolidaire.dto.UserDto;
 import com.hbtn.zafirasolidaire.dto.UserRequest;
+import com.hbtn.zafirasolidaire.model.User;
 import com.hbtn.zafirasolidaire.service.UserFacade;
 
 import jakarta.validation.Valid;
@@ -39,6 +41,16 @@ public class UserController {
     @PostMapping
     public ResponseEntity<Void> saveUser(@RequestBody @Valid UserRequest userRequest) {
         userFacade.createUser(userRequest);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody UserRequest userRequest) {
+        if (!userFacade.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        userFacade.updateUser(id, userRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

@@ -49,6 +49,20 @@ public class UserFacade {
         userRepository.save(user);
     }
 
+    public void updateUser(UUID userId, UserRequest userRequest) {
+        if (userId == null) {
+            throw new IllegalArgumentException("userId cannot be null.");
+        }
+
+        User foundUser = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        foundUser.setFirstName(userRequest.getFirstName())
+                 .setLastName(userRequest.getLastName())
+                 .setEmailAddress(userRequest.getEmailAddress())
+                 .setIsServiced(userRequest.getIsServiced());
+        userRepository.save(foundUser);
+    }
+
     public void createAllUsers(Iterable<UserRequest> userRequests) {
         if (userRequests == null || !userRequests.iterator().hasNext()) {
             throw new IllegalArgumentException("User list cannot be null or empty.");
