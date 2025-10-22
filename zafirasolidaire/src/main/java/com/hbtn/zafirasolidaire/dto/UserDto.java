@@ -49,7 +49,7 @@ public class UserDto {
     }
 
     //------- photoUrl getters and setters -------//
-    public String getEmailaddress() {
+    public String getEmailAddress() {
         return emailAddress;
     }
 
