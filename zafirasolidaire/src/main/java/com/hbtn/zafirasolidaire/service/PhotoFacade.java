@@ -56,7 +56,7 @@ public class PhotoFacade {
             throw new IllegalArgumentException("Photo ID cannot be null.");
         }
 
-        Photo foundPhoto = photoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Photo not found"));
+        Photo foundPhoto = photoRepository.findByIdWithAssociations(id).orElseThrow(() -> new IllegalArgumentException("Photo not found"));
 
         return photoMapper.photoToDto(foundPhoto);
     }

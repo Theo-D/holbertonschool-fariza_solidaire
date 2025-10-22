@@ -17,9 +17,9 @@ public interface PhotoMapper {
         @Mapping(source = "id", target = "id"),
         @Mapping(source = "createDate", target = "createDate"),
         @Mapping(source = "updateDate", target = "updateDate"),
-        @Mapping(source = "user.id", target = "userId"),
-        @Mapping(source = "event.id", target = "eventId"),
-        @Mapping(source = "blogPost.id", target = "blogPostId"),
+        @Mapping(target = "userId", expression = "java(photo.getUser() != null ? photo.getUser().getId() : null)"),
+        @Mapping(target = "eventId", expression = "java(photo.getEvent() != null ? photo.getEvent().getId() : null)"),
+        @Mapping(target = "blogPostId", expression = "java(photo.getBlogPost() != null ? photo.getBlogPost().getId() : null)"),
         @Mapping(source = "url", target = "url")
     })
     PhotoDto photoToDto(Photo photo);
