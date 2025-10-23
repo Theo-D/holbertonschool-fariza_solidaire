@@ -13,7 +13,9 @@ import com.hbtn.zafirasolidaire.dto.RequestEventDto;
 import com.hbtn.zafirasolidaire.dto.RequestPhotoDto;
 import com.hbtn.zafirasolidaire.mapper.EventMapper;
 import com.hbtn.zafirasolidaire.model.Event;
+import com.hbtn.zafirasolidaire.model.EventCategory;
 import com.hbtn.zafirasolidaire.model.Photo;
+import com.hbtn.zafirasolidaire.repository.EventCategoryRepository;
 import com.hbtn.zafirasolidaire.repository.EventRepository;
 
 @Service
@@ -21,12 +23,14 @@ public class EventFacade {
     private final EventMapper eventMapper;
     private final EventRepository eventRepository;
     private final PhotoFacade photoFacade;
+    private final EventCategoryRepository eventCategoryRepository;
 
     @Autowired
-    public EventFacade(EventMapper eventMapper, EventRepository eventRepository, PhotoFacade photoFacade) {
+    public EventFacade(EventMapper eventMapper, EventRepository eventRepository, PhotoFacade photoFacade, EventCategoryRepository eventCategoryRepository) {
         this.eventMapper = eventMapper;
         this.eventRepository = eventRepository;
         this.photoFacade = photoFacade;
+        this.eventCategoryRepository = eventCategoryRepository;
     }
 
     //---------- Repository Services ----------//
@@ -37,10 +41,22 @@ public class EventFacade {
 
         Event event = eventMapper.requestDtoToEvent(requestEventDto);
 
+        // Fetch category
+        EventCategory category = eventCategoryRepository
+                                    .findByName(requestEventDto.getCategory())
+                                    .orElseThrow(() -> new RuntimeException("Category not found"));
+        event.setCategory(category);
+
+        // Handle photo safely
+        if (requestEventDto.getPhotoUrl() == null || requestEventDto.getPhotoUrl().isBlank()) {
+            event.setPhoto(null);
+        }
+
         eventRepository.save(event);
     }
 
-    public void updateUser(UUID id, RequestEventDto requestEventDto) {
+
+    public void updateEvent(UUID id, RequestEventDto requestEventDto) {
         if (id == null) {
             throw new IllegalArgumentException("Event Id cannot be null");
         } else if (!eventRepository.existsById(id)) {

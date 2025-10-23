@@ -20,7 +20,7 @@ import jakarta.validation.constraints.NotNull;
 public class Event extends BaseModel {
 
     @NotNull
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "event_category_id", nullable = false)
     private EventCategory category;
 
