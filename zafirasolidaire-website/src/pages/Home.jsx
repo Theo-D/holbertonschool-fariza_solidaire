@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, Zap, Shield, Sparkles, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import StatsCounters from '../components/StatsCounter';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -44,11 +45,11 @@ export default function Home() {
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-t">
             <div className="px-4 pt-2 pb-4 space-y-2">
-              <a href="#features" className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-slate-50">Fonctionnalités</a>
+              <a href="#features" className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-slate-50">Notre mission</a>
               <a href="#about" className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-slate-50">À propos</a>
               <a href="#contact" className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-slate-50">Contact</a>
               <button className="w-full px-6 py-2 rounded-lg text-white font-medium" style={{backgroundColor: '#E82B89'}}>
-                Commencer
+                Se connecter
               </button>
             </div>
           </div>
@@ -84,6 +85,12 @@ export default function Home() {
             <div className="absolute top-20 right-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl" style={{backgroundColor: '#E82B89'}}></div>
             <div className="absolute bottom-0 left-1/2 w-64 h-64 rounded-full opacity-20 blur-3xl" style={{backgroundColor: '#FCD916'}}></div>
           </div>
+        </div>
+      </section>
+
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <StatsCounters />
         </div>
       </section>
 
