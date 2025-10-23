@@ -99,7 +99,7 @@ const EventList = () => {
                         </button>
                     </li>
                 );
-            })};
+            })}
             <li
                 className="flex items-center space-x-4 bg-white rounded-lg p-4 shadow w-88 border border-gray-800"
             >

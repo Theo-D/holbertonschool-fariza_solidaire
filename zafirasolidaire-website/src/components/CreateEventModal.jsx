@@ -46,16 +46,7 @@ function CreateEventModal() {
         capacity: capacity,
         date: dateTime,
       };
-
-      console.log("EVENT I'M TRYING TO SAVE:", event);
-
       await handleCreateEvent(event);
-
-      alert(
-        `Created event on ${dateTime}, capacity: ${capacity}, category: ${categoryData.name}`
-      );
-
-      toggleModal();
     } catch (err) {
       console.error("Failed to create event", err);
       alert("Failed to create event");
@@ -88,7 +79,7 @@ function CreateEventModal() {
         setCategories(updatedCat.data);
       } catch (err) {
         console.error(err);
-        alert('Failed to delete user');
+        alert('Failed to delete event category');
       }
     };
 
@@ -97,21 +88,11 @@ function CreateEventModal() {
         await saveEvent(event)
         const updatedEvents = await getEvents();
         setEvents(updatedEvents.data)
+        toggleModal();
       } catch (err) {
         alert("Failed to save Event");
-      } finally {
-
       }
     };
-
-  const handleGetCategorybyId = async (id) => {
-    try {
-      const res = await getEventCategorybyId(id);
-      setCategory(res.data);
-    } catch (err) {
-      alert("Failed to get category");
-    }
-  }
 
   return (
     <>
