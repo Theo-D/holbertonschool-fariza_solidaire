@@ -4,6 +4,10 @@ export const getEvents = async function() {
   return await api.get("/events");
 };
 
+export const getEventCategories = async function() {
+    return await api.get("/event_categories");
+}
+
 export const getEventbyId = async function(id) {
     return await api.get(`/events/${id}`);
 };
