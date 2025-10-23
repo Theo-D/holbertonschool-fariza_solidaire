@@ -3,6 +3,7 @@ package com.hbtn.zafirasolidaire.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,7 +21,7 @@ public class EventCategory extends BaseModel{
     @Column(unique = true, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Event> events = new HashSet<>();
 
     //---------- name getters and setters ----------//
