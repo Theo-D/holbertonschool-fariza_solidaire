@@ -20,7 +20,6 @@ public class UsersInitilizer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // Define 12 fake users
         List<User> mockUsers = List.of(
             new User().setEmailAddress("alice.smith@example.com").setFirstName("Alice").setLastName("Smith").setProfilePic(new Photo().setUrl("https://randomuser.me/api/portraits/women/73.jpg")),
             new User().setEmailAddress("bob.johnson@example.com").setFirstName("Bob").setLastName("Johnson").setProfilePic(new Photo().setUrl("https://randomuser.me/api/portraits/men/12.jpg")),
@@ -36,8 +35,7 @@ public class UsersInitilizer implements CommandLineRunner {
             new User().setEmailAddress("liam.lee@example.com").setFirstName("Liam").setLastName("Lee").setProfilePic(new Photo().setUrl("https://randomuser.me/api/portraits/men/15.jpg"))
         );
 
-        // Shared hashed password (e.g., "password123")
-        String hashedPassword = "$2a$10$SwTJTi4SgyinjjLo3rbUreEV8l6qPz5t13ykp.ox0yGoo7qgJ28k2";
+        String hashedPassword = "$2a$16$gykRWmAyTRCOZdgdQSdzFu7XiIt7Mn/eW3HNdYJMD.7CwA5eQR/fq";
 
         for (User user : mockUsers) {
             if (userRepository.findByEmailAddress(user.getEmailAddress()).isEmpty()) {

@@ -1,7 +1,7 @@
 package com.hbtn.zafirasolidaire.dto;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
+// import java.util.UUID;
 
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
@@ -10,8 +10,8 @@ import jakarta.validation.constraints.NotNull;
 
 public class RequestEventDto {
 
-    @NotNull
-    private UUID eventId;
+    // @NotNull
+    // private UUID eventId;
 
     @NotNull
     @NotBlank
@@ -25,18 +25,16 @@ public class RequestEventDto {
     @Min(value = 1, message = "Events must host at least one person")
     private int capacity;
 
-    @NotNull
-    @NotBlank
     private String photoUrl;
 
     //---------- id getters and setters  ----------//
-    public UUID getEventId() {
-        return this.eventId;
-    }
+    // public UUID getEventId() {
+    //     return this.eventId;
+    // }
 
-    public void setEventId(UUID eventId) {
-        this.eventId = eventId;
-    }
+    // public void setEventId(UUID eventId) {
+    //     this.eventId = eventId;
+    // }
 
     //---------- category getters and setters  ----------//
     public String getCategory() {
