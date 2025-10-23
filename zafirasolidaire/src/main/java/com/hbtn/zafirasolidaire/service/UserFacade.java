@@ -8,6 +8,7 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hbtn.zafirasolidaire.dto.RequestPhotoDto;
 import com.hbtn.zafirasolidaire.dto.UserDto;
@@ -16,6 +17,8 @@ import com.hbtn.zafirasolidaire.mapper.UserMapper;
 import com.hbtn.zafirasolidaire.model.User;
 import com.hbtn.zafirasolidaire.model.Photo;
 import com.hbtn.zafirasolidaire.repository.UserRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class UserFacade {
@@ -44,6 +47,20 @@ public class UserFacade {
         user.setPassword(authenticationService.encodePassword(userRequest.getPassword()));
         user.setIsAdmin(false);
         userRepository.save(user);
+    }
+
+    public void updateUser(UUID userId, UserRequest userRequest) {
+        if (userId == null) {
+            throw new IllegalArgumentException("userId cannot be null.");
+        }
+
+        User foundUser = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        foundUser.setFirstName(userRequest.getFirstName())
+                 .setLastName(userRequest.getLastName())
+                 .setEmailAddress(userRequest.getEmailAddress())
+                 .setIsServiced(userRequest.getIsServiced());
+        userRepository.save(foundUser);
     }
 
     public void createAllUsers(Iterable<UserRequest> userRequests) {
@@ -111,9 +128,14 @@ public class UserFacade {
         return userRepository.existsById(id);
     }
 
-    public Iterable<UserDto> getAllUsers() {
-        return mapToDto(userRepository.findAll());
+    @Transactional(readOnly = true)
+    public List<UserDto> getAllUsers() {
+        List<User> users = userRepository.findAllWithProfilePic();
+        return users.stream()
+                    .map(userMapper::userToDto)
+                    .collect(Collectors.toList());
     }
+
 
     public Iterable<UserDto> getAllUsersById(Iterable<UUID> ids) {
         if (ids == null || !ids.iterator().hasNext()) {
@@ -123,12 +145,20 @@ public class UserFacade {
         return mapToDto(userRepository.findAllById(ids));
     }
 
-    public void deleteUserById(UUID id) {
-        if (id == null) {
-            throw new IllegalArgumentException("User ID cannot be null.");
-        }
-        userRepository.deleteById(id);
+    @Transactional
+    public void deleteUserById(UUID userId) {
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        // Unlink the photo
+        user.setProfilePic(null);
+        userRepository.save(user); // important!
+
+        userRepository.delete(user);
     }
+
+
+
 
     public void deleteUser(User user) {
         if (user == null) {

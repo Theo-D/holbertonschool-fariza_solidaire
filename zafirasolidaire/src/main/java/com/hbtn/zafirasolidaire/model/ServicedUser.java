@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 public class ServicedUser extends BaseModel{
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
     public ServicedUser setId(UUID id) {

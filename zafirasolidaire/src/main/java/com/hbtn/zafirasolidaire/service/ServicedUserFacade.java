@@ -15,6 +15,8 @@ import com.hbtn.zafirasolidaire.mapper.ServicedUserMapper;
 import com.hbtn.zafirasolidaire.model.ServicedUser;
 import com.hbtn.zafirasolidaire.repository.ServicedUserRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ServicedUserFacade {
     private final ServicedUserMapper servicedUserMapper;
@@ -85,6 +87,14 @@ public class ServicedUserFacade {
             throw new IllegalArgumentException("ServicedUser ID cannot be null.");
         }
         servicedUserRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void deleteServicedUserByUserId(UUID userId) {
+        if (userId == null) {
+            throw new IllegalArgumentException("User Id cannot be null.");
+        }
+        servicedUserRepository.deleteServicedUserByUserId(userId);
     }
 
     public void deleteServicedUser(ServicedUser ServicedUser) {

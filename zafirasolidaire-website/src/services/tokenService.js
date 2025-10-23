@@ -1,10 +1,10 @@
-import axios from "axios";
+import api from "./api";
 
 export const refreshRequest = async () => {
-  const response = await axios.post("/auth/refresh",{},{ withCredentials: true });
+  const response = await api.post("/auth/refresh",{},{ withCredentials: true });
   return response.data; // { accessToken }
 };
 
 export const logoutRequest = async () => {
-  await axios.post("/auth/logout",{},{ withCredentials: true });
+  await api.post("/auth/logout",{},{ withCredentials: true });
 };

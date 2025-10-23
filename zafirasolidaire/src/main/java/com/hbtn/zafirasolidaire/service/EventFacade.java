@@ -40,6 +40,23 @@ public class EventFacade {
         eventRepository.save(event);
     }
 
+    public void updateUser(UUID id, RequestEventDto requestEventDto) {
+        if (id == null) {
+            throw new IllegalArgumentException("Event Id cannot be null");
+        } else if (!eventRepository.existsById(id)) {
+            throw new IllegalArgumentException("Event must already exist");
+        }
+
+        Event foundEvent = eventRepository.findById(id)
+                                     .orElseThrow(() -> new IllegalArgumentException("Event not found"));
+
+        foundEvent.setDate(requestEventDto.getDate())
+                  .setCapacity(requestEventDto.getCapacity())
+                  .setCategory(foundEvent.getCategory().setName(requestEventDto.getCategory()));
+
+        eventRepository.save(foundEvent);
+    }
+
     public void createAllEvents(Iterable<RequestEventDto> requestEventDtos) {
         if (requestEventDtos == null || !requestEventDtos.iterator().hasNext()) {
             throw new IllegalArgumentException("Event list cannot be null or empty.");
