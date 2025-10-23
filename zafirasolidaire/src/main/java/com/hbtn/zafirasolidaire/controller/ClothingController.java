@@ -17,7 +17,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("clothing")
-@PreAuthorize("hasRole('ADMIN')")
 public class ClothingController {
 
     private final ClothingFacade clothingFacade;
