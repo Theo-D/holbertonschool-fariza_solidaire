@@ -91,8 +91,10 @@ export default function Home() {
 
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <ClothingCounter stat="http://localhost:8080/clothing" Label="Poids de vêtements donnés en kg" Icon="<Shirt />"/>
-          <ServicedCounter stat="http://localhost:8080/serviced_users" Label="Nombre de personnes accompagnées" Icon="<Users />"/>
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <ClothingCounter Label="Poids de vêtements donnés en kg" Icon="<Shirt />"/>
+            <ServicedCounter Label="Nombre de personnes accompagnées" Icon="<Users />"/>
+          </div>
         </div>
       </section>
 
