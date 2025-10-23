@@ -45,5 +45,5 @@ export const deleteEventById = async function(id) {
 }
 
 export const deleteEventCategoryById = async function(id) {
-    return await api.delete(`/event_categories/${id}`);
+    return await api.delete(`/events/${id}/category`);
 }
