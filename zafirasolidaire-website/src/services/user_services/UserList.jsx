@@ -89,6 +89,7 @@ const UserList = () => {
           <li
             className="flex items-center space-x-4 bg-white rounded-lg p-4 shadow w-88"
             key={user.userId}
+            onClick={() => console.log(`This user is ${user.firstName} ${user.lastName} and his id is ${user.userId}`)}
           >
             <img
               className="w-10 h-10 rounded-full object-cover"
