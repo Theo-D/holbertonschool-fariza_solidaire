@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { ArrowRight, Zap, Shield, Sparkles, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import StatsCounters from '../components/StatsCounter';
+import ClothingCounter from '../components/ClothingCounter';
+import ServicedCounter from '../components/ServicedCounter';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -90,7 +91,8 @@ export default function Home() {
 
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <StatsCounters />
+          <ClothingCounter stat="http://localhost:8080/clothing" Label="Poids de vêtements donnés en kg" Icon="<Shirt />"/>
+          <ServicedCounter stat="http://localhost:8080/serviced_users" Label="Nombre de personnes accompagnées" Icon="<Users />"/>
         </div>
       </section>
 
