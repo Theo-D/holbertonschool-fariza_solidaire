@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +45,16 @@ public class EventController {
     @PostMapping("/{eventId}/photo")
     public ResponseEntity<Void> saveEvent(@RequestBody @Valid RequestPhotoDto photoDto, @PathVariable UUID eventId) {
         eventFacade.addPhoto(photoDto, eventId);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateUser(@PathVariable UUID id, @RequestBody RequestEventDto requestEventDto) {
+        if (!eventFacade.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        eventFacade.updateUser(id, requestEventDto);
+
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

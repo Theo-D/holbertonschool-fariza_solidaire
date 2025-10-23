@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hbtn.zafirasolidaire.dto.RequestPhotoDto;
 import com.hbtn.zafirasolidaire.dto.UserDto;
 import com.hbtn.zafirasolidaire.dto.UserRequest;
-import com.hbtn.zafirasolidaire.model.User;
 import com.hbtn.zafirasolidaire.service.UserFacade;
 
 import jakarta.validation.Valid;
@@ -46,7 +45,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody UserRequest userRequest) {
+    public ResponseEntity<Void> updateUser(@PathVariable UUID id, @RequestBody UserRequest userRequest) {
         if (!userFacade.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
