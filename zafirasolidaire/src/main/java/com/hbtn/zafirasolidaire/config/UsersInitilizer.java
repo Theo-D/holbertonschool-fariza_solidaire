@@ -70,6 +70,7 @@ public class UsersInitilizer implements CommandLineRunner {
                                                 .setProfilePic(new Photo().setUrl(
                                                                 "https://randomuser.me/api/portraits/men/15.jpg")));
 
+                // Shared hashed password (e.g., "password123")
                 String hashedPassword = "$2a$16$gykRWmAyTRCOZdgdQSdzFu7XiIt7Mn/eW3HNdYJMD.7CwA5eQR/fq";
 
                 for (User user : mockUsers) {
