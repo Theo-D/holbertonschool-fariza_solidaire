@@ -42,35 +42,37 @@ public class SecurityConfig {
                 return new BCryptPasswordEncoder();
         }
 
-        private static final String[] AUTHORIZED_PATHS = {"/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**", "/webjars/swagger-ui/**", "/auth/**"};
+        private static final String[] AUTHORIZED_PATHS = { "/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**",
+                        "/webjars/swagger-ui/**", "/auth/**", "/serviced_users/count", "/clothing" };
 
         @Bean
         SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
                 return http
-                        .csrf(customizer -> customizer.disable())
-                        .cors(Customizer.withDefaults())
-                        .authorizeHttpRequests(request -> request
-                                .requestMatchers(AUTHORIZED_PATHS).permitAll()
-                                .anyRequest().authenticated())
-                                //.httpBasic(Customizer.withDefaults())
-                                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                        .build();
+                                .csrf(customizer -> customizer.disable())
+                                .cors(Customizer.withDefaults())
+                                .authorizeHttpRequests(request -> request
+                                                .requestMatchers(AUTHORIZED_PATHS).permitAll()
+                                                .anyRequest().authenticated())
+                                // .httpBasic(Customizer.withDefaults())
+                                .sessionManagement(session -> session
+                                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                                .build();
         }
 
         @Bean
         public OpenAPI customOpenAPI() {
                 return new OpenAPI()
-                        .info(new Info()
-                                .title("API"))
-                        .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
-                        .components(new Components()
-                                .addSecuritySchemes("bearerAuth",
-                                        new SecurityScheme()
-                                                .name("Bearer Authentication")
-                                                .type(SecurityScheme.Type.HTTP)
-                                                .bearerFormat("JWT")
-                                                .scheme("bearer")));
+                                .info(new Info()
+                                                .title("API"))
+                                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
+                                .components(new Components()
+                                                .addSecuritySchemes("bearerAuth",
+                                                                new SecurityScheme()
+                                                                                .name("Bearer Authentication")
+                                                                                .type(SecurityScheme.Type.HTTP)
+                                                                                .bearerFormat("JWT")
+                                                                                .scheme("bearer")));
         }
 
         @Bean
