@@ -5,7 +5,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +21,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("serviced_users")
-@PreAuthorize("hasRole('ADMIN')")
 public class ServicedUserController {
     private final ServicedUserFacade servicedUserFacade;
 
@@ -42,9 +40,10 @@ public class ServicedUserController {
 
     // // Save multiple servicedUsers
     // @PostMapping("/batch")
-    // public ResponseEntity<Void> saveAllServicedUsers(@RequestBody @Valid List<ServicedUserDto> servicedUserDtos) {
-    //     servicedUserFacade.createAllServicedUsers(servicedUserDtos);
-    //     return ResponseEntity.status(HttpStatus.CREATED).build();
+    // public ResponseEntity<Void> saveAllServicedUsers(@RequestBody @Valid
+    // List<ServicedUserDto> servicedUserDtos) {
+    // servicedUserFacade.createAllServicedUsers(servicedUserDtos);
+    // return ResponseEntity.status(HttpStatus.CREATED).build();
     // }
 
     // Get servicedUser by ID
@@ -92,22 +91,24 @@ public class ServicedUserController {
 
     // // Delete a single servicedUser (full object)
     // @DeleteMapping
-    // public ResponseEntity<Void> deleteServicedUser(@RequestBody ServicedUser servicedUser) {
-    //     servicedUserFacade.deleteServicedUser(servicedUser);
-    //     return ResponseEntity.noContent().build();
+    // public ResponseEntity<Void> deleteServicedUser(@RequestBody ServicedUser
+    // servicedUser) {
+    // servicedUserFacade.deleteServicedUser(servicedUser);
+    // return ResponseEntity.noContent().build();
     // }
 
     // // Delete all servicedUsers
     // @DeleteMapping("/all")
     // public ResponseEntity<Void> deleteAllServicedUsers() {
-    //     servicedUserFacade.deleteAllServicedUsers();
-    //     return ResponseEntity.noContent().build();
+    // servicedUserFacade.deleteAllServicedUsers();
+    // return ResponseEntity.noContent().build();
     // }
 
     // // Delete specific servicedUsers
     // @DeleteMapping("/batch")
-    // public ResponseEntity<Void> deleteAllServicedUsersFromlist(@RequestBody List<ServicedUser> servicedUsers) {
-    //     servicedUserFacade.deleteAllServicedUsers(servicedUsers);
-    //     return ResponseEntity.noContent().build();
+    // public ResponseEntity<Void> deleteAllServicedUsersFromlist(@RequestBody
+    // List<ServicedUser> servicedUsers) {
+    // servicedUserFacade.deleteAllServicedUsers(servicedUsers);
+    // return ResponseEntity.noContent().build();
     // }
 }
