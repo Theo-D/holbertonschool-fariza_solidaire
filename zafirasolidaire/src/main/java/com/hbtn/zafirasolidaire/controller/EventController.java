@@ -112,6 +112,12 @@ public class EventController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/{id}/category")
+    public ResponseEntity<Void> deleteCategoryById(@PathVariable UUID id) {
+        eventFacade.deleteCategorybyId(id);
+        return ResponseEntity.noContent().build();
+    }
+
     // // Delete a single event (full object)
     // @DeleteMapping
     // public ResponseEntity<Void> deleteEvent(@RequestBody Event event) {
