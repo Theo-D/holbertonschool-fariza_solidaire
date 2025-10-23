@@ -77,17 +77,17 @@ const UserList = () => {
   }
 
   return (
-    <ul className="list-none bg-base-100 rounded-box shadow-md grid grid-cols-3 gap-4 p-4">
+    <ul className="list-none bg-base-100 rounded-box shadow-md flex flex-wrap gap-4 p-4 justify-center">
       {users.map((user) => {
         const isServiced = user.isServiced;
 
-        const buttonClass = `btn btn-active w-36 ${
+        const buttonClass = `btn btn-active w-28 ${
           isServiced ? 'bg-green-600 text-gray-900' : 'bg-red-700 text-gray-300'
         }`;
 
         return (
           <li
-            className="flex items-center space-x-4 bg-white rounded-lg p-4 shadow"
+            className="flex items-center space-x-4 bg-white rounded-lg p-4 shadow w-88"
             key={user.userId}
           >
             <img
