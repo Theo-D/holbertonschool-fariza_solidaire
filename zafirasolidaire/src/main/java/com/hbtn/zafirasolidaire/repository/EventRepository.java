@@ -9,5 +9,5 @@ import com.hbtn.zafirasolidaire.model.Event;
 
 @Repository
 public interface EventRepository extends CrudRepository<Event, UUID>{
-
+    boolean existsByCategoryId(UUID categoryId);
 }

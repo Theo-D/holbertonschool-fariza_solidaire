@@ -18,6 +18,9 @@ import com.hbtn.zafirasolidaire.model.Photo;
 import com.hbtn.zafirasolidaire.repository.EventCategoryRepository;
 import com.hbtn.zafirasolidaire.repository.EventRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
+
 @Service
 public class EventFacade {
     private final EventMapper eventMapper;
@@ -153,6 +156,18 @@ public class EventFacade {
     public void deleteAllEvents() {
         eventRepository.deleteAll();
     }
+
+    @Transactional
+    public void deleteCategorybyId(UUID id) {
+        EventCategory category = eventCategoryRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Category not found"));
+
+        if (eventRepository.existsByCategoryId(id)) {
+            throw new IllegalStateException("Cannot delete category with existing events");
+        }
+
+    eventCategoryRepository.delete(category);
+}
 
     public void deleteAllEvents(Iterable<Event> events) {
         if (events == null || !events.iterator().hasNext()) {
