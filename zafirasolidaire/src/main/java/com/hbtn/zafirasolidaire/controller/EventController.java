@@ -49,11 +49,11 @@ public class EventController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable UUID id, @RequestBody RequestEventDto requestEventDto) {
+    public ResponseEntity<Void> updateEvent(@PathVariable UUID id, @RequestBody RequestEventDto requestEventDto) {
         if (!eventFacade.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        eventFacade.updateUser(id, requestEventDto);
+        eventFacade.updateEvent(id, requestEventDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

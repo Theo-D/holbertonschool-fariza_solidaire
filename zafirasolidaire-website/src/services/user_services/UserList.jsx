@@ -33,19 +33,16 @@ const UserList = () => {
     const newServicedState = !currentUser.isServiced;
 
     try {
-      // 1. Update user object with new isServiced value
       const updatedUser = { ...currentUser, isServiced: newServicedState };
       console.log("UPDATED USER: ", updatedUser);
-      await updateUser(updatedUser.userId, updatedUser); // <-- save updated user to backend
+      await updateUser(updatedUser.userId, updatedUser);
 
-      // 2. Create or delete serviced user
       if (newServicedState) {
         await createServicedUser(userId);
       } else {
         await deleteServicedUserByUserId(userId);
       }
 
-      // 3. Update local users state
       const updatedUsers = [...users];
       updatedUsers[userIndex] = updatedUser;
       setUsers(updatedUsers);
@@ -77,17 +74,17 @@ const UserList = () => {
   }
 
   return (
-    <ul className="list-none bg-base-100 rounded-box shadow-md flex flex-wrap gap-4 p-4 justify-center">
+    <ul className="list-none bg-base-100 rounded-box shadow-md flex flex-wrap gap-4 p-4 justify-center border border-gray-800">
       {users.map((user) => {
         const isServiced = user.isServiced;
 
         const buttonClass = `btn btn-active w-28 ${
-          isServiced ? 'bg-green-600 text-gray-900' : 'bg-red-700 text-gray-300'
+          isServiced ? 'bg-green-600 text-gray-900' : 'bg-red-700 text-gray-300 '
         }`;
 
         return (
           <li
-            className="flex items-center space-x-4 bg-white rounded-lg p-4 shadow w-88"
+            className="flex items-center space-x-4 bg-white rounded-lg p-4 shadow w-88 border border-gray-800"
             key={user.userId}
             onClick={() => console.log(`This user is ${user.firstName} ${user.lastName} and his id is ${user.userId}`)}
           >

@@ -12,6 +12,10 @@ export const countServicedUsers = async function() {
   return await api.get("/serviced_users/count");
 };
 
+export const countServicedUsers = async function() {
+  return await api.get("/serviced_users/count");
+};
+
 export const saveUser = async function(user) {
   return await api.post("/users", user)
 }

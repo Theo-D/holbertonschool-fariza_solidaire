@@ -12,6 +12,17 @@ import com.hbtn.zafirasolidaire.model.Event;
 public interface EventMapper {
 
     @Mappings({
+        @Mapping(target = "id", ignore = true),
+        @Mapping(target = "createDate", ignore = true),
+        @Mapping(target = "updateDate", ignore = true),
+        @Mapping(target = "category", ignore = true), // ignore here
+        @Mapping(source = "date", target = "date"),
+        @Mapping(source = "capacity", target = "capacity"),
+        @Mapping(source = "photoUrl", target = "photo.url")
+    })
+    Event requestDtoToEvent(RequestEventDto dto);
+
+    @Mappings({
         @Mapping(source = "id", target = "id"),
         @Mapping(source = "createDate", target = "createDate"),
         @Mapping(source = "updateDate", target = "updateDate"),
@@ -21,15 +32,4 @@ public interface EventMapper {
         @Mapping(source = "photo.url", target = "photoUrl")
     })
     EventDto eventToDto(Event event);
-
-    @Mappings({
-        @Mapping(target = "id", ignore = true),
-        @Mapping(target = "createDate", ignore = true),
-        @Mapping(target = "updateDate", ignore = true),
-        @Mapping(source = "category", target = "category.name"),
-        @Mapping(source = "date", target = "date"),
-        @Mapping(source = "capacity", target = "capacity"),
-        @Mapping(source = "photoUrl", target = "photo.url")
-    })
-    Event requestDtoToEvent(RequestEventDto dto);
 }
