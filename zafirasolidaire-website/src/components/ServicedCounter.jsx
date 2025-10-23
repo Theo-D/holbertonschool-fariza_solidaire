@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { Users } from "lucide-react";
+import { countUsers } from "../services/user_services/userApi";
 
-export default function ServicedCounter({ stat, Label }) {
+export default function ServicedCounter({ Label }) {
   const [count, setCount] = useState(0);
   const duration = 2000; // durée de l’animation (ms)
 
   useEffect(() => {
   async function fetchCount() {
-    const res = await fetch({stat});
+    const res = await countUsers();
     const data = await res.json();
     animateCount(data.count);
   }

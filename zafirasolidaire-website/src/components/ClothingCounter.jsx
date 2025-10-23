@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { Shirt } from "lucide-react";
+import { getClothingWeight } from "../services/clothing_services";
 
-export default function ClothingCounter({ stat, Label }) {
+export default function ClothingCounter({ Label }) {
   const [count, setCount] = useState(0);
   const duration = 2000; // durée de l’animation (ms)
 
   useEffect(() => {
   async function fetchCount() {
-    const res = await fetch({stat});
+    const res = await getClothingWeight;
     const data = await res.json();
     animateCount(data.count);
   }
