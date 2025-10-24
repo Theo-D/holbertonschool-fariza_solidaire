@@ -25,8 +25,8 @@ public class BlogPost extends BaseModel {
 
     @NotNull
     @NotBlank
-    @Size(min = 50, message = "Text body must be at least 50 characters")
-    @Column(name = "text_body", nullable = false)
+    @Size(min = 20, message = "Text body must be at least 50 characters")
+    @Column(name = "text_body", columnDefinition = "TEXT", nullable = false)
     private String textBody;
 
     @NotNull
