@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +39,16 @@ public class PartnerController {
     @PostMapping
     public ResponseEntity<Void> savePartner(@RequestBody @Valid RequestPartnerDto requestPartnerDto) {
         partnerFacade.createPartner(requestPartnerDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updatePartner(@PathVariable UUID id, @RequestBody RequestPartnerDto requestPartnerDto) {
+        if (!partnerFacade.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        partnerFacade.updatePartner(id, requestPartnerDto);
+
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
