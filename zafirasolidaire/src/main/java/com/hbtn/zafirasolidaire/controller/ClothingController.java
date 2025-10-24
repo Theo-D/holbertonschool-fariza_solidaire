@@ -29,7 +29,8 @@ public class ClothingController {
     // Add clothing weight
     @PostMapping("/add")
     public ResponseEntity<Void> incrementClothingWeight(@RequestBody @Valid int addedWeight) {
-        clothingFacade.incrementClothingWeight(addedWeight);;
+        clothingFacade.incrementClothingWeight(addedWeight);
+        ;
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

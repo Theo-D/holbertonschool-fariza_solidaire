@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-public class JwtFilter extends OncePerRequestFilter{
+public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final CustomUserDetailsService customUserDetailsService;
@@ -29,15 +29,18 @@ public class JwtFilter extends OncePerRequestFilter{
 
     @SuppressWarnings("null")
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
 
         String path = request.getRequestURI();
 
         // Skip JWT validation for public endpoints except for auth/me
         if (path.equals("/auth/login") ||
-            path.equals("/auth/refresh") ||
-            path.equals("/auth/register") ||
-            path.equals("/auth/logout")) {
+                path.equals("/auth/refresh") ||
+                path.equals("/auth/register") ||
+                path.equals("/auth/logout") ||
+                path.equals("/serviced_users/count") ||
+                path.equals("/clothing")) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -56,7 +59,8 @@ public class JwtFilter extends OncePerRequestFilter{
             CustomUserDetails userDetails = (CustomUserDetails) customUserDetailsService.loadUserById(id);
 
             if (jwtService.isValidToken(token, userDetails)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails,
+                        null, userDetails.getAuthorities());
 
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);

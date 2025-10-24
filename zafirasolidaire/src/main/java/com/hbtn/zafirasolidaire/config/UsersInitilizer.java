@@ -56,5 +56,4 @@ public class UsersInitilizer implements CommandLineRunner {
                 userRepository.save(user);
             }
         }
-    }
 }
