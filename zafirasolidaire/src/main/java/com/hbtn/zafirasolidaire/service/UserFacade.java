@@ -46,6 +46,7 @@ public class UserFacade {
 
         user.setPassword(authenticationService.encodePassword(userRequest.getPassword()));
         user.setIsAdmin(false);
+        user.setIsServiced(false);
         userRepository.save(user);
     }
 
