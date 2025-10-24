@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {getUsers, deleteServicedUserByUserId, deleteUserById, updateUser, createServicedUser} from "./userApi";
-import { PLACEHOLDERS } from '../../components/imgPlaceholder';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -91,7 +90,7 @@ const UserList = () => {
           >
             <img
               className="w-10 h-10 rounded-full object-cover"
-              src={user.photoUrl || PLACEHOLDERS.user}
+              src={user.photoUrl || '/default-user.png'}
               alt="user photo"
             />
             <div className="grow">
