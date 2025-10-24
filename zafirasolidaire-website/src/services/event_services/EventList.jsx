@@ -3,6 +3,7 @@ import { format, parseISO } from "date-fns";
 import { getEvents, deleteEventById } from './eventApi';
 import DialogModal from '../../components/DialogModel';
 import CreateEventModal from '../../components/CreateEventModal';
+import { PLACEHOLDERS } from '../../components/imgPlaceholder';
 
 const EventList = () => {
     const [events, setEvents] = useState([]);
@@ -10,7 +11,6 @@ const EventList = () => {
     const [error, setError] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
 
-    useEffect(function () {
     async function loadEvents() {
         try {
             const res = await getEvents();
@@ -22,6 +22,8 @@ const EventList = () => {
             setLoading(false);
         }
     }
+
+    useEffect(function () {
     loadEvents();
     }, []);
 
@@ -57,7 +59,7 @@ const EventList = () => {
 
     return (
         <>
-        <ul className="list-none bg-base-100 rounded-box shadow-md border border-gray-800 flex flex-wrap gap-4 p-4 justify-center">
+        <ul className="list-none bg-base-100 rounded-box shadow-md border border-gray-800 flex flex-wrap gap-4 p-4 justify-center w-300">
             {events.map((myEvent) => {
                 return (
                     <li
@@ -67,7 +69,7 @@ const EventList = () => {
                     >
                         <img
                         className="w-10 h-10 rounded-full object-cover"
-                        src={myEvent.photoUrl || '/default-event.png'}
+                        src={myEvent.photoUrl || PLACEHOLDERS.event}
                         alt="event photo"
                         />
                         <div className="grow">
@@ -105,7 +107,7 @@ const EventList = () => {
             >
                 <div className="grow text-center font-bold">
                     <div>
-                        <CreateEventModal/>
+                        <CreateEventModal onEventCreated={loadEvents}/>
                     </div>
                 </div>
             </li>

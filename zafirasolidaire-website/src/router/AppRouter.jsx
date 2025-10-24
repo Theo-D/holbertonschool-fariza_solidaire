@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import ProtectedRoute from "../components/ProtectedRoute";
 import Unauthorized from "../pages/Unauthorized";
 import Admin from "../pages/Admin";
+import Register from "../pages/Register";
 import { AuthProvider } from "../context/AuthContext";
 
 export default function AppRouter() {
@@ -22,6 +23,7 @@ export default function AppRouter() {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route path="/register" element={<Register/>}/>
         </Routes>
       </Router>
     </AuthProvider>

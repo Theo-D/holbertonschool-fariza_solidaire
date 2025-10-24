@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {getUsers, deleteServicedUserByUserId, deleteUserById, updateUser, createServicedUser} from "./userApi";
+import { PLACEHOLDERS } from '../../components/imgPlaceholder';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -74,7 +75,7 @@ const UserList = () => {
   }
 
   return (
-    <ul className="list-none bg-base-100 rounded-box shadow-md flex flex-wrap gap-4 p-4 justify-center border border-gray-800">
+    <ul className="list-none bg-base-100 rounded-box shadow-md flex flex-wrap gap-4 p-4 justify-center border border-gray-800 w-300">
       {users.map((user) => {
         const isServiced = user.isServiced;
 
@@ -90,7 +91,7 @@ const UserList = () => {
           >
             <img
               className="w-10 h-10 rounded-full object-cover"
-              src={user.photoUrl || '/default-user.png'}
+              src={user.photoUrl || PLACEHOLDERS.user}
               alt="user photo"
             />
             <div className="grow">
