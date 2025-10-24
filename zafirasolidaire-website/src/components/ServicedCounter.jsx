@@ -37,16 +37,7 @@ export default function ServicedCounter({ Label }) {
         setIsLoading(true);
         const response = await countServicedUsers();
         console.log("bijour", response.data);
-
-        // Ajustez selon la structure de votre réponse
-        // Option 1 : si la réponse est directement { number: 1234 }
         setValue(response.data || 0);
-
-        // Option 2 : si c'est juste un nombre
-        // setValue(response.data || 0);
-
-        // Option 3 : si c'est dans un objet imbriqué
-        // setValue(response.data.data.number || 0);
 
         setError(null);
       } catch (err) {
