@@ -22,7 +22,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("partners")
-@PreAuthorize("hasRole('ADMIN')")
 public class PartnerController {
     private final PartnerFacade partnerFacade;
 
@@ -33,7 +32,9 @@ public class PartnerController {
 
     // ---------- POST ----------//
 
+
     // Save a single partner
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Void> savePartner(@RequestBody @Valid RequestPartnerDto requestPartnerDto) {
         partnerFacade.createPartner(requestPartnerDto);
@@ -71,6 +72,7 @@ public class PartnerController {
     }
 
     // Count partners
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/count")
     public ResponseEntity<Long> countpartners() {
         long count = partnerFacade.countPartners();
@@ -80,6 +82,7 @@ public class PartnerController {
     // ---------- DELETE ----------//
 
     // Delete partner by ID
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePartnerById(@PathVariable UUID id) {
         partnerFacade.deletePartnerById(id);
