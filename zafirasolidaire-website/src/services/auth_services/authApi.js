@@ -1,4 +1,4 @@
-import api from './api';
+import api from '../api';
 
 export const loginRequest = async (emailAddress, password) => {
   const response = await api.post('/auth/login', { emailAddress, password }, {withCredentials: true});
@@ -10,3 +10,7 @@ export const getCurrentUser = async () => {
   const response = await api.get('/auth/me', {withCredentials: true, headers: {Authorization: `Bearer ${token}`}});
   return response.data;
 };
+
+export const registerUser = async (user) => {
+  return await api.post("/auth", user);
+}
