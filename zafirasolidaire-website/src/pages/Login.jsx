@@ -45,6 +45,7 @@ function Login() {
           Log In
         </button>
       </form>
+      <a href="./Register"> Vous n'avez pas encore de compte? Créez en un. </a>
     </div>
   );
 }

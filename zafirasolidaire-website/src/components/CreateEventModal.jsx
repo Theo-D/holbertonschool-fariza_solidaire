@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { saveEvent, getEventCategories, saveEventCategory, deleteEventCategoryById, getEvents, getEventCategorybyId} from "../services/event_services/eventApi";
 import BinSvg from "./svg_components/Bin";
 
-function CreateEventModal() {
+function CreateEventModal(props) {
   const [open, setOpen] = useState(false);
   const [dateTime, setDateTime] = useState("");
   const [capacity, setCapacity] = useState("");
@@ -89,6 +89,9 @@ function CreateEventModal() {
         const updatedEvents = await getEvents();
         setEvents(updatedEvents.data)
         toggleModal();
+        if (props.onEventCreated) {
+          props.onEventCreated();
+        }
       } catch (err) {
         alert("Failed to save Event");
       }

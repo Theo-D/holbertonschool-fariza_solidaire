@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react'
-import { loginRequest, getCurrentUser } from '../services/auth'
+import { loginRequest, getCurrentUser } from '../services/auth_services/authApi'
 import {refreshRequest, logoutRequest} from '../services/tokenService'
 
 const AuthContext = createContext();
