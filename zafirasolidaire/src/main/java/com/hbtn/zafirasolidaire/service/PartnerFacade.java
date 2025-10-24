@@ -37,6 +37,19 @@ public class PartnerFacade {
         partnerRepository.save(partner);
     }
 
+    public void updatePartner(UUID id, RequestPartnerDto requestPartnerDto) {
+        if (id == null) {
+            throw new IllegalArgumentException("userId cannot be null.");
+        }
+
+        Partner foundPartner = partnerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        foundPartner.setName(requestPartnerDto.getName())
+                    .setHomepageUrl(requestPartnerDto.getHomepageUrl())
+                    .setLogoUrl(requestPartnerDto.getLogoUrl());
+        partnerRepository.save(foundPartner);
+    }
+
     public void createAllPartners(Iterable<RequestPartnerDto> requestPartnerDtos) {
         if (requestPartnerDtos == null || !requestPartnerDtos.iterator().hasNext()) {
             throw new IllegalArgumentException("Partner list cannot be null or empty.");
