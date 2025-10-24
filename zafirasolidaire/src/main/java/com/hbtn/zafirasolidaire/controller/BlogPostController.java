@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("blog_posts")
-@PreAuthorize("hasRole('ADMIN')")
 public class BlogPostController {
     private final BlogPostFacade blogPostFacade;
 
@@ -38,8 +38,18 @@ public class BlogPostController {
 
     // Save a single blogPost
     @PostMapping
-    public ResponseEntity<String> saveBlogPost(@RequestBody @Valid RequestBlogPostDto requestBlogPostDto) {
-        blogPostFacade.createBlogPost(requestBlogPostDto);
+    public ResponseEntity<BlogPostDto> saveBlogPost(@RequestBody @Valid RequestBlogPostDto requestBlogPostDto) {
+        BlogPostDto createdPost = blogPostFacade.createBlogPost(requestBlogPostDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateBlogPost(@PathVariable UUID id, @RequestBody RequestBlogPostDto requestBlogPostDto) {
+        if (!blogPostFacade.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        blogPostFacade.updateBlogPost(id, requestBlogPostDto);
+
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -50,6 +60,7 @@ public class BlogPostController {
     //     return ResponseEntity.status(HttpStatus.CREATED).build();
     // }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/{blogPostId}/photo")
     public ResponseEntity<Void> saveBlogPost(@RequestBody @Valid RequestPhotoDto photoDto, @PathVariable UUID blogPostId) {
         blogPostFacade.addPhoto(photoDto, blogPostId);
@@ -87,6 +98,7 @@ public class BlogPostController {
     // ---------- DELETE ----------//
 
     // Delete blogPost by ID
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBlogPostById(@PathVariable UUID id) {
         blogPostFacade.deleteBlogPostById(id);
@@ -94,6 +106,7 @@ public class BlogPostController {
     }
 
     // Delete a single blogPost (full object)
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping
     public ResponseEntity<Void> deleteBlogPost(@RequestBody BlogPost blogPost) {
         blogPostFacade.deleteBlogPost(blogPost);

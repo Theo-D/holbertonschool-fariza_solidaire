@@ -29,14 +29,51 @@ public class BlogPostFacade {
     }
 
     //---------- Repository Services ----------//
-    public void createBlogPost(RequestBlogPostDto requestBlogPostDto) {
+    public BlogPostDto createBlogPost(RequestBlogPostDto requestBlogPostDto) {
         if (requestBlogPostDto == null) {
             throw new IllegalArgumentException("BlogPost cannot be null.");
         }
 
-        BlogPost blogPost = blogPostMapper.requestDtoToBlogPost(requestBlogPostDto);
+        BlogPost blogPost = new BlogPost()
+                .setAuthor(requestBlogPostDto.getAuthor())
+                .setTitle(requestBlogPostDto.getTitle())
+                .setTextBody(requestBlogPostDto.getTextBody());
 
-        blogPostRepository.save(blogPost);
+        if (requestBlogPostDto.getPhotoUrl() != null && !requestBlogPostDto.getPhotoUrl().isBlank()) {
+            Photo photo = new Photo()
+                    .setUrl(requestBlogPostDto.getPhotoUrl())
+                    .setBlogPost(blogPost);
+            blogPost.setPhoto(photo);
+        }
+
+        return blogPostMapper.blogPostToDto(blogPostRepository.save(blogPost));
+    }
+
+    public BlogPostDto updateBlogPost(UUID id, RequestBlogPostDto requestBlogPostDto) {
+        if (id == null) {
+            throw new IllegalArgumentException("BlogPost ID cannot be null.");
+        }
+
+        BlogPost foundPost = blogPostRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Blog post not found"));
+
+        foundPost.setAuthor(requestBlogPostDto.getAuthor())
+                .setTextBody(requestBlogPostDto.getTextBody())
+                .setTitle(requestBlogPostDto.getTitle());
+
+        String newPhotoUrl = requestBlogPostDto.getPhotoUrl();
+        if (newPhotoUrl != null && !newPhotoUrl.isBlank()) {
+            if (foundPost.getPhoto() == null) {
+                Photo newPhoto = new Photo()
+                        .setUrl(newPhotoUrl)
+                        .setBlogPost(foundPost);
+                foundPost.setPhoto(newPhoto);
+            } else {
+                foundPost.getPhoto().setUrl(newPhotoUrl);
+            }
+        }
+
+        return blogPostMapper.blogPostToDto(blogPostRepository.save(foundPost));
     }
 
     public void createAllBlogPosts(Iterable<RequestBlogPostDto> requestBlogPostDtos) {

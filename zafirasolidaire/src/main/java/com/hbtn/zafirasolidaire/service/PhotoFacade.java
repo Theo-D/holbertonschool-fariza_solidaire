@@ -37,6 +37,10 @@ public class PhotoFacade {
         photoRepository.save(photo);
     }
 
+    public void savePhoto(Photo photo) {
+        photoRepository.save(photo);
+    }
+
     public void createAllPhotos(Iterable<RequestPhotoDto> requestPhotoDtos) {
         if (requestPhotoDtos == null || !requestPhotoDtos.iterator().hasNext()) {
             throw new IllegalArgumentException("Photo list cannot be null or empty.");
@@ -119,9 +123,5 @@ public class PhotoFacade {
 
     public Photo mapDtoToPhoto(RequestPhotoDto dto) {
     return photoMapper.requestDtoToPhoto(dto);
-    }
-
-    public void savePhoto(Photo photo) {
-        photoRepository.save(photo);
     }
 }
