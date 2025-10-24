@@ -19,7 +19,6 @@ function EmailInput(props) {
                 </label>
                 <div className="validator-hint hidden">Enter valid email address</div>
             </div>
-            <button className="btn btn-neutral join-item">Join</button>
         </div>
     );
 }

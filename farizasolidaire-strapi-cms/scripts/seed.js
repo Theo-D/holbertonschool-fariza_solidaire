@@ -101,6 +101,7 @@ async function uploadFile(file, name) {
 async function createEntry({ model, entry }) {
   try {
     // Actually create the entry in Strapi
+    // @ts-ignore
     await strapi.documents(`api::${model}.${model}`).create({
       data: entry,
     });
