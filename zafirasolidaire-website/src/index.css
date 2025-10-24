@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 @plugin "daisyui" {
   themes: cmyk --default;
 }
@@ -13,7 +14,8 @@
 /* Styles de base */
 @layer base {
   body {
-    @apply bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, rgb(248 250 252), rgb(241 245 249));
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
@@ -40,6 +42,7 @@
 
 /* Composants réutilisables */
 @layer components {
+
   /* Boutons */
   .btn-primary {
     @apply px-6 py-2 rounded-lg text-white font-medium transition-all hover:scale-105 hover:shadow-lg;
@@ -59,7 +62,8 @@
 
   /* Cards */
   .card {
-    @apply p-8 rounded-2xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:shadow-xl transition-all hover:-translate-y-1;
+    @apply p-8 rounded-2xl border border-slate-200 hover:shadow-xl transition-all hover:-translate-y-1;
+    background: linear-gradient(to bottom right, rgb(248 250 252), rgb(255 255 255));
   }
 
   .card-white {
@@ -94,12 +98,7 @@
     @apply max-w-7xl mx-auto;
   }
 
-  /* Icon containers - BASE */
-  .icon-box {
-    @apply w-14 h-14 rounded-xl flex items-center justify-center;
-  }
-
-  /* Icon containers - VARIANTES */
+  /* Icon containers */
   .icon-box-blue {
     @apply w-14 h-14 rounded-xl flex items-center justify-center;
     background-color: var(--brand-blue);
@@ -135,6 +134,7 @@
 
 /* Utilities personnalisées */
 @layer utilities {
+
   /* Backgrounds avec vos couleurs */
   .bg-brand-blue {
     background-color: var(--brand-blue);
@@ -180,7 +180,8 @@
 
   /* Glassmorphism effect */
   .glass {
-    @apply bg-white/80 backdrop-blur-md;
+    @apply backdrop-blur-md;
+    background-color: rgba(255, 255, 255, 0.8);
   }
 
   /* Smooth scroll */
@@ -195,6 +196,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
