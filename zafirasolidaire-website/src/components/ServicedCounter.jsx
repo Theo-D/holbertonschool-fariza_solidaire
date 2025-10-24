@@ -36,7 +36,6 @@ export default function ServicedCounter({ Label }) {
       try {
         setIsLoading(true);
         const response = await countServicedUsers();
-        console.log("bijour", response.data);
         setValue(response.data || 0);
 
         setError(null);
