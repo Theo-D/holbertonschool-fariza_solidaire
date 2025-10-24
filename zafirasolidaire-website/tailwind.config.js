@@ -5,16 +5,16 @@ export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx,html}'],
   theme: {
     extend: {
-       colors: {
-      'brand-blue': '#42AAE1',
-      'brand-pink': '#E82B89',
-      'brand-yellow': '#FCD916',
-    }
+      colors: {
+        'brand-blue': '#42AAE1',
+        'brand-pink': '#E82B89',
+        'brand-yellow': '#FCD916',
+      }
     },
   },
   plugins: [
     daisyui,
-    plugin(function({ addUtilities }) {
+    plugin(function ({ addUtilities }) {
       addUtilities({
         '.bg-linear-to-br': {
           'background-image': 'linear-gradient(to bottom right, var(--tw-gradient-stops))',
@@ -31,4 +31,7 @@ export default {
       })
     })
   ],
+  daisyui: {
+    themes: ["cmyk"], // Configuration du thème DaisyUI
+  },
 }

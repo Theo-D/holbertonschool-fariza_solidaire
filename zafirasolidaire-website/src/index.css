@@ -1,9 +1,7 @@
+/* Tailwind v4 import (replaces old @tailwind directives) */
 @import "tailwindcss";
 
-@plugin "daisyui" {
-  themes: cmyk --default;
-}
-
+/* Custom color variables */
 :root {
   --brand-blue: #42AAE1;
   --brand-pink: #E82B89;
@@ -11,7 +9,8 @@
   --gradient-brand: linear-gradient(135deg, #42AAE1 0%, #E82B89 50%, #FCD916 100%);
 }
 
-/* Styles de base */
+/* -------------------------- */
+/* Base styles (global defaults) */
 @layer base {
   body {
     min-height: 100vh;
@@ -40,10 +39,9 @@
   }
 }
 
-/* Composants réutilisables */
+/* -------------------------- */
+/* Components (reusable) */
 @layer components {
-
-  /* Boutons */
   .btn-primary {
     @apply px-6 py-2 rounded-lg text-white font-medium transition-all hover:scale-105 hover:shadow-lg;
     background-color: var(--brand-pink);
@@ -60,7 +58,6 @@
     background-color: var(--brand-pink);
   }
 
-  /* Cards */
   .card {
     @apply p-8 rounded-2xl border border-slate-200 hover:shadow-xl transition-all hover:-translate-y-1;
     background: linear-gradient(to bottom right, rgb(248 250 252), rgb(255 255 255));
@@ -70,7 +67,6 @@
     @apply bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow;
   }
 
-  /* Navigation */
   .nav-link {
     @apply text-gray-700 transition-colors duration-200;
   }
@@ -79,13 +75,11 @@
     color: var(--brand-blue);
   }
 
-  /* Gradient text */
   .gradient-text {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(to right, var(--brand-blue), var(--brand-pink), var(--brand-yellow));
   }
 
-  /* Section containers */
   .section {
     @apply py-20 px-4 sm:px-6 lg:px-8;
   }
@@ -98,7 +92,6 @@
     @apply max-w-7xl mx-auto;
   }
 
-  /* Icon containers */
   .icon-box-blue {
     @apply w-14 h-14 rounded-xl flex items-center justify-center;
     background-color: var(--brand-blue);
@@ -114,28 +107,24 @@
     background-color: var(--brand-yellow);
   }
 
-  /* CTA Section with gradient */
   .cta-gradient {
     @apply rounded-3xl p-12 text-center text-white relative overflow-hidden;
     background: var(--gradient-brand);
   }
 
-  /* Loading skeleton */
   .skeleton {
     @apply bg-slate-200 animate-pulse rounded;
   }
 
-  /* Badge/Tag */
   .badge-blue {
     @apply px-4 py-2 rounded-full text-sm font-medium text-white inline-block;
     background-color: var(--brand-blue);
   }
 }
 
-/* Utilities personnalisées */
+/* -------------------------- */
+/* Utilities (custom classes) */
 @layer utilities {
-
-  /* Backgrounds avec vos couleurs */
   .bg-brand-blue {
     background-color: var(--brand-blue);
   }
@@ -152,7 +141,6 @@
     background: var(--gradient-brand);
   }
 
-  /* Text colors */
   .text-brand-blue {
     color: var(--brand-blue);
   }
@@ -165,7 +153,6 @@
     color: var(--brand-yellow);
   }
 
-  /* Border colors */
   .border-brand-blue {
     border-color: var(--brand-blue);
   }
@@ -178,48 +165,45 @@
     border-color: var(--brand-yellow);
   }
 
-  /* Glassmorphism effect */
   .glass {
-    @apply backdrop-blur-md;
     background-color: rgba(255, 255, 255, 0.8);
+    @apply backdrop-blur-md;
   }
 
-  /* Smooth scroll */
   .smooth-scroll {
     scroll-behavior: smooth;
   }
-}
 
-/* Animations personnalisées */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out;
   }
-}
 
-.animate-fadeInUp {
-  animation: fadeInUp 0.6s ease-out;
-}
+  .decorative-blob {
+    @apply absolute rounded-full opacity-20 blur-3xl pointer-events-none;
+  }
 
-/* Decorative blobs (cercles flous) */
-.decorative-blob {
-  @apply absolute rounded-full opacity-20 blur-3xl pointer-events-none;
-}
+  .blob-blue {
+    background-color: var(--brand-blue);
+  }
 
-.blob-blue {
-  background-color: var(--brand-blue);
-}
+  .blob-pink {
+    background-color: var(--brand-pink);
+  }
 
-.blob-pink {
-  background-color: var(--brand-pink);
-}
-
-.blob-yellow {
-  background-color: var(--brand-yellow);
+  .blob-yellow {
+    background-color: var(--brand-yellow);
+  }
 }
