@@ -44,11 +44,12 @@ public class BlogPostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateBlogPost(@PathVariable UUID id, @RequestBody RequestBlogPostDto requestBlogPostDto) {
-        if (!blogPostFacade.existsById(id)) {
+    public ResponseEntity<Void> updateBlogPost(@PathVariable String id, @RequestBody RequestBlogPostDto requestBlogPostDto) {
+        UUID idFromString = UUID.fromString(id);
+        if (!blogPostFacade.existsById(idFromString)) {
             return ResponseEntity.notFound().build();
         }
-        blogPostFacade.updateBlogPost(id, requestBlogPostDto);
+        blogPostFacade.updateBlogPost(idFromString, requestBlogPostDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -98,7 +99,6 @@ public class BlogPostController {
     // ---------- DELETE ----------//
 
     // Delete blogPost by ID
-    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBlogPostById(@PathVariable UUID id) {
         blogPostFacade.deleteBlogPostById(id);

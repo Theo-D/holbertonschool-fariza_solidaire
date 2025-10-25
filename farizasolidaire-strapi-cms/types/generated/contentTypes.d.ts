@@ -571,7 +571,7 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
 export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
   collectionName: 'blog_posts';
   info: {
-    displayName: 'BlogPost';
+    displayName: 'Zafira-blog';
     pluralName: 'blog-posts';
     singularName: 'blog-post';
   };
@@ -583,18 +583,18 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    externalId: Schema.Attribute.UID;
+    externalId: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::blog-post.blog-post'
     > &
       Schema.Attribute.Private;
-    photo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    photo: Schema.Attribute.Media<'images' | 'files'>;
     publishedAt: Schema.Attribute.DateTime;
     synced: Schema.Attribute.Boolean;
-    testBody: Schema.Attribute.Blocks;
-    Title: Schema.Attribute.String;
+    textBody: Schema.Attribute.Blocks;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

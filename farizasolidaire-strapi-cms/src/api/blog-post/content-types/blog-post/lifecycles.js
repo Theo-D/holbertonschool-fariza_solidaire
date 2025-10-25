@@ -1,89 +1,75 @@
 // path: src/api/blog-post/content-types/blog-post/lifecycles.js
-
+const skipLifecycle = new Set();
 module.exports = {
   async afterCreate(event) {
-    const { result } = event;
+  const { result } = event;
+  if (result.externalId) return;
 
+  // Fetch full post including media
+  const fullPost = await strapi.db.query("api::blog-post.blog-post").findOne({
+    where: { id: result.id },
+    populate: ["photo"],
+  });
 
-    try {
-      // 🧠 Clean up the text body (if it’s structured)
-      const textBody = Array.isArray(result.testBody)
-        ? result.testBody.map(b => b.children?.map(c => c.text).join(' ')).join('\n')
-        : result.testBody;
+  const payload = buildPayload(fullPost);
 
-      const payload = {
-        title: result.Title,
-        textBody,
-        author: result.author,
-        photoUrl: result.photo?.url
-          ? `http://localhost:1337${result.photo.url}`
-          : null,
-      };
+  try {
+    console.log("🆕 afterCreate → POST to external API", payload);
 
-// Log the object to check it
-console.log("📤 Payload being sent to Spring Boot:", payload);
+    const res = await fetch("http://localhost:8080/blog_posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-      // 1️⃣ Send the new post to Spring Boot (no ID)
-      const res = await fetch("http://localhost:8080/blog_posts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: result.Title,
-          textBody,
-          author: result.author,
-          photoUrl: result.photo?.url
-            ? `http://localhost:1337${result.photo.url}`
-            : null,
-        }),
-      });
+    const createdPost = await res.json();
 
-      // 2️⃣ Parse the response from Spring Boot
-      if (!res.ok) {
-        throw new Error(`Spring Boot API returned ${res.status}`);
-      }
-      const createdPost = await res.json();
-
-      // 3️⃣ Save the Spring Boot ID back into Strapi
-      await strapi.db.query("api::blog-post.blog-post").update({
-        where: { id: result.id },
-        data: { externalId: createdPost.id },
-      });
-
-      console.log(`✅ Synced new blog post to Spring Boot (ID: ${createdPost.id})`);
-    } catch (err) {
-      console.error("❌ Failed to sync with Spring Boot:", err);
-    }
-  },
-
+    skipLifecycle.add(result.id);
+    await strapi.entityService.update("api::blog-post.blog-post", result.id, {
+      data: { externalId: createdPost.id },
+    });
+    skipLifecycle.delete(result.id);
+  } catch (err) {
+    console.error("❌ Error in afterCreate:", err);
+  }
+},
   async afterUpdate(event) {
-    const { result } = event;
+  const { result } = event;
+  if (!result.externalId || skipLifecycle.has(result.id)) return;
 
-    if (!result.externalId) {
-      console.warn(`⚠️ BlogPost ${result.id} has no externalId — skipping update`);
-      return;
-    }
+  // Fetch full entity including media
+  const fullPost = await strapi.db.query("api::blog-post.blog-post").findOne({
+    where: { id: result.id },
+    populate: ["photo"],
+  });
 
-    try {
-      const textBody = Array.isArray(result.testBody)
-        ? result.testBody.map(b => b.children?.map(c => c.text).join(' ')).join('\n')
-        : result.testBody;
+  const payload = buildPayload(fullPost);
 
-      await fetch(`http://localhost:8080/blog_posts/${result.externalId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: result.Title,
-          textBody,
-          author: result.author,
-          photoUrl: result.photo?.url
-            ? `http://localhost:1337${result.photo.url}`
-            : null,
-        }),
-      });
-
-      console.log(`✅ Updated blog post ${result.externalId} in Spring Boot`);
-    } catch (err) {
-      console.error("❌ Failed to update blog post in Spring Boot:", err);
-    }
-  },
+  try {
+    skipLifecycle.add(result.id);
+    console.log("Syncing post to external API:", payload);
+    await fetch(`http://localhost:8080/blog_posts/${result.externalId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    skipLifecycle.delete(result.id);
+  } catch (err) {
+    console.error(err);
+  }
+},
 };
+
+// Helper function to build the payload for POST or PUT
+function buildPayload(result) {
+  const textBody = Array.isArray(result.textBody)
+    ? result.textBody.map(b => b.children?.map(c => c.text).join(' ')).join('\n')
+    : result.textBody;
+
+  return {
+    title: result.title,
+    textBody,
+    author: result.author,
+    photoUrl: result.photo?.url ? `http://localhost:1337${result.photo.url}` : null,
+  };
+}
