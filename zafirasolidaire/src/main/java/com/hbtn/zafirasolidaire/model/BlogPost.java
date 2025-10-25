@@ -35,7 +35,8 @@ public class BlogPost extends BaseModel {
     @Column(name = "author", nullable = false)
     private String author;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    // , orphanRemoval = true ?
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "photo_id", unique = true)
     private Photo photo;
 

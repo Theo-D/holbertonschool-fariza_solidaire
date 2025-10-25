@@ -43,7 +43,7 @@ public class SecurityConfig {
         }
 
         private static final String[] AUTHORIZED_PATHS = { "/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**",
-                        "/webjars/swagger-ui/**", "/auth/**", "/serviced_users/count", "/clothing", "/blog_posts" };
+                        "/webjars/swagger-ui/**", "/auth/**", "/serviced_users/count", "/clothing", "/blog_posts/**" };
 
         @Bean
         SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {

@@ -16,6 +16,8 @@ import com.hbtn.zafirasolidaire.model.BlogPost;
 import com.hbtn.zafirasolidaire.model.Photo;
 import com.hbtn.zafirasolidaire.repository.BlogPostRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class BlogPostFacade {
     private final BlogPostMapper blogPostMapper;
@@ -49,6 +51,7 @@ public class BlogPostFacade {
         return blogPostMapper.blogPostToDto(blogPostRepository.save(blogPost));
     }
 
+    @Transactional
     public BlogPostDto updateBlogPost(UUID id, RequestBlogPostDto requestBlogPostDto) {
         if (id == null) {
             throw new IllegalArgumentException("BlogPost ID cannot be null.");
@@ -143,6 +146,10 @@ public class BlogPostFacade {
         if (id == null) {
             throw new IllegalArgumentException("BlogPost ID cannot be null.");
         }
+
+        // String strapiUrl = "http://localhost:1337/api/blog-posts/" + id.toString();
+        // RestTemplate restTemplate = new RestTemplate();
+        // restTemplate.delete(strapiUrl);
         blogPostRepository.deleteById(id);
     }
 

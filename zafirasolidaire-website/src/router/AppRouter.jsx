@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "../context/AuthContext";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import ProtectedRoute from "../components/ProtectedRoute";
 import Unauthorized from "../pages/Unauthorized";
 import Admin from "../pages/Admin";
 import Register from "../pages/Register";
-import { AuthProvider } from "../context/AuthContext";
+import BlogRedirect from "../components/BlogRedirect";
 
 export default function AppRouter() {
   return (
@@ -24,6 +25,7 @@ export default function AppRouter() {
           <Route path="/login" element={<Login />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/register" element={<Register/>}/>
+          <Route path="/blog" element={<BlogRedirect/>}/>
         </Routes>
       </Router>
     </AuthProvider>
