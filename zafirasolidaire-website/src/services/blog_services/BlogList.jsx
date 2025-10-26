@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAllBlogPosts, deleteBlogPostById } from "./blogApi";
 
 const BlogList = ({ redirectUrl = "/some-page" }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Fetch blog posts from API
+  // Fetch blog posts from Strapi
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch("http://localhost:8080/blog_posts"); // Replace with your API
-        const data = await res.json();
-        setPosts(data);
+        const json = await getAllBlogPosts();
+        console.log("STRAPI RESPONSE: ", json.data.data);
+        setPosts(Array.isArray(json.data.data) ? json.data.data : []);
       } catch (err) {
         console.error("Error fetching posts:", err);
+        setPosts([]);
       } finally {
         setLoading(false);
       }
@@ -28,9 +30,7 @@ const BlogList = ({ redirectUrl = "/some-page" }) => {
     if (!window.confirm("Are you sure you want to delete this post?")) return;
 
     try {
-      await fetch(`http://localhost:8080/blog_posts/${id}`, {
-        method: "DELETE",
-      });
+      await deleteBlogPostById(id);
       setPosts((prev) => prev.filter((post) => post.id !== id));
     } catch (err) {
       console.error("Error deleting post:", err);
@@ -54,7 +54,11 @@ const BlogList = ({ redirectUrl = "/some-page" }) => {
         <p>No posts found.</p>
       ) : (
         <ul style={{ listStyle: "none", padding: 0 }}>
-          {posts.map((post) => (
+          {console.log("POSTS: ", posts)}
+          {posts.map((post) => {
+          if (!post) return null;
+
+          return (
             <li
               key={post.id}
               style={{
@@ -64,12 +68,24 @@ const BlogList = ({ redirectUrl = "/some-page" }) => {
                 marginBottom: "1rem",
               }}
             >
-              <h2>{post.title}</h2>
-              <p>{new Date(post.createDate).toLocaleDateString()}</p>
+              <h2>{post.title || "Untitled Post"}</h2>
+              <p>{post.createdAt ? new Date(post.createdAt).toLocaleDateString() : ""}</p>
+
+              {post.photo?.url && (
+                <img
+                  src={
+                    post.photo.url.startsWith("http")
+                      ? post.photo.url
+                      : `http://localhost:1337${post.photo.url}`
+                  }
+                  alt={post.photo.alternativeText || ""}
+                  style={{ width: "200px", borderRadius: "4px" }}
+                />
+              )}
 
               <div style={{ marginTop: "0.5rem" }}>
                 <button
-                  onClick={() => navigate(`/blog/${post.id}`)} // Replace with your article page
+                  onClick={() => navigate(`/blog/${post.id}`)}
                   style={{
                     marginRight: "0.5rem",
                     padding: "0.5rem 1rem",
@@ -95,7 +111,8 @@ const BlogList = ({ redirectUrl = "/some-page" }) => {
                 </button>
               </div>
             </li>
-          ))}
+          );
+        })}
         </ul>
       )}
     </div>
