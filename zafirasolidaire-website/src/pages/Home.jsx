@@ -51,48 +51,53 @@ export default function Home() {
 
         {/* Features Section */}
         <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                Pourquoi nous choisir ?
-              </h2>
-              <p className="text-xl text-gray-600">
-                Des fonctionnalités pensées pour votre succès
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="group p-8 rounded-2xl bg-linear-to-br from-slate-50 to-white border border-slate-200 hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" style={{ backgroundColor: '#42AAE1' }}>
-                  <Zap className="w-7 h-7 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-900">Rapide & Efficace</h3>
+          <div className="max-w-7xl mx-auto flex flex-col gap-6">
+            {/* Block 1 - avec image */}
+            <div className="flex items-start gap-4 p-6 rounded-xl border border-slate-200 bg-white shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+              <img
+                src="../src/assets/images/depositphotos_22922088-stock-photo-business-people-shaking-hands.jpg"
+                alt="Rapide & Efficace"
+                className="w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg flex-shrink-0"
+              />
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Rapide & Efficace</h3>
                 <p className="text-gray-600">
                   Une performance optimale pour vous faire gagner un temps précieux au quotidien.
                 </p>
               </div>
+            </div>
 
-              <div className="group p-8 rounded-2xl bg-linear-to-br from-slate-50 to-white border border-slate-200 hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" style={{ backgroundColor: '#E82B89' }}>
-                  <Shield className="w-7 h-7 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-900">Sécurisé</h3>
+            {/* Block 2 - avec image */}
+            <div className="flex flex-row-reverse gap-4 p-6 rounded-xl border border-slate-200 bg-white shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+              <img
+                src="../src/assets/images/depositphotos_52470619-stock-photo-business-people-working-in-office.jpg"
+                alt="Sécurisé"
+                className="w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg flex-shrink-0"
+              />
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Sécurisé</h3>
                 <p className="text-gray-600">
                   Vos données sont protégées avec les dernières technologies de sécurité.
                 </p>
               </div>
+            </div>
 
-              <div className="group p-8 rounded-2xl bg-linear-to-br from-slate-50 to-white border border-slate-200 hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" style={{ backgroundColor: '#FCD916' }}>
-                  <Sparkles className="w-7 h-7 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-900">Innovant</h3>
+            {/* Block 3 - avec image */}
+            <div className="flex items-start gap-4 p-6 rounded-xl border border-slate-200 bg-white shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+              <img
+                src="../src/assets/images/depositphotos_358868640-stock-photo-overhead-view-recruiter-resume-colleagues.jpg"
+                alt="Innovant"
+                className="w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg flex-shrink-0"
+              />
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Innovant</h3>
                 <p className="text-gray-600">
                   Des fonctionnalités de pointe pour rester à la tête de votre secteur.
                 </p>
               </div>
             </div>
           </div>
+
         </section>
 
         {/* CTA Section */}
