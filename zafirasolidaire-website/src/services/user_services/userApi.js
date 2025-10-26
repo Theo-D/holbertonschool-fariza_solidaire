@@ -1,4 +1,4 @@
-import api from "../api"
+import api from "../springApi";
 
 export const getUsers = async function() {
   return await api.get("/users");

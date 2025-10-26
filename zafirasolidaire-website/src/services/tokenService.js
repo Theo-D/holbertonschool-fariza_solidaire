@@ -1,4 +1,4 @@
-import api from "./api";
+import api from "../services/springApi";
 
 export const refreshRequest = async () => {
   const response = await api.post("/auth/refresh",{},{ withCredentials: true });
