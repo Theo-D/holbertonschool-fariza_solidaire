@@ -21,7 +21,9 @@ export default function Home() {
                   Mettez toutes les chances
                 </span>
                 <br />
-                <span className="text-gray-900">de votre côté</span>
+                <span className="bg-linear-to-r from-[#42AAE1] via-[#E82B89] to-[#FCD916] bg-clip-text text-transparent">
+                  de votre côté
+                </span>
               </h1>
 
               <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto">
@@ -31,9 +33,9 @@ export default function Home() {
 
             {/* Decorative elements */}
             <div className="mt-16 relative">
-              <div className="absolute top-0 left-1/4 w-72 h-72 rounded-full opacity-20 blur-3xl" style={{ backgroundColor: '#42AAE1' }}></div>
+              <div className="absolute top-20 left-1/4 w-72 h-72 rounded-full opacity-20 blur-3xl" style={{ backgroundColor: '#42AAE1' }}></div>
               <div className="absolute top-20 right-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl" style={{ backgroundColor: '#E82B89' }}></div>
-              <div className="absolute bottom-0 left-1/2 w-64 h-64 rounded-full opacity-20 blur-3xl" style={{ backgroundColor: '#FCD916' }}></div>
+              <div className="absolute bottom-20 left-1/2 w-64 h-64 rounded-full opacity-20 blur-3xl" style={{ backgroundColor: '#FCD916' }}></div>
             </div>
           </div>
         </section>
