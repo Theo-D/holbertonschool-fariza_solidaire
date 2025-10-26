@@ -1,4 +1,4 @@
-import api from "./api";
+import api from "../services/springApi";
 import { refreshRequest, logoutRequest } from "./tokenService";
 
 let isRefreshing = false;

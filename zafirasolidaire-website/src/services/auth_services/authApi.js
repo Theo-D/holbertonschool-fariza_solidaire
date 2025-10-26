@@ -1,4 +1,4 @@
-import api from '../api';
+import api from "../springApi";
 
 export const loginRequest = async (emailAddress, password) => {
   const response = await api.post('/auth/login', { emailAddress, password }, {withCredentials: true});

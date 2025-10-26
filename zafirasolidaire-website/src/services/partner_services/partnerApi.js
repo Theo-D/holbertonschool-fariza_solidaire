@@ -1,4 +1,4 @@
-import api from "../api"
+import api from "../springApi";
 
 export const savePartner = async function(partner) {
   return await api.post("/partners", partner);
