@@ -8,6 +8,7 @@ function CreateEventModal(props) {
   const [capacity, setCapacity] = useState("");
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [events, setEvents] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [newCategoryInput, setNewCategoryInput] = useState("");
@@ -15,8 +16,7 @@ function CreateEventModal(props) {
 
   const toggleModal = () => setOpen(!open);
 
-  useEffect( function (){
-    async function loadCategories() {
+  async function loadCategories() {
       try {
           const res = await getEventCategories();
           console.log("LOADED CATEGORIES: ", res.data);
@@ -27,6 +27,8 @@ function CreateEventModal(props) {
           setLoading(false);
       }
     }
+
+  useEffect( function (){
     loadCategories();
   },[]);
 
