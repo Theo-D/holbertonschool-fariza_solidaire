@@ -6,7 +6,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import Unauthorized from "../pages/Unauthorized";
 import Admin from "../pages/Admin";
 import Register from "../pages/Register";
-import BlogRedirect from "../components/BlogRedirect";
+import Blog from "../pages/Blog";
 
 export default function AppRouter() {
   return (
@@ -25,7 +25,7 @@ export default function AppRouter() {
           <Route path="/login" element={<Login />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/register" element={<Register/>}/>
-          <Route path="/blog" element={<BlogRedirect/>}/>
+          <Route path="/blog/:documentId" element={<Blog/>}/>
         </Routes>
       </Router>
     </AuthProvider>

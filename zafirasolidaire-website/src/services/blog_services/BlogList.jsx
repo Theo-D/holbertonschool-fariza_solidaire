@@ -10,7 +10,6 @@ const BlogList = ({ redirectUrl = "/some-page" }) => {
 
   const STRAPI_REDIRECT = "http://localhost:1337/admin/content-manager/collection-types/api::blog-post.blog-post?page=1&pageSize=10&sort=title%3AASC";
 
-  // Fetch blog posts from Strapi
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -28,7 +27,6 @@ const BlogList = ({ redirectUrl = "/some-page" }) => {
     fetchPosts();
   }, []);
 
-  // Delete a post
   const handleDelete = async (id) => {
     if (!window.confirm("Êtes-vous sûr(e) de vouloir supprimer cet article?")) return;
 
@@ -88,7 +86,7 @@ const BlogList = ({ redirectUrl = "/some-page" }) => {
 
               <div style={{ marginTop: "0.5rem" }}>
                 <button
-                  onClick={() => navigate(`/blog/${post.id}`)}
+                  onClick={() => navigate(`/blog/${post.documentId}`)}
                   style={{
                     marginRight: "0.5rem",
                     padding: "0.5rem 1rem",
