@@ -32,6 +32,7 @@ const PartnersList = () => {
   };
 
   const handleDelete = async (id) => {
+    if (!window.confirm("Êtes-vous sûr(e) de vouloir supprimer ce partenaire?")) return;
     try {
       await deletePartnerById(id);
       setPartners(partners.filter(p => p.id !== id));

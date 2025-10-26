@@ -32,6 +32,7 @@ const EventList = () => {
     }
 
     const handleDelete = async (id) => {
+        if (!window.confirm("Êtes-vous sûr(e) de vouloir supprimer cet évènement?")) return;
         try {
             await deleteEventById(id);
             setEvents(events.filter(e => e.id !== id));

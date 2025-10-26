@@ -54,6 +54,7 @@ const UserList = () => {
   };
 
   const handleDelete = async (id) => {
+    if (!window.confirm("Êtes-vous sûr(e) de vouloir supprimer cet utilisateur?")) return;
     try {
       await deleteUserById(id);
       const updatedUsers = await getUsers();
