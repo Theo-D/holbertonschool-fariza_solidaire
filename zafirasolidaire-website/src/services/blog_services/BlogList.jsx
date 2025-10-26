@@ -27,7 +27,7 @@ const BlogList = ({ redirectUrl = "/some-page" }) => {
 
   // Delete a post
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this post?")) return;
+    if (!window.confirm("Êtes-vous sûr(e) de vouloir supprimer cet article?")) return;
 
     try {
       await deleteBlogPostById(id);
