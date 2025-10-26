@@ -16,16 +16,16 @@ export default function AppRouter() {
           <Route path="/home" element={<Home />} />
           <Route
             path="/admin"
-            element = {
+            element={
               <ProtectedRoute requiredRole={"ROLE_ADMIN"}>
-                <Admin/>
+                <Admin />
               </ProtectedRoute>
             }
           />
           <Route path="/login" element={<Login />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
-          <Route path="/register" element={<Register/>}/>
-          <Route path="/blog/:documentId" element={<Blog/>}/>
+          <Route path="/register" element={<Register />} />
+          <Route path="/blog/:documentId" element={<Blog />} />
         </Routes>
       </Router>
     </AuthProvider>
