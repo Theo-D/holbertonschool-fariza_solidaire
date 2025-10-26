@@ -20,12 +20,6 @@
     "author": {
       "type": "string"
     },
-    "externalId": {
-      "type": "string"
-    },
-    "synced": {
-      "type": "boolean"
-    },
     "photo": {
       "type": "media",
       "multiple": false,
