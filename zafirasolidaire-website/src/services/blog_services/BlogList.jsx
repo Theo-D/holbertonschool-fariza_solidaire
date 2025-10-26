@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllBlogPosts, deleteBlogPostById } from "./blogApi";
+import { PLACEHOLDERS } from "../../components/imgPlaceholder";
 
 const BlogList = ({ redirectUrl = "/some-page" }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const STRAPI_REDIRECT = "http://localhost:1337/admin/content-manager/collection-types/api::blog-post.blog-post?page=1&pageSize=10&sort=title%3AASC";
 
   // Fetch blog posts from Strapi
   useEffect(() => {
@@ -74,12 +77,12 @@ const BlogList = ({ redirectUrl = "/some-page" }) => {
               {post.photo?.url && (
                 <img
                   src={
-                    post.photo.url.startsWith("http")
-                      ? post.photo.url
-                      : `http://localhost:1337${post.photo.url}`
+                    post.photo?.url
+                      ? post.photo.url.startsWith("http")
+                        ? post.photo.url
+                        : `http://localhost:1337${post.photo.url}`
+                      : PLACEHOLDERS.blog
                   }
-                  alt={post.photo.alternativeText || ""}
-                  style={{ width: "200px", borderRadius: "4px" }}
                 />
               )}
 
@@ -115,6 +118,18 @@ const BlogList = ({ redirectUrl = "/some-page" }) => {
         })}
         </ul>
       )}
+      <button
+        className="btn btn-secondary"
+        onClick={() => {
+          if (STRAPI_REDIRECT) {
+            window.open(STRAPI_REDIRECT, '_blank', 'noopener,noreferrer');
+          } else {
+            console.warn("URL de redirection manquante.");
+          }
+        }}
+      >
+        Nouvel article
+      </button>
     </div>
   );
 };
