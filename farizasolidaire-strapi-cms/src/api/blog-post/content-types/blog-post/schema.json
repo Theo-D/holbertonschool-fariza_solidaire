@@ -12,13 +12,9 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
-    },
-    "textBody": {
-      "type": "blocks"
-    },
-    "author": {
-      "type": "string"
+      "type": "string",
+      "minLength": 5,
+      "required": true
     },
     "photo": {
       "type": "media",
@@ -27,6 +23,14 @@
         "images",
         "files"
       ]
+    },
+    "textBody": {
+      "type": "blocks",
+      "required": true
+    },
+    "author": {
+      "type": "string",
+      "required": false
     }
   }
 }
