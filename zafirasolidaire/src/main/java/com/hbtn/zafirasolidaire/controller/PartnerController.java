@@ -35,7 +35,6 @@ public class PartnerController {
 
 
     // Save a single partner
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Void> savePartner(@RequestBody @Valid RequestPartnerDto requestPartnerDto) {
         partnerFacade.createPartner(requestPartnerDto);
@@ -83,7 +82,6 @@ public class PartnerController {
     }
 
     // Count partners
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/count")
     public ResponseEntity<Long> countpartners() {
         long count = partnerFacade.countPartners();

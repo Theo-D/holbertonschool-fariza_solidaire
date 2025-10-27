@@ -1,4 +1,5 @@
 import RegisterInput from "../components/RegisterInput";
+import PageLayout from "../components/PageLayout";
 import { useState } from "react";
 import { registerUser } from "../services/auth_services/authApi";
 import { useNavigate } from "react-router-dom";
@@ -43,11 +44,14 @@ function Register() {
 };
 
   return (
-    <RegisterInput
-      formData={formData}
-      onChange={handleChange}
-      onSubmit={handleSubmit}
-    />
+
+    <PageLayout>
+      <RegisterInput
+        formData={formData}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
+    </PageLayout>
   );
 }
 

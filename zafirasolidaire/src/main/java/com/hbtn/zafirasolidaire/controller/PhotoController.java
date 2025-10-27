@@ -76,7 +76,6 @@ public class PhotoController {
     }
 
     // Get all photos
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ResponseEntity<Iterable<PhotoDto>> getAllPhotos() {
         Iterable<PhotoDto> photos = photoFacade.getAllPhotos();
@@ -84,7 +83,6 @@ public class PhotoController {
     }
 
     // Count photos
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/count")
     public ResponseEntity<Long> countPhotos() {
         long count = photoFacade.countPhotos();

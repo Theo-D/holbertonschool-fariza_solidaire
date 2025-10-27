@@ -5,7 +5,9 @@ import AppRouter from "./router/AppRouter"
 
 function App() {
   return (
-    <AppRouter/>
+    <div className='overflow-x-hidden'>
+      <AppRouter/>
+    </div>
   )
 }
 
