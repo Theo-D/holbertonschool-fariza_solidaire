@@ -1,10 +1,15 @@
-import api from "../services/springApi";
+import axios from "axios";
+
+const authApi = axios.create({
+  baseURL: "http://localhost:8080",
+  withCredentials: true,
+});
 
 export const refreshRequest = async () => {
-  const response = await api.post("/auth/refresh",{},{ withCredentials: true });
+  const response = await authApi.post("/auth/refresh");
   return response.data; // { accessToken }
 };
 
 export const logoutRequest = async () => {
-  await api.post("/auth/logout",{},{ withCredentials: true });
+  await authApi.post("/auth/logout");
 };

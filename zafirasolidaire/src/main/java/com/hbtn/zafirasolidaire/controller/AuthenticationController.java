@@ -73,8 +73,7 @@ public class AuthenticationController {
                                         .sameSite("None")
                                         .build();
 
-        String cookie = refreshCookie.toString() + "; Partitioned";
-        response.addHeader(HttpHeaders.SET_COOKIE, cookie);
+        response.addHeader(HttpHeaders.SET_COOKIE, refreshCookie.toString());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("accessToken", jwtToken));
     }
@@ -97,9 +96,7 @@ public class AuthenticationController {
                                         .sameSite("None")
                                         .build();
 
-        String cookie = deleteCookie.toString() + "; Partitioned";
-
-        response.addHeader(HttpHeaders.SET_COOKIE, cookie);
+        response.addHeader(HttpHeaders.SET_COOKIE, deleteCookie.toString());
         return ResponseEntity.ok(Map.of("message", "Successfully logged out"));
     }
 
@@ -107,6 +104,10 @@ public class AuthenticationController {
     public ResponseEntity<?> refreshToken(
         @CookieValue(value = "refreshToken", required = false) String oldRefreshToken,
         HttpServletResponse response) {
+
+        Instant expirationDate = refreshTokenRepository.findByToken(oldRefreshToken)
+                                                       .orElseThrow(() -> new IllegalArgumentException("Can't find refresh token."))
+                                                       .getExpirationDate();
 
         if (oldRefreshToken == null || oldRefreshToken.isBlank()) {
             return ResponseEntity
@@ -121,8 +122,8 @@ public class AuthenticationController {
                     .httpOnly(true)
                     .secure(true)
                     .path("/")
-                    .maxAge(7 * 24 * 60 * 60)
-                    .sameSite("Strict")
+                    .maxAge(Duration.between(Instant.now(), expirationDate))
+                    .sameSite("None")
                     .build();
             response.addHeader(HttpHeaders.SET_COOKIE, refreshCookie.toString());
 

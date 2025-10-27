@@ -28,13 +28,23 @@ export const AuthProvider = ({children}) => {
     };
 
     const login = async function (email, password) {
-        const token = await loginRequest(email, password);
-
-        saveToken(token);
-        const userData = await getCurrentUser();
-        setUser(userData);
-        return token
+        setLoading(true);
+        try {
+            const token = await loginRequest(email, password);
+            saveToken(token);
+            const userData = await getCurrentUser();
+            setUser(userData);
+            return token;
+        } catch (err) {
+            saveToken(null);
+            setUser(null);
+            throw err;
+        } finally {
+            setLoading(false);
+        }
     };
+
+
 
     const logout = async function () {
         await logoutRequest();
@@ -58,10 +68,22 @@ export const AuthProvider = ({children}) => {
         }
     }, []);
 
-    useEffect(function () {
-        (async function ()  {
+    const hasRole = useCallback(
+        (role) => {
+            if (!user) return false;
+            if (Array.isArray(user.roles)) {
+                return user.roles.includes(role);
+            }
+            return user.role === role;
+        },
+        [user]
+    );
+
+    useEffect(() => {
+        (async function init() {
+            setLoading(true);
+            loadToken();
             try {
-                loadToken();
                 const userData = await getCurrentUser();
                 setUser(userData);
             } catch (err) {
@@ -73,6 +95,7 @@ export const AuthProvider = ({children}) => {
         })();
     }, []);
 
+
     const value = React.useMemo(() => ({
         user,
         accessToken,
@@ -81,6 +104,7 @@ export const AuthProvider = ({children}) => {
         refresh,
         loading,
         isAuthenticated: !!user,
+        hasRole
     }), [user, accessToken, loading]);
 
 

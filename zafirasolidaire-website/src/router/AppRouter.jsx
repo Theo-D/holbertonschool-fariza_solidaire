@@ -7,6 +7,7 @@ import Unauthorized from "../pages/Unauthorized";
 import Admin from "../pages/Admin";
 import Register from "../pages/Register";
 import Blog from "../pages/Blog";
+import Contact from "../pages/Contact";
 
 export default function AppRouter() {
   return (
@@ -26,6 +27,7 @@ export default function AppRouter() {
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/register" element={<Register />} />
           <Route path="/blog/:documentId" element={<Blog />} />
+          <Route path="/contact" element={<Contact/>} />
         </Routes>
       </Router>
     </AuthProvider>

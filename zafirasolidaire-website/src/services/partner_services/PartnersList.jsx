@@ -11,8 +11,8 @@ const PartnersList = () => {
   const [newPartnerHomepage, setNewPartnerHomepage] = useState('');
   const [newPartnerLogo, setNewPartnerLogo] = useState('');
 
-  const [selectedPartner, setSelectedPartner] = useState(null); // partner being edited
-  const [isEditOpen, setIsEditOpen] = useState(false); // modal visibility
+  const [selectedPartner, setSelectedPartner] = useState(null);
+  const [isEditOpen, setIsEditOpen] = useState(false);
 
   const PLACEHOLDER_HOMEPAGE = "Pas de page d'accueil";
 
@@ -85,7 +85,6 @@ const PartnersList = () => {
 
   return (
     <div className="p-4">
-      {/* Add Partner Form */}
       <div className="mb-4 flex gap-2 flex-wrap">
         <input
           type="text"
@@ -174,7 +173,6 @@ const PartnersList = () => {
         </ul>
       )}
 
-      {/* Edit Partner Modal */}
       {isEditOpen && selectedPartner && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 w-96 relative">

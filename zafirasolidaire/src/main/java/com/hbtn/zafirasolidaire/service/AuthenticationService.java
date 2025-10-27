@@ -52,7 +52,6 @@ public class AuthenticationService {
 
         String newAccessToken = jwtService.generateToken(user.getId(), user.getIsAdmin());
 
-        // ✅ call the specialized method here
         RefreshToken newRefreshToken = rotateRefreshToken(user, existingToken);
 
         return Map.of(

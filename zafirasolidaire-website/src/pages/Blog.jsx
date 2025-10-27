@@ -12,7 +12,7 @@ export default function Blog() {
   useEffect(() => {
     getBlogPostById("cwjz6ex9kt09rib4uwie8a60")
       .then((res) => {
-        console.log(res.data.data); // The actual post object
+        console.log(res.data.data);
         setPost(res.data.data);
       })
       .catch((err) => {
