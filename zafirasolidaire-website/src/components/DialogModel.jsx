@@ -14,6 +14,7 @@ const DialogModal = ({ selectedEvent, setSelectedEvent }) => {
               <p>{selectedEvent.category}</p>
               <p>{selectedEvent.date}</p>
               <p>{selectedEvent.capacity}</p>
+
             </>
           ) : (
             <p>No event selected</p>

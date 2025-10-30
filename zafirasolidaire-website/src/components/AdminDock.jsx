@@ -1,6 +1,6 @@
 const AdminDock = ({ activeSection, setActiveSection }) => {
   return (
-    <div className="dock dock-xl absolute inset-x-0 bottom-0 left-1/2 transform -translate-x-1/2 z-50 bg-gray-50 p-2  shadow-lg flex space-x-4">
+    <div className="dock dock-xl absolute inset-x-0 bottom-0 left-1/2 transform -translate-x-1/2 z-49 bg-gray-50 p-2  shadow-lg flex space-x-4">
       <button
         onClick={() => setActiveSection("users")}
         className={`flex flex-col items-center px-3 py-2 rounded hover:bg-gray-200 transition ${
