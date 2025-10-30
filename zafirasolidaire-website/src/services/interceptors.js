@@ -21,6 +21,14 @@ const processQueue = (error, token = null) => {
   refreshQueue = [];
 };
 
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("accessToken");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 // Interceptor
 api.interceptors.response.use(
   (response) => response,

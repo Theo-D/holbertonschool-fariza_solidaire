@@ -13,7 +13,7 @@ export const getPartnerById = async function(id) {
 }
 
 export const getAllPartners = async function() {
-  return await api.get("/partners");
+  return await api.get("/partners/all");
 }
 
 export const isPartnerExist = async function(id) {
