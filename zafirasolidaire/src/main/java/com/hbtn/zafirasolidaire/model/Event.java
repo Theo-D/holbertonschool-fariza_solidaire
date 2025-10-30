@@ -34,6 +34,12 @@ public class Event extends BaseModel {
     @Column(name = "capacity", nullable = false)
     private int capacity;
 
+    @Column(name = "event_url", nullable = false)
+    private String url;
+
+    @Column(name = "description", columnDefinition = "TEXT", nullable = true)
+    private String description;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "photo_id", unique = true)
     private Photo photo;
@@ -83,6 +89,24 @@ public class Event extends BaseModel {
 
     public Event setPhoto(Photo photo) {
         this.photo = photo;
+        return this;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public Event setUrl(String url) {
+        this.url = url;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Event setDescription(String description) {
+        this.description = description;
         return this;
     }
 

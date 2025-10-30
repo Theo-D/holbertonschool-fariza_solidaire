@@ -10,9 +10,6 @@ import jakarta.validation.constraints.NotNull;
 
 public class RequestEventDto {
 
-    // @NotNull
-    // private UUID eventId;
-
     @NotNull
     @NotBlank
     private String category;
@@ -26,6 +23,10 @@ public class RequestEventDto {
     private int capacity;
 
     private String photoUrl;
+
+    private String url;
+
+    private String description;
 
     //---------- id getters and setters  ----------//
     // public UUID getEventId() {
@@ -70,5 +71,21 @@ public class RequestEventDto {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -15,7 +15,7 @@ public interface EventMapper {
         @Mapping(target = "id", ignore = true),
         @Mapping(target = "createDate", ignore = true),
         @Mapping(target = "updateDate", ignore = true),
-        @Mapping(target = "category", ignore = true), // ignore here
+        @Mapping(target = "category", ignore = true),
         @Mapping(source = "date", target = "date"),
         @Mapping(source = "capacity", target = "capacity"),
         @Mapping(source = "photoUrl", target = "photo.url")
