@@ -12,6 +12,8 @@ public class EventDto {
     private LocalDateTime date;
     private int capacity;
     private String photoUrl;
+    private String url;
+    private String description;
 
     //---------- id getters and setters  ----------//
     public UUID getId() {
@@ -72,5 +74,21 @@ public class EventDto {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
