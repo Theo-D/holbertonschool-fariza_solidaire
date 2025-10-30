@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { saveEvent, getEventCategories, saveEventCategory, deleteEventCategoryById, getEvents, getEventCategorybyId} from "../services/event_services/eventApi";
+import { createPortal} from "react-dom";
+import { saveEvent, getEventCategories, saveEventCategory, deleteEventCategoryById, getEvents, getEventCategorybyId } from "../services/event_services/eventApi";
 import BinSvg from "./svg_components/Bin";
 
 function CreateEventModal(props) {
@@ -7,30 +8,34 @@ function CreateEventModal(props) {
   const [dateTime, setDateTime] = useState("");
   const [capacity, setCapacity] = useState("");
   const [categories, setCategories] = useState([]);
-  const [category, setCategory] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [loading, setLoading] = useState(true);
   const [events, setEvents] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
   const [newCategoryInput, setNewCategoryInput] = useState("");
   const [addingCategory, setAddingCategory] = useState(false);
+  const [url, setUrl] = useState(""); // New field
+  const [description, setDescription] = useState(""); // New field
 
-  const toggleModal = () => setOpen(!open);
+  const toggleModal = () => {
+    console.log("Toggled modal", !open);
+    setOpen(!open);
+  }
 
   async function loadCategories() {
-      try {
-          const res = await getEventCategories();
-          console.log("LOADED CATEGORIES: ", res.data);
-          setCategories(res.data);
-      } catch (err) {
-          setError("Failed to load categories");
-      } finally {
-          setLoading(false);
-      }
+    try {
+      const res = await getEventCategories();
+      console.log("LOADED CATEGORIES: ", res.data);
+      setCategories(res.data);
+    } catch (err) {
+      console.error("Failed to load categories", err);
+    } finally {
+      setLoading(false);
     }
+  }
 
-  useEffect( function (){
+  useEffect(() => {
     loadCategories();
-  },[]);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +52,8 @@ function CreateEventModal(props) {
         category: categoryData.name,
         capacity: capacity,
         date: dateTime,
+        url: url,
+        description: description,
       };
       await handleCreateEvent(event);
     } catch (err) {
@@ -55,7 +62,6 @@ function CreateEventModal(props) {
     }
   };
 
-
   const handleAddCategory = async () => {
     if (newCategoryInput.trim() === "") return;
     try {
@@ -63,9 +69,7 @@ function CreateEventModal(props) {
       const res = await getEventCategories();
       setCategories(res.data);
       const addedCategory = res.data.find(cat => cat.name === newCategoryInput.trim());
-    if (addedCategory) {
-      setSelectedCategory(addedCategory);
-    }
+      if (addedCategory) setSelectedCategory(addedCategory.id);
       setNewCategoryInput("");
       setAddingCategory(false);
     } catch (error) {
@@ -75,29 +79,27 @@ function CreateEventModal(props) {
   };
 
   const handleDelete = async (id) => {
-      try {
-        await deleteEventCategoryById(id);
-        const updatedCat = await getEventCategories();
-        setCategories(updatedCat.data);
-      } catch (err) {
-        console.error(err);
-        alert('Failed to delete event category');
-      }
-    };
+    try {
+      await deleteEventCategoryById(id);
+      const updatedCat = await getEventCategories();
+      setCategories(updatedCat.data);
+    } catch (err) {
+      console.error(err);
+      alert('Failed to delete event category');
+    }
+  };
 
-    const handleCreateEvent = async (event) => {
-      try {
-        await saveEvent(event)
-        const updatedEvents = await getEvents();
-        setEvents(updatedEvents.data)
-        toggleModal();
-        if (props.onEventCreated) {
-          props.onEventCreated();
-        }
-      } catch (err) {
-        alert("Failed to save Event");
-      }
-    };
+  const handleCreateEvent = async (event) => {
+    try {
+      await saveEvent(event);
+      const updatedEvents = await getEvents();
+      setEvents(updatedEvents.data);
+      toggleModal();
+      if (props.onEventCreated) props.onEventCreated();
+    } catch (err) {
+      alert("Failed to save Event");
+    }
+  };
 
   return (
     <>
@@ -111,107 +113,123 @@ function CreateEventModal(props) {
       </button>
 
       {open && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          onClick={toggleModal}
-        >
+        createPortal(
           <div
-            className="bg-white rounded-lg p-6 w-full max-w-md"
-            onClick={(e) => e.stopPropagation()}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-999"
+            onClick={toggleModal}
           >
-            <h2 id="modal-title" className="text-xl font-bold mb-4">
-              Create New Event
-            </h2>
+            <div
+              className="bg-white rounded-lg p-6 w-full max-w-md"
+              onClick={(e) => e.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-title"
+            >
+              <h2 id="modal-title" className="text-xl font-bold mb-4">
+                Create New Event
+              </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Date & time */}
-              <div>
-                <label
-                  htmlFor="datetime"
-                  className="block text-sm font-medium mb-1"
-                >
-                  Date & Time
-                </label>
-                <input
-                  id="datetime"
-                  type="datetime-local"
-                  value={dateTime}
-                  onChange={(e) => setDateTime(e.target.value)}
-                  className="input input-bordered w-full"
-                  required
-                />
-              </div>
-
-              {/* Capacity */}
-              <div>
-                <label
-                  htmlFor="capacity"
-                  className="block text-sm font-medium mb-1"
-                >
-                  Capacity (1-99)
-                </label>
-                <input
-                  id="capacity"
-                  type="number"
-                  min="1"
-                  max="99"
-                  value={capacity}
-                  onChange={(e) => setCapacity(e.target.value)}
-                  className="input input-bordered w-full"
-                  required
-                />
-              </div>
-
-              {/* Category dropdown */}
-              <div>
-                <label
-                  htmlFor="category"
-                  className="block text-sm font-medium mb-1"
-                >
-                  Category
-                </label>
-                {!addingCategory ? (
-                  <div className="flex items-center space-x-2">
-                  <select
-                    id="category"
-                    value={selectedCategory}
-                    onChange={(e) => {
-                      if (e.target.value === "__add_new__") {
-                        setAddingCategory(true);
-                      } else {
-                        setSelectedCategory(e.target.value);
-                      }
-                    }}
-                    className="select select-bordered grow"
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Date & time */}
+                <div>
+                  <label htmlFor="datetime" className="block text-sm font-medium mb-1">
+                    Date & Time
+                  </label>
+                  <input
+                    id="datetime"
+                    type="datetime-local"
+                    value={dateTime}
+                    onChange={(e) => setDateTime(e.target.value)}
+                    className="input input-bordered w-full"
                     required
-                  >
-                    <option value="" disabled>
-                      Select category
-                    </option>
-                    {categories.map((category) => (
-                      <option key={category.id} value={category.id}>
-                        {category.name}
-                      </option>
-                    ))}
-                    <option value="__add_new__">+ Add new category</option>
-                  </select>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      //console.log(selectedCategory)
-                      handleDelete(selectedCategory)
-                    }}
-                    aria-label="Delete category"
-                    className="btn btn-ghost p-1"
-                  >
-                    <BinSvg className="w-6 h-6 text-red-600" />
-                  </button>
+                  />
                 </div>
-                ) : (
+
+                {/* Capacity */}
+                <div>
+                  <label htmlFor="capacity" className="block text-sm font-medium mb-1">
+                    Capacity (1-99)
+                  </label>
+                  <input
+                    id="capacity"
+                    type="number"
+                    min="1"
+                    max="99"
+                    value={capacity}
+                    onChange={(e) => setCapacity(e.target.value)}
+                    className="input input-bordered w-full"
+                    required
+                  />
+                </div>
+
+                {/* URL */}
+                <div>
+                  <label htmlFor="url" className="block text-sm font-medium mb-1">
+                    Event URL
+                  </label>
+                  <input
+                    id="url"
+                    type="text"
+                    placeholder="https://example.com"
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                {/* Description */}
+                <div>
+                  <label htmlFor="description" className="block text-sm font-medium mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    id="description"
+                    placeholder="Enter event description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="textarea textarea-bordered w-full"
+                    rows={3}
+                  />
+                </div>
+
+                {/* Category dropdown */}
+                <div>
+                  <label htmlFor="category" className="block text-sm font-medium mb-1">
+                    Category
+                  </label>
+                  {!addingCategory ? (
+                    <div className="flex items-center space-x-2">
+                      <select
+                        id="category"
+                        value={selectedCategory}
+                        onChange={(e) => {
+                          if (e.target.value === "__add_new__") setAddingCategory(true);
+                          else setSelectedCategory(e.target.value);
+                        }}
+                        className="select select-bordered grow"
+                        required
+                      >
+                        <option value="" disabled>
+                          Select category
+                        </option>
+                        {categories.map((category) => (
+                          <option key={category.id} value={category.id}>
+                            {category.name}
+                          </option>
+                        ))}
+                        <option value="__add_new__">+ Add new category</option>
+                      </select>
+
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(selectedCategory)}
+                        aria-label="Delete category"
+                        className="btn btn-ghost p-1"
+                      >
+                        <BinSvg className="w-6 h-6 text-red-600" />
+                      </button>
+                    </div>
+                  ) : (
                     <div className="flex space-x-2">
                       <input
                         type="text"
@@ -220,11 +238,7 @@ function CreateEventModal(props) {
                         value={newCategoryInput}
                         onChange={(e) => setNewCategoryInput(e.target.value)}
                       />
-                      <button
-                        type="button"
-                        onClick={handleAddCategory}
-                        className="btn btn-primary"
-                      >
+                      <button type="button" onClick={handleAddCategory} className="btn btn-primary">
                         Add
                       </button>
                       <button
@@ -241,25 +255,22 @@ function CreateEventModal(props) {
                   )}
                 </div>
 
-              {/* Buttons */}
-              <div className="flex justify-end space-x-2 pt-4">
-                <button
-                  type="button"
-                  onClick={toggleModal}
-                  className="btn btn-ghost"
-                >
-                  Cancel
-                </button>
-                <button type="submit" className="btn btn-primary">
-                  Create
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+                {/* Buttons */}
+                <div className="flex justify-end space-x-2 pt-4">
+                  <button type="button" onClick={toggleModal} className="btn btn-ghost">
+                    Cancel
+                  </button>
+                  <button type="submit" className="btn btn-primary">
+                    Create
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>,
+          document.body
+        ))}
     </>
   );
 }
 
-export default CreateEventModal
+export default CreateEventModal;
