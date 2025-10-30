@@ -14,7 +14,7 @@ const PartnerCardsList = () => {
       try {
         const response = await getAllPartners();
         console.log("LOADED PARTNERS: ", response)
-        setPartners(response.data); // assuming API returns { data: [...] }
+        setPartners(response.data);
       } catch (err) {
         setError("Failed to load partners.");
         console.error(err);
