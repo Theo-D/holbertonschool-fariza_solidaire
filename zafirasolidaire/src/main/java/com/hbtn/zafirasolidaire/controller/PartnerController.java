@@ -75,7 +75,7 @@ public class PartnerController {
     }
 
     // Get all partners
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<Iterable<PartnerDto>> getAllpartners() {
         Iterable<PartnerDto> partnerDtos = partnerFacade.getAllPartners();
         return ResponseEntity.ok(partnerDtos);
