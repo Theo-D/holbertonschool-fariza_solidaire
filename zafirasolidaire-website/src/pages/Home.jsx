@@ -279,53 +279,6 @@ export default function Home() {
           <PartnerCardsList/>
         </div>
 
-
-
-        {/* <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-          <div className="max-w-7xl mx-auto flex flex-col gap-6">
-            <div className="flex items-start gap-4 p-6 rounded-xl border border-slate-200 bg-white shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
-              <img
-                src="../src/assets/images/depositphotos_22922088-stock-photo-business-people-shaking-hands.jpg"
-                alt="Rapide & Efficace"
-                className="w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg shrink-0"
-              />
-              <div className="flex-1">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Rapide & Efficace</h3>
-                <p className="text-gray-600">
-                  Une performance optimale pour vous faire gagner un temps précieux au quotidien.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-row-reverse gap-4 p-6 rounded-xl border border-slate-200 bg-white shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
-              <img
-                src="../src/assets/images/depositphotos_52470619-stock-photo-business-people-working-in-office.jpg"
-                alt="Sécurisé"
-                className="w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg shrink-0"
-              />
-              <div className="flex-1">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Sécurisé</h3>
-                <p className="text-gray-600">
-                  Vos données sont protégées avec les dernières technologies de sécurité.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 p-6 rounded-xl border border-slate-200 bg-white shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
-              <img
-                src="../src/assets/images/depositphotos_358868640-stock-photo-overhead-view-recruiter-resume-colleagues.jpg"
-                alt="Innovant"
-                className="w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg shrink-0"
-              />
-              <div className="flex-1">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Innovant</h3>
-                <p className="text-gray-600">
-                  Des fonctionnalités de pointe pour rester à la tête de votre secteur.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section> */}
         <section className="py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="rounded-3xl p-12 text-center text-white relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #42AAE1 0%, #E82B89 50%, #FCD916 100%)' }}>
