@@ -8,6 +8,7 @@ import Admin from "../pages/Admin";
 import Register from "../pages/Register";
 import Blog from "../pages/Blog";
 import Contact from "../pages/Contact";
+import Volunteer from "../pages/Volunteer";
 
 export default function AppRouter() {
   return (
@@ -28,6 +29,7 @@ export default function AppRouter() {
           <Route path="/register" element={<Register />} />
           <Route path="/blog/:documentId" element={<Blog />} />
           <Route path="/contact" element={<Contact/>} />
+          <Route path="/volunteer" element={<Volunteer/>} />
         </Routes>
       </Router>
     </AuthProvider>
