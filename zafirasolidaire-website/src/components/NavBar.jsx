@@ -6,14 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 
 const NavBar = () => {
-    //const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const {user, hasRole, logout} = useAuth();
     const navigate = useNavigate();
-
-    const handleLogin = async () => {
-        await logout();
-        navigate("/home");
-    }
 
     return (
         <nav className="bg-white backdrop-blur-md shadow-sm fixed w-full top-0 z-49">
@@ -35,10 +29,9 @@ const NavBar = () => {
                     </div>
 
                     <div className="hidden md:flex space-x-8">
-                        <a href="#features" className="text-gray-700 hover:text-[#42AAE1] transition-colors">Notre mission</a>
-                        <a href="#about" className="text-gray-700 hover:text-[#E82B89] transition-colors">À propos</a>
-                        <Link to="/blog" className="text-gray-700 hover:text-[#FCD916] transition-colors">Blogs</Link>
-                         <Link to = "/contatct" className="text-gray-700 hover:text-[#42AAE1] transition-colors">Contact</Link>
+                        <Link to="/volunteer" className="text-gray-700 hover:text-[#FCD916] transition-colors">Bénévoles</Link>
+                        <Link to="/blog" className="text-gray-700 hover:text-[#42AAE1] transition-colors">Blogs</Link>
+                        <Link to = "/contatct" className="text-gray-700 hover:text-[#E82B89] transition-colors">Contact</Link>
                     </div>
 
                     { !user && (
@@ -59,30 +52,8 @@ const NavBar = () => {
                         </button>
                         </div>
                     )}
-
-                    {/* <button
-                        className="md:hidden"
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    >
-                        {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                    </button> */}
                 </div>
             </div>
-
-            {/* {mobileMenuOpen && (
-                <div className="md:hidden bg-white border-t">
-                    <div className="px-4 pt-2 pb-4 space-y-2">
-                        <a href="#features" className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-slate-50">Notre mission</a>
-                        <a href="#about" className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-slate-50">À propos</a>
-                        <Link to="/blog" className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-slate-50">Blogs</Link>
-                        <a href="#contact" className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-slate-50">Contact</a>
-
-                        <button className="w-full px-6 py-2 rounded-lg text-white font-medium" style={{ backgroundColor: '#E82B89' }}>
-                            Se connecter
-                        </button>
-                    </div>
-                </div>
-            )} */}
         </nav>
     );
 

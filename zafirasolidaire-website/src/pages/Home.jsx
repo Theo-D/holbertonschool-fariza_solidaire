@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { Zap, Shield, Sparkles, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ClothingCounter from '../components/ClothingCounter';
 import ServicedCounter from '../components/ServicedCounter';
 import PageLayout from '../components/PageLayout';
 import PartnerCardsList from '../components/PartnerCardsList';
+import ContactFormModal from '../components/ContactFormModal';
 
 export default function Home() {
 
+  const modalRef = useRef(null);
+  const navigate = useNavigate();
+
+  const handleOpen = () => {
+    if (modalRef.current) {
+      modalRef.current.showModal();
+    }
+  };
+
+  const handleClose = () => {
+    if (modalRef.current) {
+      modalRef.current.close();
+    }
+  };
 
   return (
     <PageLayout>
@@ -286,16 +302,28 @@ export default function Home() {
                 <h2 className="text-4xl font-bold mb-6">Vous voulez rejoindre l’aventure ?</h2>
                 <p className="text-xl font-semibold mb-3 opacity-95">Vous êtes une entreprise, une fondation, une collectivité, un acteur social ou un particulier engagé ?</p>
                 <p className="text-xl mb-3 opacity-95">Vous croyez en une solidarité concrète, badass et durable ?</p>
-                <p className="text-xl mb-3 opacity-95">Alors contactez-nous:</p>
-                <button
-                  className="btn btn-soft btn-warning w-75"
-                  onClick={() => {
-                    navigator.clipboard.writeText("fariza.solidaire@email.com");
-                    alert("Adresse mail copiée dans le presse-papier");
-                  }}
-                >
-                  <p className='text-xl'>fariza.solidaire@email.com</p>
-                </button>
+                <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 mt-7'>
+                  <div>
+                    <p className="text-xl mb-3 opacity-95">Alors devenez bénévole :</p>
+                    <button
+                      className="btn btn-soft btn-warning w-75 pb-1"
+                      onClick={() => navigate("/volunteer")}
+                    >
+                      <p className='text-xl'>Je suis intéressé·e</p>
+                    </button>
+                  </div>
+
+                  <div className='text-black'>
+                    <p className="text-xl mb-3 opacity-95 text-white">Ou contactez-nous:</p>
+                    <button
+                      className="btn btn-soft btn-warning w-75 pb-1"
+                      onClick={handleOpen}
+                    >
+                      <p className='text-xl'>fariza.solidaire@email.com</p>
+                    </button>
+                    <ContactFormModal ref={modalRef} onClose={handleClose} />
+                  </div>
+                </div>
 
               </div>
               {/* Decorative circles */}
