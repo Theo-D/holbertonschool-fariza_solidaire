@@ -19,7 +19,6 @@ The Zafira Solidaire MVP was successfully developed and includes the following f
   - Number of people assisted
   - Automatic refresh every 30 seconds
 - **Protected admin dashboard** featuring:
-  - Real-time statistics
   - Quick action buttons for management
   - Role-based route protection
 - **Responsive navigation** with mobile menu
@@ -37,6 +36,7 @@ The Zafira Solidaire MVP was successfully developed and includes the following f
 | Real-time statistics display | ✅ Achieved | Animated counters with auto-refresh |
 | Functional admin dashboard | ✅ Achieved | Complete interface with protection |
 | Spring Boot API integration | ✅ Achieved | Operational front-back communication |
+| Strapi integration | ✅ Achieved | External dynamic content-management |
 | User testing | ⚠️ Partial | Internal tests completed, external tests pending |
 
 ### 1.3 Key Metrics and Performance Indicators
@@ -53,7 +53,6 @@ The Zafira Solidaire MVP was successfully developed and includes the following f
 - ✅ Interface deemed "intuitive" and "modern"
 - ✅ Clear and smooth navigation
 - ✅ Branding appreciated
-- ⚠️ Need to improve CORS/403 error messages
 
 ---
 
@@ -145,6 +144,7 @@ The Zafira Solidaire MVP was successfully developed and includes the following f
    - Fix identified bugs
    - Improve error messages
    - Performance optimization
+   - Mail verification on registration
 
 2. 🚀 **Medium term (1-3 months)**
    - Add new features (requested by users)
@@ -160,8 +160,8 @@ The Zafira Solidaire MVP was successfully developed and includes the following f
 
 ---
 
-**Document Date**: [Current Date]  
-**Project Team**: [Team Member Names]  
+**Document Date**: November, 3rd 2025
+**Project Team**: Théo DESSAIGNE & Ancelin CHEVALLIER
 **MVP Status**: ✅ **OPERATIONAL**
 
 ---
@@ -183,7 +183,8 @@ The Zafira Solidaire MVP was successfully developed and includes the following f
 
 - Spring Boot
 - JWT Authentication
-- MySQL/PostgreSQL
+- MySQL/Hibernate
+- Strapi (content management)
 - Maven
 
 ### 4.2 Key Decisions
