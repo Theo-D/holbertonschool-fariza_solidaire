@@ -30,6 +30,7 @@ const NavBar = () => {
 
                     <div className="hidden md:flex space-x-8">
                         <Link to="/volunteer" className="text-gray-700 hover:text-[#FCD916] transition-colors">Bénévoles</Link>
+                        <Link to="/events" className="text-gray-700 hover:text-[#FCD916] transition-colors">Évènements</Link>
                         <Link to="/blog" className="text-gray-700 hover:text-[#42AAE1] transition-colors">Blogs</Link>
                         <Link to = "/contatct" className="text-gray-700 hover:text-[#E82B89] transition-colors">Contact</Link>
                     </div>
