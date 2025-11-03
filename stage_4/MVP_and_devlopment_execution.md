@@ -19,7 +19,7 @@ This sprint uses the **MoSCoW prioritization framework** to categorize tasks:
 
 ---
 
-## ✅ Must Have (M)
+## ✅ Must Have
 | ID | Task | Description | Status |
 |----|-------|-------------|--------|
 | M1 | Beneficiary account| A beneficiary must be able to create a secure account | Done |
@@ -29,14 +29,14 @@ This sprint uses the **MoSCoW prioritization framework** to categorize tasks:
 
 ---
 
-## 💪 Should Have (S)
+## Should Have
 | ID | Task | Description | Status |
 |----|-------|-------------|-------|
 | S1 | Image upload | The admin should be able to illustrate Blog Posts or events when needed | Done |
 
 ---
 
-## 🌟 Could Have (C)
+## Could Have
 | ID | Task | Description |  Status |
 |----|-------|-------------|--------|
 | C1 | Email Validation | The user should be able to validate his email by receiving an email verification | To be Done |
@@ -45,19 +45,17 @@ This sprint uses the **MoSCoW prioritization framework** to categorize tasks:
 
 ---
 
-## 🚫 Won’t Have (W)
+## Won’t Have
 | ID | Task | Description | Reason for Deprioritization |
 |----|-------|-------------|-----------------------------|
 | W1 | Beneficiary Reviews | A beneficiary should be able to leave reviews to talk about his experience | Lack of time and unclear user business role |
 | W2 | Reviews management | The admin should be able to validate revioews before they are displayed to the website | Beneficiary Reviews were deprioritized|
 
-> ❌ Agreed to defer for future sprints.
-
 ---
 
-## 📈 Sprint Organization
+## Sprint Organization
 | Application section | Time required | Notes |
-|--------|---------|---------|-------|
+|--------|---------|---------|
 | Springboot Backend | 2.5 week | Took longer than initially expected |
 | React Front End| 1.5 week | Aligned with previsions |
 | Strapi integration | 0.5 week | Unexpected addition for simplicity sake |
