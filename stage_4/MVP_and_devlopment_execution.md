@@ -65,7 +65,7 @@ This sprint uses the **MoSCoW prioritization framework** to categorize tasks:
 ## Retrospective Notes
 - **What went well:**
   - The backend is fonctionnal and reliable.
-  - Front end integration went well not major .
+  - Front end integration went well no major roadblock.
 - **What could be improved:**
   - Time management because of the burden of learning a new language and environment.
   - Team communication.
