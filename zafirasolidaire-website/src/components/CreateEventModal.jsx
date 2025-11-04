@@ -104,7 +104,7 @@ function CreateEventModal(props) {
   return (
     <>
       <button
-        className="btn btn-primary"
+        className="btn btn-info bg-yellow-300"
         onClick={toggleModal}
         aria-haspopup="dialog"
         aria-expanded={open}

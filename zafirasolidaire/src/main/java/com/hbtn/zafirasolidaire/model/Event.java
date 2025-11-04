@@ -25,7 +25,7 @@ public class Event extends BaseModel {
     private EventCategory category;
 
     @NotNull
-    @Future(message = "Event date must be in the future")
+    //@Future(message = "Event date must be in the future")
     @Column(name = "event_date", nullable = false)
     private LocalDateTime date;
 

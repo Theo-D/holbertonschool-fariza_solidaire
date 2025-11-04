@@ -8,7 +8,7 @@ const AdminDock = ({ activeSection, setActiveSection }) => {
         }`}
       >
         <span className="text-xl">👤</span>
-        <span className="text-sm">Users</span>
+        <span className="text-sm">Utilisateurs</span>
       </button>
 
       <button
@@ -18,7 +18,7 @@ const AdminDock = ({ activeSection, setActiveSection }) => {
         }`}
       >
         <span className="text-xl">📅</span>
-        <span className="text-sm">Events</span>
+        <span className="text-sm">Évènements</span>
       </button>
 
       <button
@@ -28,7 +28,7 @@ const AdminDock = ({ activeSection, setActiveSection }) => {
         }`}
       >
         <span className="text-xl">🤝</span>
-        <span className="text-sm">Partners</span>
+        <span className="text-sm">Partenaires</span>
       </button>
 
       <button

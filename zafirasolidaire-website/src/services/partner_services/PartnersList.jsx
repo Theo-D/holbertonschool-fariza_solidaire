@@ -88,21 +88,21 @@ const PartnersList = () => {
       <div className="mb-4 flex gap-2 flex-wrap">
         <input
           type="text"
-          placeholder="Partner name"
+          placeholder="Nom du partneraire"
           value={newPartnerName}
           onChange={(e) => setNewPartnerName(e.target.value)}
           className="border p-2 rounded"
         />
         <input
           type="text"
-          placeholder="Homepage URL"
+          placeholder="Page d'accueil"
           value={newPartnerHomepage}
           onChange={(e) => setNewPartnerHomepage(e.target.value)}
           className="border p-2 rounded"
         />
         <input
           type="text"
-          placeholder="Logo URL"
+          placeholder="Lien du logo"
           value={newPartnerLogo}
           onChange={(e) => setNewPartnerLogo(e.target.value)}
           className="border p-2 rounded"
@@ -111,7 +111,7 @@ const PartnersList = () => {
           onClick={handleAddPartner}
           className="bg-blue-500 text-white px-4 rounded hover:bg-blue-600"
         >
-          Add Partner
+          Ajouter Partneraire
         </button>
       </div>
 
@@ -132,7 +132,7 @@ const PartnersList = () => {
             <li
               key={partner.id}
               onClick={() => openEditModal(partner)}
-              className="flex items-center justify-between bg-white rounded-lg p-4 shadow w-80 border border-gray-300 overflow-hidden cursor-pointer hover:shadow-lg transition"
+              className="bg-white rounded-lg p-4 shadow w-80 border border-gray-300 overflow-hidden cursor-pointer hover:shadow-lg transition flex flex-col"
             >
               <div className="flex items-center space-x-4 flex-1 min-w-0">
                 <img
@@ -160,13 +160,13 @@ const PartnersList = () => {
                 </div>
               </div>
               <button
-                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                className=" bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-sm font-semibold transition w-1/3 self-center mt-2"
                 onClick={(e) => {
                   e.stopPropagation(); // prevent modal
                   handleDelete(partner.id);
                 }}
               >
-                Delete
+                Supprimer
               </button>
             </li>
           ))}
@@ -200,7 +200,7 @@ const PartnersList = () => {
                 onChange={(e) =>
                   setSelectedPartner({ ...selectedPartner, homepageUrl: e.target.value })
                 }
-                placeholder="Homepage URL"
+                placeholder="Page d'accueil"
                 className="border p-2 rounded"
               />
               <input

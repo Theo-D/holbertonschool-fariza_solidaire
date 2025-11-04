@@ -34,7 +34,6 @@ const UserList = () => {
 
     try {
       const updatedUser = { ...currentUser, isServiced: newServicedState };
-      console.log("UPDATED USER: ", updatedUser);
       await updateUser(updatedUser.userId, updatedUser);
 
       if (newServicedState) {
@@ -75,63 +74,74 @@ const UserList = () => {
   }
 
   return (
-    <ul className="list-none bg-base-100 rounded-box shadow-md flex flex-wrap gap-4 p-4 justify-center border border-gray-800 w-300">
-      {users.map((user) => {
-        const isServiced = user.isServiced;
+    <div className="p-4">
+      {users.length === 0 ? (
+        <div className="text-gray-700 bg-gray-100 p-4 rounded shadow text-center">
+          Aucun utilisateur pour le moment
+        </div>
+      ) : (
+        <ul className="list-none flex flex-wrap gap-4 p-4 justify-center">
+          {users
+            .filter((user) => !user.isAdmin)
+            .map((user) => {
+            const isServiced = user.isServiced;
 
-        const buttonClass = `btn btn-active w-28 ${
-          isServiced ? 'bg-green-600 text-gray-900' : 'bg-red-700 text-gray-300 '
-        }`;
+            return (
+              <li
+                key={user.userId}
+                className="bg-white rounded-lg p-4 shadow w-80 border border-gray-300 overflow-hidden cursor-pointer hover:shadow-lg transition"
+              >
+                <div className="flex items-center space-x-4 mb-3">
+                  <img
+                    className="w-12 h-12 rounded-full object-cover shrink-0 border border-gray-200"
+                    src={user.photoUrl || '/default-user.png'}
+                    alt={`${user.firstName} ${user.lastName}`}
+                  />
+                  <div className="min-w-0">
+                    <h3 className="font-bold truncate text-gray-800">
+                      {user.firstName} {user.lastName}
+                    </h3>
+                    <p className="text-sm text-gray-600 truncate">{user.emailaddress}</p>
+                  </div>
+                </div>
 
-        return (
-          <li
-            className="flex items-center space-x-4 bg-white rounded-lg p-4 shadow w-88 border border-gray-800"
-            key={user.userId}
-            onClick={() => console.log(`This user is ${user.firstName} ${user.lastName} and his id is ${user.userId}`)}
-          >
-            <img
-              className="w-10 h-10 rounded-full object-cover"
-              src={user.photoUrl || '/default-user.png'}
-              alt="user photo"
-            />
-            <div className="grow">
-              <div>{user.firstName} {user.lastName}</div>
-              <div className="text-xs font-semibold opacity-60">{user.emailaddress}</div>
-            </div>
+                {!user.isAdmin && (
+                  <div className="flex gap-2 justify-start">
+                    <button
+                      className={`flex-1 px-3 py-1 rounded text-sm font-semibold transition ${
+                        isServiced
+                          ? 'bg-green-500 text-white hover:bg-green-600'
+                          : 'bg-red-500 text-white hover:bg-red-600'
+                      }`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleServiced(user.userId);
+                      }}
+                    >
+                      {isServiced ? 'Accompagné' : 'À accompagner'}
+                    </button>
 
-            {!user.isAdmin && (
-              <>
-                <button
-                  className={buttonClass}
-                  onClick={() => toggleServiced(user.userId)}
-                >
-                  {isServiced ? 'Serviced' : 'Mark as Serviced'}
-                </button>
+                    <button
+                      className="flex-1 bg-gray-200 text-red-600 px-3 py-1 rounded hover:bg-red-100 text-sm font-semibold"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(user.userId);
+                      }}
+                      aria-label={`Delete ${user.firstName} ${user.lastName}`}
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                )}
+              </li>
 
-                <button
-                  className="btn btn-square btn-ghost"
-                  onClick={() => handleDelete(user.userId)}
-                  aria-label={`Delete ${user.firstName} ${user.lastName}`}
-                >
-                  <svg
-                    className="w-5 h-5 text-red-600"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18" strokeLinecap="round" strokeLinejoin="round" />
-                    <line x1="6" y1="6" x2="18" y2="18" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-              </>
-            )}
-          </li>
-        );
-      })}
-    </ul>
+            );
+          })}
+        </ul>
+      )}
+    </div>
   );
+
 };
 
 export default UserList;
