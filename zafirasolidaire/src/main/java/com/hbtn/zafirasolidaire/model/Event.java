@@ -24,6 +24,7 @@ public class Event extends BaseModel {
     @JoinColumn(name = "event_category_id", nullable = false)
     private EventCategory category;
 
+    //TO DO: Commenting @Future is for testing only
     @NotNull
     //@Future(message = "Event date must be in the future")
     @Column(name = "event_date", nullable = false)

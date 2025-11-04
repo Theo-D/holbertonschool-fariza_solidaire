@@ -26,10 +26,9 @@ public class AdminInitializer implements CommandLineRunner {
             User newAdmin = new User().setEmailAddress(adminEmail)
                                       .setFirstName("Admin")
                                       .setLastName("Admin")
-                                      .setPassword("$2a$10$SwTJTi4SgyinjjLo3rbUreEV8l6qPz5t13ykp.ox0yGoo7qgJ28k2")
+                                      .setPassword("$2a$10$gU4Jgnrfhk6baOIAL6s.dOVVt6TCucGFIN5CAQrTe5WnWngimE9Ku")
                                       .setIsAdmin(true);
             userRepository.save(newAdmin);
         }
     }
-
 }

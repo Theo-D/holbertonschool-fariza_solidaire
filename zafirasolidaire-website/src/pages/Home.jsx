@@ -63,7 +63,7 @@ export default function Home() {
         <div className="card card-side bg-base-100 mr-10 ml-10 mb-20 shadow-md ">
           <figure className='h1/5 shrink-0'>
             <img
-              src="https://media.gettyimages.com/id/1591572504/fr/photo/des-femmes-daffaires-joyeuses-se-serrant-la-main-dans-la-salle-de-r%C3%A9union.jpg?s=612x612&w=0&k=20&c=nS3XDIn0n5fS07FH1yEU6jdNeEaEmwEkpO2jodR9d6o="
+              src="/img/placeholder1.jpg"
               alt="Movie"
               className='object-cover w-full h-full rounded-r-none'
               />
@@ -101,7 +101,7 @@ export default function Home() {
         <div className="card flex-row-reverse bg-base-100 mr-10 ml-10 mt-20 mb-20 shadow-md rounded-xl overflow-hidden">
           <figure className="w-1/3 shrink-0 rounded-none! m-0!">
             <img
-              src="https://media.gettyimages.com/id/1591572504/fr/photo/des-femmes-daffaires-joyeuses-se-serrant-la-main-dans-la-salle-de-r%C3%A9union.jpg?s=612x612&w=0&k=20&c=nS3XDIn0n5fS07FH1yEU6jdNeEaEmwEkpO2jodR9d6o="
+              src="/img/placeholder3.jpg"
               alt="Movie"
               className="object-cover w-full h-full rounded-none!"
             />
@@ -253,7 +253,7 @@ export default function Home() {
         <div className="card card-side bg-base-100 mr-10 ml-10  mt-20 mb-5 shadow-md ">
           <figure className='h1/5 shrink-0'>
             <img
-              src="https://media.gettyimages.com/id/1591572504/fr/photo/des-femmes-daffaires-joyeuses-se-serrant-la-main-dans-la-salle-de-r%C3%A9union.jpg?s=612x612&w=0&k=20&c=nS3XDIn0n5fS07FH1yEU6jdNeEaEmwEkpO2jodR9d6o="
+              src="/img/placeholder2.jpg"
               alt="Movie"
               className='object-cover w-full h-full rounded-r-none'
               />
