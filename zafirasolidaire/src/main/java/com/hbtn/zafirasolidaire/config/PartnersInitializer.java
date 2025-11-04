@@ -17,7 +17,7 @@ public class PartnersInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        final String IMG_URL = "https://www.centre-inffo.fr/content/uploads/2018/09/logo-partenaire-region-auvergne-rhone-alpes-rvb-bleu-gris.png";
+        final String IMG_URL = "https://www.aulnay-sous-bois.fr/wp-content/themes/aulnay-sous-bois/images/logo/logo.png";
         if (partnerRepository.count() == 0) {
             Partner[] partners = {
                 new Partner()

@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { getAllBlogPosts, deleteBlogPostById } from "./blogApi";
 import { PLACEHOLDERS } from "../../components/imgPlaceholder";
 
-const BlogList = ({ redirectUrl = "/some-page" }) => {
+const BlogList = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const STRAPI_REDIRECT = "http://localhost:1337/admin/content-manager/collection-types/api::blog-post.blog-post?page=1&pageSize=10&sort=title%3AASC";
+  const STRAPI_REDIRECT = "http://localhost:1337/admin/content-manager/collection-types/api::blog-post.blog-post?page=1&pageSize=10&sort=documentId%3AASC";
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -41,95 +41,87 @@ const BlogList = ({ redirectUrl = "/some-page" }) => {
   if (loading) return <p>Loading posts...</p>;
 
   return (
-    <div>
-      <h1>Blog Posts</h1>
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4 text-center">Articles de Blog</h1>
 
-      <button
-        style={{ marginBottom: "1rem" }}
-        onClick={() => navigate(redirectUrl)}
-      >
-        Go to Redirect Page
-      </button>
-
+      {/* Blog posts list */}
       {posts.length === 0 ? (
-        <p>No posts found.</p>
+        <div className="text-gray-700 bg-gray-100 p-4 rounded shadow text-center">
+          Pas d'articles trouvés.
+        </div>
       ) : (
-        <ul style={{ listStyle: "none", padding: 0 }}>
-          {console.log("POSTS: ", posts)}
+        <ul className="list-none flex flex-wrap gap-4 justify-center">
           {posts.map((post) => {
-          if (!post) return null;
+            if (!post) return null;
 
-          return (
-            <li
-              key={post.id}
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "8px",
-                padding: "1rem",
-                marginBottom: "1rem",
-              }}
-            >
-              <h2>{post.title || "Untitled Post"}</h2>
-              <p>{post.createdAt ? new Date(post.createdAt).toLocaleDateString() : ""}</p>
+            const imageUrl = post.photo?.url
+              ? post.photo.url.startsWith("http")
+                ? post.photo.url
+                : `http://localhost:1337${post.photo.url}`
+              : PLACEHOLDERS.blog;
 
-              {post.photo?.url && (
+            return (
+              <li
+                key={post.id}
+                className="flex flex-col bg-white rounded-lg p-4 shadow w-80 border border-gray-300 overflow-hidden hover:shadow-lg transition"
+              >
+                {/* Image at the top */}
                 <img
-                  src={
-                    post.photo?.url
-                      ? post.photo.url.startsWith("http")
-                        ? post.photo.url
-                        : `http://localhost:1337${post.photo.url}`
-                      : PLACEHOLDERS.blog
-                  }
+                  src={imageUrl}
+                  alt={post.title || "Blog Post"}
+                  className="w-full h-40 object-cover rounded-md mb-3"
                 />
-              )}
 
-              <div style={{ marginTop: "0.5rem" }}>
-                <button
-                  onClick={() => navigate(`/blog/${post.documentId}`)}
-                  style={{
-                    marginRight: "0.5rem",
-                    padding: "0.5rem 1rem",
-                    borderRadius: "4px",
-                    cursor: "pointer",
-                  }}
-                >
-                  View Article
-                </button>
+                {/* Text in the middle */}
+                <div className="flex-1">
+                  <h2 className="font-bold text-lg truncate">
+                    {post.title || "Untitled Post"}
+                  </h2>
+                  <p className="text-sm text-gray-600 mb-2">
+                    {post.createdAt
+                      ? new Date(post.createdAt).toLocaleDateString()
+                      : ""}
+                  </p>
+                </div>
 
-                <button
-                  onClick={() => handleDelete(post.id)}
-                  style={{
-                    backgroundColor: "red",
-                    color: "white",
-                    border: "none",
-                    padding: "0.5rem 1rem",
-                    borderRadius: "4px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          );
-        })}
+                {/* Buttons at the bottom */}
+                <div className="flex justify-between mt-3">
+                  <button
+                    onClick={() => navigate(`/blog/${post.documentId}`)}
+                    className="flex-1 bg-blue-500 text-white px-3 py-1 rounded text-sm font-semibold hover:bg-blue-600 transition mr-2"
+                  >
+                    Vers l'article
+                  </button>
+                  <button
+                    onClick={() => handleDelete(post.id)}
+                    className="flex-1 bg-red-500 text-white px-3 py-1 rounded text-sm font-semibold hover:bg-red-600 transition"
+                  >
+                    Supprimer
+                  </button>
+                </div>
+              </li>
+
+            );
+          })}
         </ul>
       )}
-      <button
-        className="btn btn-secondary"
-        onClick={() => {
-          if (STRAPI_REDIRECT) {
-            window.open(STRAPI_REDIRECT, '_blank', 'noopener,noreferrer');
-          } else {
-            console.warn("URL de redirection manquante.");
-          }
-        }}
-      >
-        Nouvel article
-      </button>
+      <div className="my-20 flex justify-center">
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+          onClick={() => {
+            if (STRAPI_REDIRECT) {
+              window.open(STRAPI_REDIRECT, '_blank', 'noopener,noreferrer');
+            } else {
+              console.warn("URL de redirection manquante.");
+            }
+          }}
+        >
+          Nouvel article
+        </button>
+      </div>
     </div>
   );
+
 };
 
 export default BlogList;

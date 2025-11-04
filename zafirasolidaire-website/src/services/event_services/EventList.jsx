@@ -11,6 +11,8 @@ const EventList = () => {
     const [error, setError] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
 
+    const sortedEvents = [...events].sort((a, b) => new Date(a.date) - new Date(b.date));
+
     async function loadEvents() {
         try {
             const res = await getEvents();
@@ -52,83 +54,117 @@ const EventList = () => {
 
     return (
         <div className="p-4">
-            {/* Add Event Button */}
-            <div className="mb-4 flex justify-center">
-                <CreateEventModal onEventCreated={loadEvents} />
-            </div>
-
             {error && (
-                <div className="text-red-600 bg-red-100 p-4 rounded shadow mb-4">
-                    <strong>Error:</strong> {error}
-                </div>
+            <div className="text-red-600 bg-red-100 p-4 rounded shadow mb-4">
+                <strong>Error:</strong> {error}
+            </div>
             )}
 
             {events.length === 0 ? (
-                <div className="text-gray-700 bg-gray-100 p-4 rounded shadow text-center">
-                    No existing events
-                </div>
+            <div className="text-gray-700 bg-gray-100 p-4 rounded shadow text-center">
+                Pas encore d'évènements
+            </div>
             ) : (
-                <ul className="list-none flex flex-wrap gap-4 justify-center">
-                    {events.map((myEvent) => (
-                        <li
-                            key={myEvent.id}
-                            className="flex items-center justify-between bg-white rounded-lg p-4 shadow w-80 overflow-hidden cursor-pointer hover:shadow-lg"
-                            onClick={() => openModal(myEvent)}
-                        >
-                            <div className="flex items-center space-x-4 flex-1 min-w-0">
-                                <img
-                                    className="w-12 h-12 rounded-full object-cover shrink-0"
-                                    src={myEvent.photoUrl || PLACEHOLDERS.event}
-                                    alt="event photo"
-                                />
-                                <div className="min-w-0">
-                                    <h3 className="font-bold truncate">{myEvent.category}</h3>
-                                    <p className="truncate">
-                                        Date: <DateDisplay dateString={myEvent.date} />
-                                    </p>
-                                    <p className="truncate">Capacity: {myEvent.capacity}</p>
-                                    <a
-                                        href = {myEvent.url}
-                                        className="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                    >
-                                        Lien de l'évènement
-                                        <svg className="w-4 h-4 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                                        </svg>
-                                    </a>
-                                    <p className="bg-gray-200 outline">{myEvent.description}</p>
-                                </div>
-                            </div>
+            <ul className="list-none flex flex-wrap gap-4 justify-center">
+                {sortedEvents.map((myEvent) => {
+                    const isPast = new Date(myEvent.date) < new Date();
 
-                            {/* Delete Button */}
-                            <button
-                                className="btn btn-square btn-ghost"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleDelete(myEvent.id);
-                                }}
-                                aria-label={`Delete ${myEvent.id}`}
+                    return (
+                    <li
+                        key={myEvent.id}
+                        className={` rounded-lg p-4 shadow w-80 border border-gray-300 overflow-hidden cursor-pointer hover:shadow-lg transition
+                        ${isPast ? "bg-gray-200" : "bg-white"}`}
+                        onClick={() => openModal(myEvent)}
+                    >
+                        <div className="flex items-center space-x-4 mb-3">
+                        <img
+                            className="w-12 h-12 rounded-full object-cover shrink-0 border border-gray-200"
+                            src={myEvent.photoUrl || PLACEHOLDERS.event}
+                            alt={`${myEvent.category} event`}
+                        />
+                        <div className="min-w-0">
+                            <h3 className="font-bold truncate text-gray-800">{myEvent.category}</h3>
+                            <p className="text-sm text-gray-600 truncate">
+                            <span className="font-medium">Date:</span>{" "}
+                            <DateDisplay dateString={myEvent.date} />
+                            </p>
+                            <p className="text-sm text-gray-600 truncate">
+                            <span className="font-medium">Capacité:</span> {myEvent.capacity}
+                            </p>
+                        </div>
+                        </div>
+
+                        {myEvent.description && (
+                        <p className="text-sm text-gray-700 bg-gray-100 rounded p-2 mb-3 line-clamp-3">
+                            {myEvent.description}
+                        </p>
+                        )}
+
+                        <div className='columns-2 gap-2 sm:columns-2'>
+                            {myEvent.url && (
+                            <a
+                                href={myEvent.url}
+                                target="_blank"
+                                rel="noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                className="text-blue-500 text-sm font-medium hover:underline inline-flex items-center mb-3"
                             >
+                                Voir l'évènement
                                 <svg
-                                    className="w-5 h-5 text-red-600"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth={2}
+                                className="w-4 h-4 ml-1"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 14 10"
                                 >
-                                    <line x1="18" y1="6" x2="6" y2="18" strokeLinecap="round" strokeLinejoin="round" />
-                                    <line x1="6" y1="6" x2="18" y2="18" strokeLinecap="round" strokeLinejoin="round" />
+                                <path
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M1 5h12m0 0L9 1m4 4L9 9"
+                                />
                                 </svg>
-                            </button>
-                        </li>
-                    ))}
+                            </a>
+                            )}
+                            {isPast && <p className="text-red-500">Évènement passé</p>}
+                        </div>
+
+                        <div className="flex gap-2 justify-start">
+                        <button
+                            className="flex-1 bg-blue-500 text-white px-3 py-1 rounded text-sm font-semibold hover:bg-blue-600 transition"
+                            onClick={(e) => {
+                            e.stopPropagation();
+                            openModal(myEvent);
+                            }}
+                        >
+                            Edit
+                        </button>
+                        <button
+                            className="flex-1 bg-red-500 text-white px-3 py-1 rounded text-sm font-semibold hover:bg-red-600 transition"
+                            onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete(myEvent.id);
+                            }}
+                            aria-label={`Delete event ${myEvent.id}`}
+                        >
+                            Supprimer
+                        </button>
+                        </div>
+                    </li>
+                    );
+                })}
                 </ul>
+
             )}
 
+            {/* Dialog Modal */}
             <DialogModal selectedEvent={selectedEvent} setSelectedEvent={setSelectedEvent} />
+            <div className="my-20 flex justify-center">
+            <CreateEventModal onEventCreated={loadEvents} />
+            </div>
         </div>
     );
+
 };
 
 export default EventList;

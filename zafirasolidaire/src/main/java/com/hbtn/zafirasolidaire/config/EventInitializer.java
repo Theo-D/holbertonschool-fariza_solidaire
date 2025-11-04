@@ -39,6 +39,13 @@ public class EventInitializer implements CommandLineRunner {
 
         List < Event > events = List.of(
             new Event().setCategory(eventCategoryRepository.findByName("Vestiaire professionnel").orElseThrow(() -> new RuntimeException("Category not found")))
+            .setDate(LocalDateTime.now().minusDays(60))
+            .setCapacity(100)
+            .setUrl("https://example.com/event1")
+            .setDescription("Join us for a professional wardrobe session to refresh your style and confidence.")
+            .setPhoto(new Photo().setUrl("https://www.placeholderimage.eu/api/100/100")),
+
+            new Event().setCategory(eventCategoryRepository.findByName("Vestiaire professionnel").orElseThrow(() -> new RuntimeException("Category not found")))
             .setDate(LocalDateTime.now().plusDays(5))
             .setCapacity(100)
             .setUrl("https://example.com/event1")
