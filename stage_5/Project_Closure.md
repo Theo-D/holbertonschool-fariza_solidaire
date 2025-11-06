@@ -86,12 +86,15 @@ The Zafira Solidaire MVP was successfully developed and includes the following f
 
 | Challenge | Impact | Solution Applied | Result |
 |-----------|--------|-----------------|--------|
-| **CORS errors (403)** | ⚠️ Medium | CORS configuration in Spring Boot + `@CrossOrigin` | ✅ Resolved |
-| **Unknown Tailwind classes** | ⚠️ Medium | Migration from `@import "tailwindcss"` to `@tailwind base/components/utilities` | ✅ Resolved |
-| **`@apply` issue with gradients** | 🔴 High | Replaced with pure CSS for complex gradients | ✅ Resolved |
-| **Admin route protection** | 🔴 High | Created `ProtectedRoute` + backend verification | ✅ Resolved |
-| **JWT token management** | ⚠️ Medium | Axios interceptors + localStorage | ✅ Resolved |
-| **Responsive design** | 🟡 Low | Used Tailwind breakpoints (`md:`, `lg:`) | ✅ Resolved |
+| **CORS errors (403)** | ⚠️ Medium | CORS configuration in Spring Boot + `@CrossOrigin` | ✅ Efficient security config |
+| **Unknown Tailwind classes** | ⚠️ Medium | Migration from `@import "tailwindcss"` to `@tailwind base/components/utilities` | ✅ functioning imports |
+| **`@apply` issue with gradients** | 🔴 High | Replaced with pure CSS for complex gradients | ✅ Solved version compatibity conflicts |
+| **Admin route protection** | 🔴 High | Created `ProtectedRoute` + backend verification | ✅ Ensure proper access |
+| **JWT token management** | ⚠️ Medium | Axios interceptors + localStorage | ✅ Proper issuance of tokens |
+|  |
+| **Better time management** | ⚠️ Medium | Allocate less time for testing simple features | ✅ Time savings at the start of the project |
+| **Stay focused on current feature** | ⚠️ Medium | Enforce respect of the chosen commit strategy | ✅ More structured workflow |
+| **Not developing heavy features from scratch** | 🔴 High | Reliance on Strapi for Blog logic | ✅ Faster prototyping and integration |
 
 ### 2.3 Unresolved Difficulties / Pending Items
 
