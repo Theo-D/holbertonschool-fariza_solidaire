@@ -64,7 +64,7 @@ export default function Home() {
           </section>
 
           {/* LEFT HAND SIDE CARD */}
-          <div className="card card-side bg-base-100 mr-10 ml-10 mb-20 shadow-md ">
+          <div className="card card-side bg-white/75 mr-10 ml-10 mb-20 shadow-md ">
             <figure className='h1/5 shrink-0'>
               <img
                 src="/img/placeholder1.jpg"
@@ -102,7 +102,7 @@ export default function Home() {
           </div>
 
           {/* RIGHT HAND SIDE CARD */}
-          <div className="card flex-row-reverse bg-base-100 mr-10 ml-10 mt-20 mb-20 shadow-md rounded-xl overflow-hidden">
+          <div className="card flex-row-reverse bg-white/75 mr-10 ml-10 mt-20 mb-20 shadow-md rounded-xl overflow-hidden">
             <figure className="w-1/3 shrink-0 rounded-none! m-0!">
               <img
                 src="/img/placeholder3.jpg"
@@ -149,7 +149,7 @@ export default function Home() {
 
           <div className="flex w-full h-[400px] gap-6">
             {/* Person Card - 1/3 width */}
-            <div className="w-1/3 bg-white flex flex-row rounded-xl shadow-lg ml-10 overflow-hidden">
+            <div className="w-1/3 bg-white/75 flex flex-row rounded-xl shadow-lg ml-10 overflow-hidden">
               <div className="w-1/2 m-3">
                 <img
                   src="https://marisca.fr/wp-content/uploads/2025/08/PORTRAIT-MARISCA-scaled.jpg"
@@ -173,7 +173,7 @@ export default function Home() {
 
 
             {/* Content Div - 2/3 width */}
-            <div className="w-2/3 bg-white p-6 rounded-xl shadow-lg flex flex-col justify-between mr-10">
+            <div className="w-2/3 bg-white/75 p-6 rounded-xl shadow-lg flex flex-col justify-between mr-10">
             <div className="grid grid-cols-4 grid-rows-1 gap-2 h-3/5">
                 <img
                   src="https://images.unsplash.com/photo-1761054172958-bed78dc0e0be?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
@@ -218,7 +218,7 @@ export default function Home() {
           {/* First card/link */}
           <a
             href="https://www.helloasso.com/associations/zafira-vestiaire-solidaire/formulaires/3"
-            className="flex w-1/2 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all"
+            className="flex w-1/2 bg-white/75 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all"
           >
             {/* 25% Image */}
             <div className="w-1/4">
@@ -236,7 +236,7 @@ export default function Home() {
           {/* Second card/link */}
           <a
             href="https://www.helloasso.com/associations/zafira-vestiaire-solidaire/adhesions/adhesion-zafira-solidaire"
-            className="flex w-1/2 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all"
+            className="flex w-1/2 bg-white/75 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all"
           >
             <div className="w-1/4">
               <img
@@ -254,7 +254,7 @@ export default function Home() {
 
 
           {/* LEFT HAND SIDE CARD */}
-          <div className="card card-side bg-base-100 mr-10 ml-10  mt-20 mb-5 shadow-md ">
+          <div className="card card-side bg-white/75 mr-10 ml-10  mt-20 mb-5 shadow-md ">
             <figure className='h1/5 shrink-0'>
               <img
                 src="/img/placeholder2.jpg"
@@ -291,7 +291,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="w-screen h-24  bg-white flex items-center justify-center shadow-md mb-5 mt-5">
+          <div className="w-screen h-24  bg-white/75 flex items-center justify-center shadow-md mb-5 mt-5">
             <h1 className="text-cyan-900 text-4xl font-bold">🌟 Merci à celles et ceux qui marchent à nos côtés</h1>
           </div>
 
