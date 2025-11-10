@@ -3,14 +3,15 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { getBlogPostById } from "../services/blog_services/blogApi";
 import PageLayout from "../components/PageLayout";
 import { useParams } from "react-router-dom";
+import { PLACEHOLDERS } from "../components/imgPlaceholder";
 
 export default function Blog() {
   const [post, setPost] = useState(null);
-  const documentId = useParams();
+  const {documentId} = useParams();
   const baseUrl = "http://localhost:1337"
 
   useEffect(() => {
-    getBlogPostById("cwjz6ex9kt09rib4uwie8a60")
+    getBlogPostById(documentId)
       .then((res) => {
         console.log(res.data.data);
         setPost(res.data.data);
@@ -34,10 +35,9 @@ export default function Blog() {
         <h1 className="text-5xl mb-8 text">{post.title}</h1>
         <img
           className="max-w-2xl mx-auto"
-          src={baseUrl + post.photo.url}
-          alt={post.photo.alternativeText || ""}
-        >
-        </img>
+          src={post?.photo?.url ? baseUrl + post.photo.url : PLACEHOLDERS.blog}
+          alt={post?.photo?.alternativeText || ""}
+        />
         <div className="prose mx-auto ">
           {post.textBody && post.textBody.length > 0 ? (
             <BlocksRenderer content={post.textBody} />
