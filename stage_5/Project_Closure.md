@@ -86,9 +86,9 @@ The Zafira Solidaire MVP was successfully developed and includes the following f
 
 | Challenge | Impact      | Solution Applied | Result |
 |-----------|-------------|-----------------|--------|
-| **Better time management** | ⚠️ Medium | Allocate less time for testing simple features | ✅ Time savings at the start of the project |
-| **Stay focused on current feature** | ⚠️ Medium | Enforce respect of the chosen commit strategy | ✅ More structured workflow |
-| **Not developing heavy features from scratch** | 🔴 High | Reliance on Strapi for Blog logic | ✅ Faster prototyping and integration |
+| **Better time management** | Medium | Allocate less time for testing simple features | Time savings at the start of the project |
+| **Stay focused on current feature** | Medium | Enforce respect of the chosen commit strategy | More structured workflow |
+| **Not developing heavy features from scratch** | High | Reliance on Strapi for Blog logic | Faster prototyping and integration |
 
 ### 2.3 Unresolved Difficulties / Pending Items
 
