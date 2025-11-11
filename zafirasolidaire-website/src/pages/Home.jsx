@@ -31,7 +31,7 @@ export default function Home() {
       <BackgroundShapes/>
 
       <div className='backdrop-blur-3xl'>
-        <div className="min-h-screen bg-transparent relative">
+        <div className="min-h-screen bg-transparent relative mx-30">
           {/* Hero Section */}
           <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
@@ -263,35 +263,44 @@ export default function Home() {
                 />
             </figure>
             <div className="card-body">
-              <article className='prose lg:prose-xl text-lg'>
-                <h1 className="card-title text-3xl">Nos Partenaires 💥</h1>
-                <p className='line-clamp-6 mt-3 mb-3 indent-5'>
-                  Chez <b>Zafira Solidaire</b>, on croit que <b>rien de grand ne se construit seul</b>.
-                  Si aujourd’hui on peut redonner de la confiance, de la dignité et du style à celles et ceux qui
-                  en ont besoin, c’est aussi <b>grâce à des alliés qui croient en notre vision et qui passent à
-                  l’action avec nous.</b>
+              <article className="prose lg:prose-xl text-black w-4/5">
+                <h1 className="text-4xl font-extrabold mb-6 leading-snug text-center">
+                  Nos Partenaires
+                </h1>
+
+                <p className="mb-6 text-lg leading-relaxed">
+                  Chez <strong>Zafira Solidaire</strong>, nous croyons que <strong>les grandes choses se construisent ensemble</strong>.
+                  Grâce à nos partenaires, nous redonnons confiance, dignité et style à celles et ceux qui en ont besoin.
                 </p>
-                <p className='line-clamp-6 mt-3 mb-3'>
-                  🤝 <b>Associations, entreprises, collectivités, structures d’accompagnement,
-                  commerçants engagés…</b>
-                  Nos partenaires, ce sont des gens qui ne se contentent pas de belles paroles. Ce sont des
-                  acteurs du changement, des bâtisseurs de confiance, des faiseurs d’opportunités
+
+                <p className="mb-6 text-lg leading-relaxed">
+                  <strong>Associations, entreprises, collectivités, commerçants engagés… </strong>
+                  Ce sont eux qui passent à l’action, qui transforment les idées en réalité et nous aident à construire un futur meilleur.
                 </p>
-                <h2 className='font-semibold text-2xl mb-3'>💬 Ce qu’ils nous apportent ?</h2>
-                <ul className='mb- indent-5'>
-                  <li>Des vêtements de qualité.</li>
-                  <li>L’importance d’une confiance qui défonce les barrières</li>
-                  <li>Des relais vers les publics en insertion</li>
-                  <li>Du financement, du matériel, des idées… et surtout, <b>de la force</b></li>
+
+                <h2 className="text-3xl font-semibold mb-4 mt-8">
+                  Ce qu’ils nous apportent
+                </h2>
+
+                <ul className="list-none list-inside mb-6 space-y-3 text-lg indent-5">
+                  <li>Des vêtements de qualité, pensés pour durer.</li>
+                  <li>Une confiance qui brise les barrières.</li>
+                  <li>Un accès facilité aux publics en insertion.</li>
+                  <li>Du financement, du matériel, des idées… et <strong>une force collective</strong> inestimable.</li>
                 </ul>
+
+                <p className="text-lg font-semibold mt-6">
+                  Avec eux, rien n’est impossible. Rejoignez-nous pour construire un impact réel dès aujourd’hui.
+                </p>
               </article>
+
               <div className="card-actions justify-end">
                 {/* <button className="btn btn-primary">Watch</button> */}
               </div>
             </div>
           </div>
 
-          <div className="w-screen h-24  bg-white/75 flex items-center justify-center shadow-md mb-5 mt-5">
+          <div className="w-screen h-24 -mx-30   bg-white/75 flex items-center justify-center shadow-md mb-5 mt-5">
             <h1 className="text-cyan-900 text-4xl font-bold">🌟 Merci à celles et ceux qui marchent à nos côtés</h1>
           </div>
 
